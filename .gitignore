@@ -1,0 +1,37 @@
+# Local environments and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+node_modules/
+dist/
+build/
+coverage/
+.next/
+.DS_Store
+
+# Raw / large imagery and processing outputs
+data/raw/
+data/downloads/
+data/processed/
+*.h5
+*.hdf5
+*.tif
+*.tiff
+*.nc
+*.zarr/
+*.parquet
+
+# IDE and transient
+.vscode/
+.idea/
+*.log
+
+# Keep small manifests, documentation and intentionally reviewed fixtures in version control.
