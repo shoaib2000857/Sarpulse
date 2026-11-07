@@ -14,7 +14,7 @@ SARPulse is Team StarFire's selected concept for the 2026 challenge **[Dancing w
 - **14–15 Nov 2026:** hackathon build window. Begin actual challenge solution work when the event officially starts.
 - **15 Nov 2026, 23:59 local time:** project submission deadline. Verify your Local Event's instructions.
 
-The [2026 Space Apps event](https://www.spaceappschallenge.org/2026/) and [2026 Local Event guidance](https://www.spaceappschallenge.org/2026/local-events/santiago-dominican-republic/) state that development of the competition solution must wait until the official start. This repository is intended to make collaboration easier before then.
+Follow the [official 2026 Space Apps event](https://www.spaceappschallenge.org/2026/) and the latest participant/local-event guidance about when solution work may begin. We are deliberately keeping this scaffold documentation-only before the hackathon and will follow the current official rules.
 
 ## 👥 Team and areas
 
