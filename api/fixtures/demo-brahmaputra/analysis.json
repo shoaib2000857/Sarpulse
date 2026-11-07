@@ -1,0 +1,30 @@
+{
+  "aoi_id": "demo-brahmaputra",
+  "source_scene_ids": [
+    "SYNTHETIC-SCENE-A",
+    "SYNTHETIC-SCENE-C"
+  ],
+  "before_scene_id": "SYNTHETIC-SCENE-A",
+  "after_scene_id": "SYNTHETIC-SCENE-C",
+  "processing_version": "fixture-0",
+  "valid_area_km2": 100.0,
+  "gained_water_km2": 10.0,
+  "lost_water_km2": 2.0,
+  "ambiguous_km2": 1.0,
+  "class_definitions": {
+    "water_gained": "dry before, water after",
+    "water_lost": "water before, dry after",
+    "stable_water": "water both dates",
+    "stable_land": "dry both dates",
+    "ambiguous": "needs review"
+  },
+  "threshold_method": "placeholder threshold (fixture)",
+  "provenance": {
+    "note": "hand-written fixture"
+  },
+  "limitations": [
+    "All values are synthetic placeholders, not measurements."
+  ],
+  "validation_status": "not validated",
+  "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS"
+}
