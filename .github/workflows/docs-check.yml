@@ -1,0 +1,21 @@
+name: Repository checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  structure:
+    name: Required documentation and team structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check starter documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in README.md AGENTS.md CONTRIBUTING.md docs/TEAM.md docs/WORKFLOW.md docs/DATA_INTEGRITY.md docs/PRE_EVENT.md; do
+            test -s "$file" || { echo "Missing or empty: $file"; exit 1; }
+          done
+          echo "Collaboration scaffold is present."
