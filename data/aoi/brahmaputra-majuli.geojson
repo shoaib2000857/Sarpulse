@@ -1,0 +1,12 @@
+{
+  "type": "Feature",
+  "properties": {
+    "id": "brahmaputra-majuli",
+    "name": "Brahmaputra floodplain around Majuli, Assam (candidate AOI)",
+    "note": "Candidate study area; same bbox as the API demo site. Selection depends on verified comparable NISAR GCOV coverage."
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[[93.9, 26.8], [94.3, 26.8], [94.3, 27.1], [93.9, 27.1], [93.9, 26.8]]]
+  }
+}
