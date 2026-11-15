@@ -26,6 +26,8 @@ Start the frontend separately with `cd web`, `npm ci`, then `npm run dev`. It in
 
 **Public project:** https://sarpulse.adoredrose256.chatgpt.site · [Seven-slide demo](https://sarpulse.adoredrose256.chatgpt.site/demo/) · [Demo PDF](https://sarpulse.adoredrose256.chatgpt.site/demo/sarpulse-demo.pdf).
 
+Video production: [complete project context, asset paths and cinematic brief](docs/VIDEO_PRODUCTION_HANDOFF.md) for the separate studio Codex session.
+
 Submission material: [final form-ready fields](docs/SUBMISSION_FINAL.md). The requested domain `sarpulse.shoaibssm.me` awaits the records in [public deployment](docs/PUBLIC_DEPLOYMENT.md). The supplied guide requires a **<=30-second video or <=7-slide deck**, superseding the master plan's longer demonstration proposal. This November 16 release does not establish a submission before the supplied November 15 deadline.
 
 ## 📅 Important dates
