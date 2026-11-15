@@ -30,4 +30,3 @@ The Docker recipe is provided; container execution is only verified if recorded 
 `.github/workflows/ci.yml` runs scientific, API and integration tests and contract checks. `.github/workflows/delivery.yml` packages a validated precomputed delivery from the checked-out repository when explicitly dispatched. Raw GCOV products and Earthdata credentials are never committed or required by CI tests.
 
 Automatic frontend publication awaits the actual frontend and selected host. This avoids publishing a synthetic fixture or overwriting the custom domain with an unrelated scaffold. The deployment artifact is ready for the frontend team's hosting workflow; public scientific readiness remains conditional on authentic processed data.
-

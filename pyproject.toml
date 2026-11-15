@@ -26,4 +26,3 @@ namespaces = false
 testpaths = ["science/ingestion/tests", "science/analysis/tests", "api/tests", "tests"]
 pythonpath = [".", "science/ingestion", "science/analysis", "api", "platform"]
 addopts = "--import-mode=importlib"
-

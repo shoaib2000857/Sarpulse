@@ -2,11 +2,11 @@
 ## NASA Space Apps Challenge 2026: Dancing with the SARs
 ### Research-backed master plan · Version 1.0 · November 7, 2026
 
-**Working product name:** SARPulse  
-**Tagline:** Earth's changes. Revealed by radar.  
-**Team:** StarFire  
-**Challenge:** https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/  
-**Build event:** November 14–15, 2026; official submission opens Nov 14 at 09:00 and closes Nov 15 at 23:59 *local time*.  
+**Working product name:** SARPulse
+**Tagline:** Earth's changes. Revealed by radar.
+**Team:** StarFire
+**Challenge:** https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/
+**Build event:** November 14–15, 2026; official submission opens Nov 14 at 09:00 and closes Nov 15 at 23:59 *local time*.
 **Note:** This document specifies a proposed project, not a completed implementation. No actual L-band acquisition pairs or scientific performance metrics have been confirmed here. Dataset feasibility must be independently checked in the ASF catalog. 2026 submission instructions are expected November 13 and supersede historical guidance.
 
 ---
@@ -204,8 +204,8 @@ For independent validation, report confusion matrix, per-class precision and rec
 
 ### Audience
 
-**Primary:** conservation/floodplain analyst investigating water changes.  
-**Secondary:** educator or curious member of public.  
+**Primary:** conservation/floodplain analyst investigating water changes.
+**Secondary:** educator or curious member of public.
 **Judges:** technically literate viewers needing transparent, quick scientific proof.
 
 ### User journey 1 — Explore the change
@@ -463,11 +463,11 @@ Remember that a **09:00 Saturday to 23:59 Sunday submission window is about 39 h
 
 ### Guided demo (roughly 90 seconds, not necessarily the official upload length)
 
-0–10s: “Clouds hide much of what optical satellites see during floods. Radar lets us investigate the surface anyway.”  
-10–25s: Globe/map flies to verified floodplain with region/time labels.  
-25–40s: Time-synchronized before/after NISAR imagery and difference overlay.  
-40–55s: Water gain/loss and site summary from real calculations.  
-55–70s: Science Lab opens HH/HV channels, scatter/temporal plot, exact scene IDs, independent validation.  
+0–10s: “Clouds hide much of what optical satellites see during floods. Radar lets us investigate the surface anyway.”
+10–25s: Globe/map flies to verified floodplain with region/time labels.
+25–40s: Time-synchronized before/after NISAR imagery and difference overlay.
+40–55s: Water gain/loss and site summary from real calculations.
+55–70s: Science Lab opens HH/HV channels, scatter/temporal plot, exact scene IDs, independent validation.
 70–90s: Explain plausible hydrological context, uncertainty, implications and what users can explore. Close with “SARPulse: Earth's changes. Revealed by radar.”
 
 **Important:** The 2025 official judges' document mentioned special demo length/slide limits and AI disclosure requirements. **Do not assume those specific 2025 limits are the 2026 rules.** On Nov 13, inspect the 2026 submission guide and create precisely the required demo duration and format.

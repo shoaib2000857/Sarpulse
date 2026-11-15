@@ -30,4 +30,3 @@ The candidate July 22 / October 14, 2026 pair has catalog-listed acquisitions at
 ## Resources
 
 Challenge and resource list were supplied in `infodump.md`; current submission rules were supplied by the team. Official URLs: https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/ and https://www.spaceappschallenge.org/resources/project-submission-guide/ . Scientific method/resource links and software used in this integration are listed in `docs/SUBMISSION_DRAFT.md` and `ATTRIBUTION.md`.
-

@@ -97,7 +97,7 @@ Scientific processing uses Python, NumPy, SciPy, h5py, rasterio, pyproj and scik
 
 Shoaib — core platform, shared contracts, orchestration and integration; Veer — satellite data and preprocessing; Naveen — change detection, evaluation and uncertainty; Nidhi — frontend and geographic visualization; Shridhar — backend, evidence and contextual data; Hansika — UI/UX, storytelling and presentation.
 
-Project: https://sarpulse.shoaibssm.me  
+Project: https://sarpulse.shoaibssm.me
 Source: https://github.com/shoaib2000857/Sarpulse
 
 ## 6. Use of Super Intelligence (SI)

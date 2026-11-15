@@ -32,4 +32,3 @@ Always display `data_status`. Synthetic results must be conspicuously marked `SY
 Areas are km², backscatter is gamma-0 dB, observation timestamps are UTC, and source CRS/release/polarization remain available in scene records and provenance. Time-series points use the intersection of valid areas across all selected dates. Preserve their `quality_flags`, threshold and sensitivity ranges. Do not interpolate missing acquisitions.
 
 Threshold sensitivity ranges are not calibrated probabilities. Method agreement is not accuracy. Do not infer flood causation, casualties, displacement or vegetated inundation from the open-water classes. Sparse sample passports disclose coordinates/distance; newer runs export filtered evidence rasters for exact pixel lookup. Invalid locations abstain from environmental interpretation.
-
