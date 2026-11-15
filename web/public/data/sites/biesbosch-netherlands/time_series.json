@@ -1,0 +1,35 @@
+{
+  "aoi_id": "biesbosch-netherlands",
+  "interpolated": false,
+  "common_valid_area_km2": 363.0144,
+  "points": [
+    {
+      "date": "2026-07-19",
+      "scene_id": "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+      "water_area_km2": 183.4448,
+      "water_area_km2_range": [
+        148.6144,
+        217.6208
+      ],
+      "threshold_db": -10.215,
+      "quality_flags": [
+        "weak_bimodality",
+        "maturity_provisional"
+      ]
+    },
+    {
+      "date": "2026-10-11",
+      "scene_id": "NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001",
+      "water_area_km2": 151.9456,
+      "water_area_km2_range": [
+        117.3728,
+        180.688
+      ],
+      "threshold_db": -9.843,
+      "quality_flags": [
+        "maturity_provisional"
+      ]
+    }
+  ],
+  "data_status": "observed"
+}

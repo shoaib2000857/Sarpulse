@@ -249,6 +249,52 @@
         }
       }
     },
+    "/api/sites/{site_id}/samples": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Samples",
+        "operationId": "get_samples_api_sites__site_id__samples_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SamplePoint"
+                  },
+                  "title": "Response Get Samples Api Sites  Site Id  Samples Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/sites/{site_id}/layers": {
       "get": {
         "tags": [
@@ -884,6 +930,101 @@
           "data_status"
         ],
         "title": "LayersManifest"
+      },
+      "SamplePoint": {
+        "properties": {
+          "lon": {
+            "type": "number",
+            "title": "Lon"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "before_hh_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before Hh Db"
+          },
+          "after_hh_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After Hh Db"
+          },
+          "before_hv_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Before Hv Db"
+          },
+          "after_hv_db": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "After Hv Db"
+          },
+          "change_class": {
+            "type": "string",
+            "title": "Change Class"
+          },
+          "valid": {
+            "type": "boolean",
+            "title": "Valid",
+            "default": true
+          },
+          "slope_deg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slope Deg"
+          },
+          "jrc_occurrence_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Jrc Occurrence Pct"
+          }
+        },
+        "type": "object",
+        "required": [
+          "lon",
+          "lat",
+          "change_class"
+        ],
+        "title": "SamplePoint",
+        "description": "Per-location values from the analysis pipeline (Naveen/Veer outputs)."
       },
       "Scene": {
         "properties": {

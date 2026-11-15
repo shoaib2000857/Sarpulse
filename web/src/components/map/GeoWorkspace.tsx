@@ -13,6 +13,7 @@ import {
   visibleOverlays,
 } from "../../lib/study";
 import type { Basemap, GeoWorkspaceProps } from "../../types/frontend";
+import { assetUrl } from "../../lib/science";
 
 // MapLibre 6 ships a separate worker; keep it on the same origin in dev and builds.
 maplibregl.setWorkerUrl(workerUrl);
@@ -299,10 +300,10 @@ export default function GeoWorkspace(props: GeoWorkspaceProps) {
         {basemapNote[basemap] && <em> · {basemapNote[basemap]}</em>}
       </div>
       <div className="map-legend" aria-label="Map legend">
-        {Object.entries(c).map(([key, color]) => (
+        {Object.entries(study.science ? { "water gained":"#2166ac", "water lost":"#e08214", "stable water":"#92c5de", "ambiguous":"#bdbdbd" } : c).map(([key, color]) => (
           <span key={key}>
             <i style={{ background: color }} />
-            {key === "stable"
+            {study.science ? key : key === "stable"
               ? "Persistent / ●"
               : key === "gain"
                 ? "Gain / +"
@@ -550,10 +551,14 @@ function updateMap(map: GLMap, p: GeoWorkspaceProps, isBefore: boolean) {
   map.setPaintProperty("cell-patterns", "fill-opacity", opacity * 0.75);
   if (map.getLayer("radar")) map.removeLayer("radar");
   if (map.getSource("radar")) map.removeSource("radar");
+  if (map.getLayer("science-change")) map.removeLayer("science-change");
+  if (map.getSource("science-change")) map.removeSource("science-change");
   const raster = observationRaster(observation, p.channel);
   const tiles = raster?.tiles ?? [];
-  if (tiles.length && (isBefore || mode === "before" || mode === "after")) {
-    map.addSource("radar", {
+  if ((tiles.length || raster?.image) && (isBefore || mode === "before" || mode === "after")) {
+    if (raster?.image) map.addSource("radar", { type:"image", url:raster.image.url,
+      coordinates:raster.image.coordinates as [[number,number],[number,number],[number,number],[number,number]] });
+    else map.addSource("radar", {
       type: "raster",
       tiles,
       tileSize: 256,
@@ -571,5 +576,15 @@ function updateMap(map: GLMap, p: GeoWorkspaceProps, isBefore: boolean) {
       },
       "cells",
     );
+  }
+  if (!isBefore && ["difference", "gain", "loss"].includes(mode) && study.science) {
+    const id = mode === "gain" ? "water_gained" : mode === "loss" ? "water_lost" : "change_class";
+    const layer = study.science.layers.find(l => l.id === id);
+    const image = study.observations.flatMap(o => o.channels ?? []).find(c => c.raster.image)?.raster.image;
+    if (layer?.png && image) {
+      map.addSource("science-change", {type:"image",url:assetUrl(layer.png, study.science.siteBase),
+        coordinates:image.coordinates as [[number,number],[number,number],[number,number],[number,number]]});
+      map.addLayer({id:"science-change",type:"raster",source:"science-change",paint:{"raster-opacity":opacity,"raster-fade-duration":0}},"cells");
+    }
   }
 }

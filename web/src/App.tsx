@@ -23,6 +23,7 @@ import { Button } from "./components/ui/button";
 import { demoStudy } from "./data/demo";
 import { parseStudyPackage } from "./lib/validate-package";
 import { installTilt } from "./lib/tilt";
+import { loadSites, loadScientificSite, type SiteOption } from "./lib/science";
 import type { StudyPackage } from "./types/frontend";
 
 const Landing = lazy(() => import("./pages/Landing"));
@@ -48,9 +49,30 @@ export default function App() {
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [sites,setSites] = useState<SiteOption[]>([]), [siteId,setSiteId] = useState("");
+  const [loading,setLoading] = useState(false);
+  const apiSource = import.meta.env.VITE_SARPULSE_API_URL as string | undefined;
+  const dataSource = new URL(apiSource ?? import.meta.env.VITE_SARPULSE_DATA_URL ?? `${import.meta.env.BASE_URL}data/`, location.origin).href;
   const fileInput = useRef<HTMLInputElement>(null);
   const main = useRef<HTMLElement>(null);
   useEffect(() => installTilt(document.body), []);
+  useEffect(() => {
+    const controller = new AbortController();
+    void loadSites(dataSource,Boolean(apiSource),controller.signal).then(options => {
+      if (controller.signal.aborted) return;
+      setSites(options); if(options.length) setSiteId(options[0].id);
+    }).catch(e=>{if(!controller.signal.aborted && apiSource) setError(`Configured data source is unavailable: ${e.message}. The labelled demo remains open.`);});
+    return ()=>controller.abort();
+  },[dataSource,apiSource]);
+  useEffect(() => {
+    if(!siteId) return;
+    const controller=new AbortController(); setLoading(true);
+    void loadScientificSite(dataSource,siteId,Boolean(apiSource),controller.signal).then(s=>{
+      if(!controller.signal.aborted){setStudy(s);setError("");setNotice(`Opened ${s.title}. ${s.science?.analysis.data_status}.`);}
+    }).catch(e=>{if(!controller.signal.aborted) setError(`Investigation could not load: ${e.message}`);})
+      .finally(()=>{if(!controller.signal.aborted)setLoading(false);});
+    return ()=>controller.abort();
+  },[siteId,dataSource,apiSource]);
   useEffect(() => {
     const onHash = () => {
       setRoute(getRoute());
@@ -121,6 +143,8 @@ export default function App() {
           ))}
         </nav>
         <div className="header-actions">
+          {sites.length>0 && <label className="investigation-picker">Investigation<select aria-label="Scientific investigation" value={siteId} disabled={loading}
+            onChange={e=>setSiteId(e.target.value)}>{sites.map(s=><option value={s.id} key={s.id}>{s.name}</option>)}</select></label>}
           <Button
             variant="outline"
             size="sm"
@@ -157,7 +181,8 @@ export default function App() {
         <span>
           {study.status === "synthetic"
             ? "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS. No measured change or validated flood results."
-            : "Imported locally. Source metadata is preserved; scientific validity is not verified by this viewer."}
+            : study.science ? `NASA NISAR observations · ${[...new Set(study.science.scenes.map(s=>s.maturity))].join(", ")} · Exploratory water candidates. Review validation and limitations in Science Lab.`
+              : "Imported locally. Source metadata is preserved; scientific validity is not verified by this viewer."}
         </span>
         {study !== demoStudy && (
           <button

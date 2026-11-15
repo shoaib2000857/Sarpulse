@@ -1,0 +1,50 @@
+[
+  {
+    "scene_id": "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+    "source": "NASA/JPL NISAR L2 GCOV via ASF DAAC (NISAR_L2_GCOV_PROVISIONAL_V1)",
+    "acquired_at_utc": "2026-07-19T18:57:41Z",
+    "maturity": "PROVISIONAL",
+    "crid": "P05023",
+    "orbit_direction": "DESCENDING",
+    "relative_orbit": 167,
+    "polarizations": [
+      "HHHH",
+      "HVHV"
+    ],
+    "grid_epsg": 32631,
+    "pixel_spacing_m": 40.0,
+    "footprint": {
+      "west": 3.15709,
+      "south": 50.81491,
+      "east": 7.97198,
+      "north": 53.73145
+    },
+    "license": "NASA Earth Science open data policy; cite NASA/JPL-Caltech NISAR and ASF DAAC",
+    "data_url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001/NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001.h5",
+    "data_status": "observed"
+  },
+  {
+    "scene_id": "NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001",
+    "source": "NASA/JPL NISAR L2 GCOV via ASF DAAC (NISAR_L2_GCOV_PROVISIONAL_V1)",
+    "acquired_at_utc": "2026-10-11T18:57:39Z",
+    "maturity": "PROVISIONAL",
+    "crid": "P05023",
+    "orbit_direction": "DESCENDING",
+    "relative_orbit": 167,
+    "polarizations": [
+      "HHHH",
+      "HVHV"
+    ],
+    "grid_epsg": 32631,
+    "pixel_spacing_m": 40.0,
+    "footprint": {
+      "west": 3.17624,
+      "south": 50.84689,
+      "east": 7.995,
+      "north": 53.76374
+    },
+    "license": "NASA Earth Science open data policy; cite NASA/JPL-Caltech NISAR and ASF DAAC",
+    "data_url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001/NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001.h5",
+    "data_status": "observed"
+  }
+]

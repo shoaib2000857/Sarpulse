@@ -1,6 +1,9 @@
 .git
 .venv
 node_modules
+web/node_modules
+web/dist
+hosting
 build
 dist
 data/raw

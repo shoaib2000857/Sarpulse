@@ -45,6 +45,7 @@ def cmd_validate(args) -> int:
         "scene_id": scene.scene_id,
         "date": scene.date,
         "reference": {"path": str(args.reference), "kind": args.kind, "description": args.reference_name},
+        "reference_caveat": args.reference_caveat,
         "metrics": metrics,
         "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
     }
@@ -60,6 +61,10 @@ def cmd_validate(args) -> int:
         f"{v['date']} vs {v['reference']['description']}: OA {v['metrics']['overall_accuracy']} (95% CI {v['metrics']['overall_accuracy_95ci']}), F1 water {v['metrics']['f1_water']}, n={v['metrics']['n']}"
         for v in analysis["validation"]
     )
+    if args.reference_caveat:
+        analysis["validation_status"] = "Reference agreement (not field accuracy): " + analysis["validation_status"]
+        if args.reference_caveat not in analysis["limitations"]:
+            analysis["limitations"].append(args.reference_caveat)
     analysis_path.write_text(json.dumps(analysis, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(metrics, indent=2))
     if metrics["n"] < 100:
@@ -91,6 +96,7 @@ def main(argv=None) -> int:
     v.add_argument("--reference", required=True, help="GeoJSON points or reference raster")
     v.add_argument("--kind", choices=["points", "raster"], required=True)
     v.add_argument("--reference-name", required=True, help="e.g. 'Sentinel-2 NDWI 2026-07-23, manual labels'")
+    v.add_argument("--reference-caveat", default="", help="Temporal/reference-method limitations retained with metrics")
     v.add_argument("--water-values", default="1", help="raster values meaning water (comma-separated)")
     v.add_argument("--label-field", default="water", help="boolean property on reference points")
     v.set_defaults(func=cmd_validate)

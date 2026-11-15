@@ -1,0 +1,178 @@
+{
+  "aoi_id": "brahmaputra-majuli",
+  "crs": "EPSG:4326",
+  "bounds_wgs84": [
+    93.897452,
+    26.796802,
+    94.303545,
+    27.103156
+  ],
+  "image_coordinates": [
+    [
+      93.897452,
+      27.103156
+    ],
+    [
+      94.303545,
+      27.103156
+    ],
+    [
+      94.303545,
+      26.796802
+    ],
+    [
+      93.897452,
+      26.796802
+    ]
+  ],
+  "dates": [
+    "2026-07-22",
+    "2026-10-14"
+  ],
+  "layers": [
+    {
+      "id": "change_class",
+      "kind": "categorical",
+      "title": "Water change 2026-07-22 to 2026-10-14",
+      "png": "web/change_class.png",
+      "geotiff": "change_class.tif",
+      "legend": [
+        {
+          "class": "stable_land",
+          "code": 0,
+          "color": null
+        },
+        {
+          "class": "water_gained",
+          "code": 1,
+          "color": "#2166ac"
+        },
+        {
+          "class": "water_lost",
+          "code": 2,
+          "color": "#e08214"
+        },
+        {
+          "class": "stable_water",
+          "code": 3,
+          "color": "#92c5de"
+        },
+        {
+          "class": "ambiguous",
+          "code": 4,
+          "color": "#bdbdbd"
+        },
+        {
+          "class": "nodata",
+          "code": 255,
+          "color": null
+        }
+      ],
+      "before_scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+      "after_scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001"
+    },
+    {
+      "id": "water_gained",
+      "kind": "categorical",
+      "title": "Water Gained",
+      "png": "web/water_gained.png",
+      "before_scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+      "after_scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001"
+    },
+    {
+      "id": "water_lost",
+      "kind": "categorical",
+      "title": "Water Lost",
+      "png": "web/water_lost.png",
+      "before_scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+      "after_scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001"
+    },
+    {
+      "id": "ambiguous",
+      "kind": "categorical",
+      "title": "Ambiguous",
+      "png": "web/ambiguous.png",
+      "before_scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+      "after_scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001"
+    },
+    {
+      "id": "delta_hh_db",
+      "kind": "difference",
+      "title": "HH change (after minus before)",
+      "png": "web/delta_hh_db.png",
+      "geotiff": "delta_hh_db.tif",
+      "display_range_db": [
+        -10,
+        10
+      ]
+    },
+    {
+      "id": "water_2026-07-22",
+      "kind": "mask",
+      "title": "Open water 2026-07-22",
+      "png": "web/water_2026-07-22.png",
+      "geotiff": "water/2026-07-22.tif",
+      "scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+      "date": "2026-07-22"
+    },
+    {
+      "id": "hh_db_2026-07-22",
+      "kind": "backscatter",
+      "title": "HH backscatter 2026-07-22",
+      "png": "web/hh_db_2026-07-22.png",
+      "display_range_db": [
+        -25.0,
+        0.0
+      ],
+      "scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+      "date": "2026-07-22"
+    },
+    {
+      "id": "hv_db_2026-07-22",
+      "kind": "backscatter",
+      "title": "HV backscatter 2026-07-22",
+      "png": "web/hv_db_2026-07-22.png",
+      "display_range_db": [
+        -35.0,
+        -5.0
+      ],
+      "scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+      "date": "2026-07-22"
+    },
+    {
+      "id": "water_2026-10-14",
+      "kind": "mask",
+      "title": "Open water 2026-10-14",
+      "png": "web/water_2026-10-14.png",
+      "geotiff": "water/2026-10-14.tif",
+      "scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001",
+      "date": "2026-10-14"
+    },
+    {
+      "id": "hh_db_2026-10-14",
+      "kind": "backscatter",
+      "title": "HH backscatter 2026-10-14",
+      "png": "web/hh_db_2026-10-14.png",
+      "display_range_db": [
+        -25.0,
+        0.0
+      ],
+      "scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001",
+      "date": "2026-10-14"
+    },
+    {
+      "id": "hv_db_2026-10-14",
+      "kind": "backscatter",
+      "title": "HV backscatter 2026-10-14",
+      "png": "web/hv_db_2026-10-14.png",
+      "display_range_db": [
+        -35.0,
+        -5.0
+      ],
+      "scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001",
+      "date": "2026-10-14"
+    }
+  ],
+  "attribution": "NISAR data: NASA/JPL-Caltech, via ASF DAAC. Derived by SARPulse (Team StarFire).",
+  "data_status": "observed"
+}

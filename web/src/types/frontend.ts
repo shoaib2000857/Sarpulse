@@ -1,4 +1,5 @@
 import type { Feature, FeatureCollection, Polygon } from "geojson";
+import type { ScientificData } from "./science";
 
 // Frontend view model only. This does not establish a backend or shared scientific API.
 export type LayerMode = "after" | "before" | "difference" | "gain" | "loss";
@@ -13,7 +14,8 @@ export type MapCamera = {
 };
 export type ChangeKind = "stable" | "gain" | "loss" | "no-data";
 export type RasterLayer = {
-  tiles: string[];
+  tiles?: string[];
+  image?: { url: string; coordinates: [number, number][] };
   attribution: string;
   minDb: number;
   maxDb: number;
@@ -65,6 +67,7 @@ export type StudyPackage = {
   provenance: string;
   limitations: string[];
   validationStatus: string;
+  science?: ScientificData;
 };
 export type GeoWorkspaceProps = {
   study: StudyPackage;

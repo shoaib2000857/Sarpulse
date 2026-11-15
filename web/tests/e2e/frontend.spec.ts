@@ -1,6 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { demoStudy } from "../../src/data/demo";
 
+test.beforeEach(async ({page}) => {
+  await page.route("**/data/sites.json", route => route.fulfill({status:404,body:"No installed package in this fixture test"}));
+});
+
 test("landing, explorer controls, actual map rendering, comparison and exports", async ({
   page,
 }) => {

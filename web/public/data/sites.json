@@ -1,0 +1,30 @@
+[
+  {
+    "id": "brahmaputra-majuli",
+    "name": "Brahmaputra floodplain around Majuli, Assam (candidate AOI)",
+    "description": "NISAR L2 GCOV open-water change, 2026-07-22 to 2026-10-14 (T040A_F015_4005_DHDH_PR_P05023).",
+    "bbox": {
+      "west": 93.897452,
+      "south": 26.796888,
+      "east": 94.30351,
+      "north": 27.103156
+    },
+    "data_status": "observed",
+    "verified": true,
+    "path": "sites/brahmaputra-majuli/"
+  },
+  {
+    "id": "biesbosch-netherlands",
+    "name": "Biesbosch wetlands, Netherlands",
+    "description": "NISAR L2 GCOV open-water change, 2026-07-19 to 2026-10-11 (T167D_F062_2005_DHDH_PR_P05023).",
+    "bbox": {
+      "west": 4.643268,
+      "south": 51.696212,
+      "east": 4.907858,
+      "north": 51.883792
+    },
+    "data_status": "observed",
+    "verified": true,
+    "path": "sites/biesbosch-netherlands/"
+  }
+]

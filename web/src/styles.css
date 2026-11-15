@@ -2526,3 +2526,16 @@ td {
     transition: none;
   }
 }
+/* Connected scientific evidence */
+.investigation-picker { display:flex; flex-direction:column; gap:3px; font-size:10px; max-width:200px; }
+.investigation-picker select { background:#101820; color:#edf3f7; border:1px solid #324250; max-width:100%; padding:5px; }
+.change-passport { margin-top:18px; border-top:1px solid #324250; padding-top:12px; font-size:12px; max-height:520px; overflow:auto; }
+.change-passport details, .connected-evidence details { padding:10px 0; border-bottom:1px solid #324250; }
+.change-passport summary, .connected-evidence summary { cursor:pointer; line-height:1.6; }
+.change-passport dt { color:#9fb3c5; margin-top:6px; }
+.change-passport dd { margin:0; overflow-wrap:anywhere; }
+.connected-evidence { margin:24px 0; }
+.connected-evidence pre { white-space:pre-wrap; overflow-wrap:anywhere; max-height:350px; overflow:auto; color:#bdd1de; }
+.connected-evidence table { width:100%; text-align:left; border-collapse:collapse; }
+.connected-evidence th, .connected-evidence td { padding:10px; border-bottom:1px solid #324250; }
+@media(max-width:650px) { .investigation-picker { max-width:125px; } }

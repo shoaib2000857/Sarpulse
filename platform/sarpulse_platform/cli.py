@@ -42,6 +42,8 @@ def run(args) -> dict:
             stack.scenes = [c for c in stack.scenes if c.scene_id in wanted or c.start_utc[:10] in wanted]
             if len(stack.scenes) != 2:
                 raise ValueError("Before/after must select exactly two catalog acquisitions")
+            from sarpulse_ingest.comparability import build_stacks
+            stack = build_stacks(stack.scenes)[0]
             write_json(out / "input_manifest.json", {"aoi": json.loads(args.aoi.read_text(encoding="utf-8")),
                        "stack": stack.to_dict(), "scenes": [c.to_dict() for c in stack.scenes]})
             opener = local_opener(args.local_dir) if args.offline else earthdata_opener(args.local_dir)
@@ -85,10 +87,12 @@ def doctor() -> dict:
     import netrc
 
     credential_file = False
-    try:
-        credential_file = bool(netrc.netrc().authenticators("urs.earthdata.nasa.gov"))
-    except (OSError, netrc.NetrcParseError):
-        pass
+    paths = [Path(os.environ["NETRC"])] if os.environ.get("NETRC") else [Path.home()/".netrc", Path.home()/"_netrc"]
+    for credential_path in paths:
+        try:
+            credential_file |= bool(netrc.netrc(str(credential_path)).authenticators("urs.earthdata.nasa.gov"))
+        except (OSError, netrc.NetrcParseError):
+            pass
     return {"python": platform.python_version(), "modules": {
         m: importlib.util.find_spec(m) is not None for m in ("numpy", "rasterio", "h5py", "scipy", "sklearn", "earthaccess", "fastapi")},
         "earthdata_credentials_available": bool(credential_file or os.environ.get("EARTHDATA_TOKEN") or

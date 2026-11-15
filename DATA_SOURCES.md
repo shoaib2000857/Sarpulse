@@ -2,7 +2,11 @@
 
 ## Status
 
-The repository includes catalog metadata and synthetic software-test fixtures. A catalog record confirms discovery, not successful pixel retrieval or environmental validation. Per-run input manifests and exported provenance identify the exact products once processed. Do not describe fixture values as NASA observations.
+The application includes genuine processed NISAR observations for Brahmaputra–Majuli and Biesbosch, plus separately labelled synthetic software fixtures. Exact acquisitions, physical units, CRS, processing release, derived rasters and reference results are retained in `web/public/data/sites/`. A real observation does not establish classifier accuracy or a confirmed flood.
+
+Assam uses July 22 / October 14, 2026 GCOV data, retrieved directly from ASF with the user's local Earthdata credentials. Biesbosch uses July 19 / October 11, 2026 GCOV data, with original NASA product identifiers corroborated against live ASF metadata; native subsets were accessed through a public mirror. The transport source, native windows, hashes and reuse evidence are retained in `web/public/data/sites/biesbosch-netherlands/source-provenance.json`. No HDF5 originals or credentials are committed.
+
+Biesbosch's independent cross-sensor reference is Sentinel-2C L2A `S2C_31UFT_20260715_0_L2A`, July 15, 2026 at 10:46:41.387Z. SCL 6 is reference water, 4/5 reference land; other classes are excluded. The optical observation is 4.34 days earlier than NISAR and uses automatic classification, so this comparison is reference agreement, not field accuracy. Water precision 0.2605, recall 0.8906 and F1 0.403 expose substantial false positives; see the full confusion matrix and caveats in the delivered analysis.
 
 ## Primary NISAR inputs
 
@@ -21,7 +25,7 @@ The candidate July 22 / October 14, 2026 pair has catalog-listed acquisitions at
 - **Copernicus DEM GLO-30:** ESA/Copernicus via AWS Open Data, https://registry.opendata.aws/copernicus-dem/ . Used only if the DEM adapter is run. Preserve required Copernicus notices and applicable terms with redistributed derivatives.
 - **EC JRC Global Surface Water v1.4:** 1984–2021 occurrence, https://global-surface-water.appspot.com/ . Historical context, not contemporary flood truth. The adapter does not claim to use a newer version.
 - **NASA GPM IMERG V07 daily Late Run:** `GPM_3IMERGDL`, https://gpm.nasa.gov/data/imerg . About 0.1-degree resolution; optional authenticated retrieval. Accumulation interval is `[before date, after date)`. Missing days are disclosed; partial totals are not complete-period rainfall.
-- **Sentinel-2:** a possible independent reference or optical context, not yet acquired by the integration. Cite actual product/date, masking, annotation method, license and temporal tolerance if used.
+- **Sentinel-2:** the Biesbosch reference above was obtained from public Sentinel-2 COGs via Earth Search STAC. Processing/SCL definitions: https://sentiwiki.copernicus.eu/web/s2-processing . Source links and hashes are retained in `reference-provenance.json`; Sentinel reuse terms apply.
 
 ## Synthetic test data
 

@@ -22,7 +22,7 @@ def test_list_sites_marks_synthetic():
 
 
 def test_site_endpoints():
-    for path in ["", "/scenes", "/summary", "/timeseries", "/evidence"]:
+    for path in ["", "/scenes", "/summary", "/timeseries", "/evidence", "/samples"]:
         assert client.get(SITE + path).status_code == 200, path
 
 

@@ -36,5 +36,11 @@ data/processed/
 *.egg-info/
 .netrc
 _netrc
+.dodsrc
+.urs_cookies
+hosting/
+# Reviewed small scientific derivatives used by the public application.
+!web/public/data/**/*.tif
+!web/public/data/**/*.tiff
 
 # Keep small manifests, documentation and intentionally reviewed fixtures in version control.

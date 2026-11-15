@@ -1,0 +1,233 @@
+{
+  "aoi_id": "biesbosch-netherlands",
+  "source_scene_ids": [
+    "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+    "NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001"
+  ],
+  "before_scene_id": "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+  "after_scene_id": "NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001",
+  "processing_version": "sarpulse_analysis 0.1.0",
+  "valid_area_km2": 363.0144,
+  "gained_water_km2": 2.7776,
+  "lost_water_km2": 6.32,
+  "ambiguous_km2": 108.3264,
+  "stable_water_km2": 107.3792,
+  "stable_land_km2": 138.2112,
+  "area_ranges_km2": {
+    "water_gained": [
+      2.7776,
+      3.6448
+    ],
+    "water_lost": [
+      6.32,
+      18.8256
+    ],
+    "note": "min/max over thresholds shifted by -u, 0, +u on each date, with the min_change_db rule and no ambiguity masking"
+  },
+  "hh_brightening_non_water_km2": 6.7616,
+  "class_definitions": {
+    "stable_land": "Not classified as open water on either date",
+    "water_gained": "Land before, open water after, with HH decrease >= min_change_db",
+    "water_lost": "Open water before, land after, with HH increase >= min_change_db",
+    "stable_water": "Classified as open water on both dates",
+    "ambiguous": "Water label within threshold uncertainty on either date, or label change without sufficient HH change"
+  },
+  "threshold_method": "split-based Otsu on 17 bimodal 64px tiles (Ashman D>2.0) per date on Lee-filtered HH dB; change requires |delta HH| >= 3.0 dB",
+  "thresholds": {
+    "2026-07-19": {
+      "threshold_db": -10.215,
+      "uncertainty_db": 1.172,
+      "bootstrap_std_db": 0.598,
+      "method": "split-based Otsu on 17 bimodal 64px tiles (Ashman D>2.0)",
+      "n_tiles_selected": 17,
+      "n_tiles_total": 42,
+      "ashman_d": 1.806,
+      "minor_class_fraction": 0.304,
+      "flags": [
+        "weak_bimodality"
+      ],
+      "enl": 1.43
+    },
+    "2026-10-11": {
+      "threshold_db": -9.843,
+      "uncertainty_db": 0.968,
+      "bootstrap_std_db": 0.494,
+      "method": "split-based Otsu on 14 bimodal 64px tiles (Ashman D>2.0)",
+      "n_tiles_selected": 14,
+      "n_tiles_total": 42,
+      "ashman_d": 2.046,
+      "minor_class_fraction": 0.25,
+      "flags": [],
+      "enl": 2.02
+    }
+  },
+  "passport_rasters": {
+    "change_class": "change_class.tif",
+    "before_hh_db": "evidence/before_hh_db.tif",
+    "before_hv_db": "evidence/before_hv_db.tif",
+    "after_hh_db": "evidence/after_hh_db.tif",
+    "after_hv_db": "evidence/after_hv_db.tif"
+  },
+  "baseline_comparison": {
+    "description": "Diagnostic areas on the common pair footprint; not accuracy metrics or flood truth.",
+    "absolute_difference_threshold_db": 3.0,
+    "absolute_difference_km2": 32.0752,
+    "difference_without_water_transition_km2": 15.384,
+    "simple_threshold_gain_km2": 9.7472,
+    "simple_threshold_loss_km2": 41.2464
+  },
+  "method_agreement": {
+    "description": "Otsu water vs unsupervised 2-component Gaussian mixture on (HH, HV) dB. Internal consistency only, NOT accuracy.",
+    "2026-07-19": {
+      "n_pixels": 226884,
+      "percent_agreement": 67.51,
+      "cohens_kappa": 0.3458
+    },
+    "2026-10-11": {
+      "n_pixels": 226884,
+      "percent_agreement": 85.64,
+      "cohens_kappa": 0.7176
+    }
+  },
+  "provenance": {
+    "si_assistance": "Code and integration assisted by Codex; see AI_DISCLOSURE.md. Observational inputs are not SI-generated.",
+    "stack_id": "T167D_F062_2005_DHDH_PR_P05023",
+    "stack_schema": "sarpulse.ard_stack.v0",
+    "comparability_key": {
+      "track": 167,
+      "direction": "DESCENDING",
+      "frame": 62,
+      "mode": "2005",
+      "polarization": "DHDH",
+      "processing_type": "PR",
+      "crid": "P05023"
+    },
+    "ingest_processing": {
+      "software": "sarpulse_ingest 0.1.0",
+      "multilook": 2,
+      "valid_rule": "GCOV mask in 1..5, inputDataExceptionMask == 0, finite and > 0 in HHHH and HVHV",
+      "created_utc": "2026-11-15T18:53:00Z"
+    },
+    "grid": {
+      "crs": "EPSG:32631",
+      "epsg": 32631,
+      "transform": [
+        40.0,
+        0.0,
+        613560.0,
+        0.0,
+        -40.0,
+        5749400.0
+      ],
+      "width": 444,
+      "height": 511,
+      "pixel_spacing_m": 40.0
+    },
+    "scenes": [
+      {
+        "scene_id": "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+        "source": "NASA/JPL NISAR L2 GCOV via ASF DAAC (NISAR_L2_GCOV_PROVISIONAL_V1)",
+        "acquired_at_utc": "2026-07-19T18:57:41Z",
+        "maturity": "PROVISIONAL",
+        "crid": "P05023",
+        "orbit_direction": "DESCENDING",
+        "relative_orbit": 167,
+        "polarizations": [
+          "HHHH",
+          "HVHV"
+        ],
+        "grid_epsg": 32631,
+        "pixel_spacing_m": 40.0,
+        "footprint": {
+          "west": 3.15709,
+          "south": 50.81491,
+          "east": 7.97198,
+          "north": 53.73145
+        },
+        "license": "NASA Earth Science open data policy; cite NASA/JPL-Caltech NISAR and ASF DAAC",
+        "data_url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001/NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001.h5",
+        "data_status": "observed"
+      },
+      {
+        "scene_id": "NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001",
+        "source": "NASA/JPL NISAR L2 GCOV via ASF DAAC (NISAR_L2_GCOV_PROVISIONAL_V1)",
+        "acquired_at_utc": "2026-10-11T18:57:39Z",
+        "maturity": "PROVISIONAL",
+        "crid": "P05023",
+        "orbit_direction": "DESCENDING",
+        "relative_orbit": 167,
+        "polarizations": [
+          "HHHH",
+          "HVHV"
+        ],
+        "grid_epsg": 32631,
+        "pixel_spacing_m": 40.0,
+        "footprint": {
+          "west": 3.17624,
+          "south": 50.84689,
+          "east": 7.995,
+          "north": 53.76374
+        },
+        "license": "NASA Earth Science open data policy; cite NASA/JPL-Caltech NISAR and ASF DAAC",
+        "data_url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001/NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001.h5",
+        "data_status": "observed"
+      }
+    ],
+    "parameters": {
+      "speckle_filter": "lee",
+      "filter_size": 5,
+      "tile_px": 64,
+      "margin_db": 0.5,
+      "min_change_db": 3.0,
+      "n_boot": 200,
+      "seed": 0,
+      "gmm_check": true
+    },
+    "created_utc": "2026-11-15T18:53:08Z"
+  },
+  "limitations": [
+    "NISAR GCOV inputs have data maturity PROVISIONAL: calibrated but not fully validated by the mission.",
+    "Open water is inferred from low L-band HH backscatter. Smooth non-water surfaces (dry sand bars, bare flat soil, radar shadow) can look like water; wind- or rain-roughened water can look like land.",
+    "Flooded vegetation can brighten HH through double-bounce scattering and is NOT mapped as water; strong HH increases on land are reported separately as hh_brightening_non_water_km2.",
+    "A change in backscatter is evidence of surface change, not proof of flooding or of its cause. Rainfall or river-gauge data are context, not confirmation.",
+    "Layover/shadow from the NISAR static-layers product is not applied; results in steep terrain are unreliable.",
+    "Areas use projected (UTM) pixel area; map scale distortion is below ~0.2 % within a UTM zone.",
+    "Backscatter values in samples.json are gamma-0 dB on the analysis grid; filter settings are recorded in processing parameters. They are not unprocessed source pixels.",
+    "2026-07-19: threshold quality flag 'weak_bimodality'.",
+    "The optical reference precedes NISAR by 4.34 days; tides and actual change may differ. SCL is an automatic classifier, not field ground truth. Spatially correlated pixels do not provide independent validation samples; any binomial interval is descriptive only."
+  ],
+  "validation_status": "Reference agreement (not field accuracy): 2026-07-19 vs Sentinel-2C L2A SCL, 2026-07-15T10:46:41.387Z, automatic optical water reference: OA 0.614 (95% CI [0.6119, 0.616]), F1 water 0.403, n=221753",
+  "data_status": "observed",
+  "validation": [
+    {
+      "scene_id": "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+      "date": "2026-07-19",
+      "reference": {
+        "path": "data/processed/biesbosch-reference/water-reference.tif",
+        "kind": "raster",
+        "description": "Sentinel-2C L2A SCL, 2026-07-15T10:46:41.387Z, automatic optical water reference"
+      },
+      "reference_caveat": "The optical reference precedes NISAR by 4.34 days; tides and actual change may differ. SCL is an automatic classifier, not field ground truth. Spatially correlated pixels do not provide independent validation samples; any binomial interval is descriptive only.",
+      "metrics": {
+        "n": 221753,
+        "confusion_matrix": {
+          "tp": 28900,
+          "fp": 82056,
+          "fn": 3551,
+          "tn": 107246
+        },
+        "overall_accuracy": 0.614,
+        "overall_accuracy_95ci": [
+          0.6119,
+          0.616
+        ],
+        "precision_water": 0.2605,
+        "recall_water": 0.8906,
+        "f1_water": 0.403,
+        "iou_water": 0.2524,
+        "cohens_kappa": 0.2283
+      },
+      "created_utc": "2026-11-15T18:56:01Z"
+    }
+  ]
+}

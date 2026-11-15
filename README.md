@@ -6,7 +6,9 @@
 
 SARPulse is Team StarFire's selected concept for the 2026 challenge **[Dancing with the SARs](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/)**. Our goal during the hackathon is to explore how NASA–ISRO **NISAR synthetic-aperture radar observations** can help people investigate changes across Earth's surface.
 
-**Status: scientific modules, platform and frontend source integrated; real-data execution and frontend data connection pending.** Ingestion, open-water analysis, the FastAPI evidence service, orchestration, exports and the frontend are implemented. The frontend currently opens a clearly labelled synthetic workspace and imports its own local data-package format; it does not yet automatically consume the platform's export/API. No real environmental measurements or independent accuracy results are claimed by this status.
+**Status: connected application with real NISAR investigations.** The project processes and displays two genuine GCOV pairs: Brahmaputra–Majuli, Assam (July 22 / October 14, 2026), and Biesbosch wetlands, Netherlands (July 19 / October 11, 2026). The UI loads precomputed scientific records and georeferenced HH/HV/change images, exposes Change Passports and scientific exports, and includes a seven-slide demonstration. The statistical baseline is exploratory: the Biesbosch optical-reference comparison reveals substantial false positives, and Assam has no independent reference comparison. Read the limitations before interpreting a candidate change as water or flooding.
+
+**Run the complete application:** `docker compose up --build`, then open http://127.0.0.1:8000 . The image includes the frontend, API and both precomputed investigations. Credentials are required to reproduce source-data retrieval, not to view the published results. See [release status](docs/FINAL_STATUS.md).
 
 ## Run the integrated project
 
@@ -15,10 +17,10 @@ uv venv --python 3.12 .venv
 uv pip install --python .venv/Scripts/python.exe -r requirements.lock.txt
 uv pip install --python .venv/Scripts/python.exe --no-deps -e .
 .venv/Scripts/python scripts/sarpulse.py doctor
-.venv/Scripts/python scripts/sarpulse.py serve --data-dir api/fixtures
+.venv/Scripts/python scripts/sarpulse.py serve --data-dir web/public/data/sites
 ```
 
-The last command serves **synthetic development fixtures** at http://127.0.0.1:8000/docs. See [the platform runbook](platform/README.md) for real GCOV ingestion, analysis, validation and versioned exports; [shared contracts](contracts/README.md) for frontend integration; and [integration status](docs/INTEGRATION_STATUS.md) for verified work and outstanding dependencies.
+The last command serves the genuine precomputed investigations at http://127.0.0.1:8000/docs and, after `npm --prefix web run build`, the complete frontend at `/`. `api/fixtures` remains available for explicitly synthetic software tests. See [the platform runbook](platform/README.md) and [shared contracts](contracts/README.md).
 
 Start the frontend separately with `cd web`, `npm ci`, then `npm run dev`. It includes geographic exploration, comparisons, a Science Lab, guided stories and a 3D presentation. See [frontend setup and data boundaries](web/README.md).
 

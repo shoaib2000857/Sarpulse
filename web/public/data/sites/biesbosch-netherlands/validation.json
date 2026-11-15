@@ -1,0 +1,32 @@
+[
+  {
+    "scene_id": "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+    "date": "2026-07-19",
+    "reference": {
+      "path": "data/processed/biesbosch-reference/water-reference.tif",
+      "kind": "raster",
+      "description": "Sentinel-2C L2A SCL, 2026-07-15T10:46:41.387Z, automatic optical water reference"
+    },
+    "reference_caveat": "The optical reference precedes NISAR by 4.34 days; tides and actual change may differ. SCL is an automatic classifier, not field ground truth. Spatially correlated pixels do not provide independent validation samples; any binomial interval is descriptive only.",
+    "metrics": {
+      "n": 221753,
+      "confusion_matrix": {
+        "tp": 28900,
+        "fp": 82056,
+        "fn": 3551,
+        "tn": 107246
+      },
+      "overall_accuracy": 0.614,
+      "overall_accuracy_95ci": [
+        0.6119,
+        0.616
+      ],
+      "precision_water": 0.2605,
+      "recall_water": 0.8906,
+      "f1_water": 0.403,
+      "iou_water": 0.2524,
+      "cohens_kappa": 0.2283
+    },
+    "created_utc": "2026-11-15T18:56:01Z"
+  }
+]

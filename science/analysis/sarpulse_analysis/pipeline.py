@@ -147,6 +147,12 @@ def run_analysis(stack_path: str | Path, before_ref: str, after_ref: str, out_di
             "after_scene_id": after.scene_id,
         }
     ]
+    for name in ("water_gained", "water_lost", "ambiguous"):
+        single_class = np.where(cls == CLASS_CODES[name], cls, NODATA).astype(np.uint8)
+        rel = f"web/{name}.png"
+        write_png(out / rel, classes_rgba(proj.warp(single_class, NODATA)))
+        layers.append({"id": name, "kind": "categorical", "title": name.replace("_", " ").title(),
+                       "png": rel, "before_scene_id": before.scene_id, "after_scene_id": after.scene_id})
     write_png(out / "web" / "delta_hh_db.png", backscatter_rgba(proj.warp(delta_out, np.float32(np.nan)), (-10, 10)))
     layers.append({"id": "delta_hh_db", "kind": "difference", "title": "HH change (after minus before)",
                    "png": "web/delta_hh_db.png", "geotiff": "delta_hh_db.tif", "display_range_db": [-10, 10]})
