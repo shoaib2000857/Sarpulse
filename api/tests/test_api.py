@@ -89,7 +89,8 @@ def test_pipeline_output_without_context(tmp_path):
         assert client.get(SITE + "/summary").json()["area_ranges_km2"]["water_gained"] == [8.0, 12.0]
         p = client.get(SITE + "/passport", params={"lon": 94.0, "lat": 26.9})
         assert p.status_code == 200
-        assert "Context" not in [e["label"] for e in p.json()["evidence"]]
+        ctx = [e for e in p.json()["evidence"] if e["label"] == "Context"]
+        assert len(ctx) == 1 and ctx[0]["values"]["slope_deg"] == 1.0  # per-point only, no AOI records
     finally:
         app.dependency_overrides.clear()
 

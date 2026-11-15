@@ -89,6 +89,16 @@ def build_passport(
             source="science/analysis pipeline",
         ),
     ]
+    if sample.slope_deg is not None or sample.jrc_occurrence_pct is not None:
+        evidence.append(
+            EvidenceItem(
+                label=EvidenceLabel.context,
+                statement="At this location: terrain slope and historical surface-water occurrence. "
+                "Historical water is context, not 2026 ground truth.",
+                values={"slope_deg": sample.slope_deg, "jrc_occurrence_pct": sample.jrc_occurrence_pct},
+                source="Copernicus DEM GLO-30; EC JRC Global Surface Water v1.4",
+            )
+        )
     for c in context:
         head = f"{c.kind}: {c.value} {c.units or ''}".strip()
         evidence.append(

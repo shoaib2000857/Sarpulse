@@ -49,7 +49,26 @@ Extra fields from the pipeline (`area_ranges_km2`, `thresholds`, `method_agreeme
 
 Evidence for a point is split into labelled items: **Observed** (radar dB values, acquisition times), **Derived** (change class, method, validation status), **Context** (ancillary data with caveats), **Hypothesis** (physical interpretation). Automatic warnings are added for mixed maturity, invalid masks, steep slope and distant samples.
 
+## Context adapters (offline)
+
+Fill per-point `slope_deg` / `jrc_occurrence_pct` in `samples.json` and write `context.json` for a site folder (e.g. Naveen's pipeline output):
+
+```bash
+pip install -r requirements-context.txt
+python -m context_adapters ../data/processed/<run>/<site_id>            # DEM slope + JRC (no login)
+python -m context_adapters ../data/processed/<run>/<site_id> --imerg    # + IMERG rainfall (Earthdata Login)
+```
+
+| Kind | Source | AOI value | Caveat |
+|---|---|---|---|
+| `dem_slope` | Copernicus DEM GLO-30 (AWS Open Data COGs) | % of AOI with slope > 10 deg | layover/shadow risk |
+| `jrc_gsw_occurrence` | EC JRC Global Surface Water v1.4 (1984-2021) | % of AOI water in >= 50% of observations | historical context, not 2026 truth |
+| `rainfall_imerg` | NASA GPM IMERG V07 daily Late Run | AOI-mean accumulated mm between before and after dates `[before, after)` | context, not cause; ~10 km |
+
+Only AOI windows are read remotely (about 30 s for the demo box). Results are cached in the folder, so the API never fetches live. Context records are `data_status: observed` because they are real ancillary data, independent of whether the radar site is synthetic.
+
 ## Next
 
-- Context adapters: GPM IMERG, Sentinel-2 L2A, JRC GSW, DEM slope (write cached JSON, never called live in the demo).
+- Run `--imerg` with Earthdata Login on the real Majuli stack dates.
+- Optional: Sentinel-2 L2A nearest clear scene + cloud %.
 - Swap fixtures for real exports from `science/analysis`.
