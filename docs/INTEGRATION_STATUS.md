@@ -2,7 +2,7 @@
 
 ## Frontend follow-up review
 
-Integrated the three new `frontend` commits (`2e4511a`, `1d4e75e`, `4701f88`) on `feat/shoaib-frontend-integration`. The source includes the 3D landing, shared map workspace, comparisons, local package imports, Science Lab, chart alternatives, story navigation and labelled synthetic fixture. Frontend type checking, 17 unit tests and the production build pass; the existing 40 backend/integration tests and generated-contract checks also pass. Browser-check and remote CI results are recorded in the review PR. CI now checks the frontend as well as Python modules.
+Integrated the three new `frontend` commits (`2e4511a`, `1d4e75e`, `4701f88`) on `feat/shoaib-frontend-integration`. The source includes the 3D landing, shared map workspace, comparisons, local package imports, Science Lab, chart alternatives, story navigation and labelled synthetic fixture. Frontend type checking, 17 unit tests and the production build pass; the existing 40 backend/integration tests and generated-contract checks also pass. Browser review found and corrected a false failure callback in the canvas fallback and deferred continuous rendering until the model is ready. Final browser-check and remote CI results are recorded in PR #11. CI now checks the frontend as well as Python modules.
 
 The production build reports large WebGL/3D chunks and a redundant dynamic import for the class chart. These are performance/code-splitting warnings, not build failures. Backend-to-frontend data adaptation remains an explicit open integration task, as detailed below.
 

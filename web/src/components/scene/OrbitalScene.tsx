@@ -287,10 +287,7 @@ function LoadingProgress() {
     </div>
   );
 }
-function Unavailable({ onFailure }: { onFailure?: () => void }) {
-  useEffect(() => {
-    onFailure?.();
-  }, []);
+function Unavailable() {
   return (
     <div className="orbital-static" role="status">
       <span>
@@ -374,7 +371,7 @@ const OrbitalScene = forwardRef<SceneHandle, Props>(function OrbitalScene(
     >
       <SceneBoundary onFailure={failure}>
         <Canvas
-          frameloop={visible && motion ? "always" : "demand"}
+          frameloop={status === "ready" && visible && motion ? "always" : "demand"}
           dpr={[1, innerWidth < 768 ? 1.25 : 1.5]}
           camera={{ position: [0, 0, 11.5], fov: 34, near: 0.1, far: 80 }}
           gl={{
@@ -383,7 +380,7 @@ const OrbitalScene = forwardRef<SceneHandle, Props>(function OrbitalScene(
             toneMapping: ACESFilmicToneMapping,
             toneMappingExposure: 1,
           }}
-          fallback={<Unavailable onFailure={failure} />}
+          fallback={<Unavailable />}
           onCreated={({ gl }) => {
             gl.setClearColor("#000000");
             gl.domElement.setAttribute("aria-hidden", "true");
