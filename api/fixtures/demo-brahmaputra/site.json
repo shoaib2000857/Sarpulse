@@ -1,0 +1,13 @@
+{
+  "id": "demo-brahmaputra",
+  "name": "Brahmaputra floodplain (DEMO)",
+  "description": "Synthetic fixture for frontend/API development. Replace with verified NISAR outputs.",
+  "bbox": {
+    "west": 93.9,
+    "south": 26.8,
+    "east": 94.3,
+    "north": 27.1
+  },
+  "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+  "verified": false
+}

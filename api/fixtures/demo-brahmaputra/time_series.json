@@ -1,0 +1,27 @@
+{
+  "aoi_id": "demo-brahmaputra",
+  "interpolated": false,
+  "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+  "points": [
+    {
+      "date": "2026-07-01",
+      "scene_id": "SYNTHETIC-SCENE-A",
+      "water_area_km2": 20.0,
+      "quality_flags": []
+    },
+    {
+      "date": "2026-07-13",
+      "scene_id": "SYNTHETIC-SCENE-B",
+      "water_area_km2": 24.0,
+      "quality_flags": []
+    },
+    {
+      "date": "2026-07-25",
+      "scene_id": "SYNTHETIC-SCENE-C",
+      "water_area_km2": 28.0,
+      "quality_flags": [
+        "fixture"
+      ]
+    }
+  ]
+}

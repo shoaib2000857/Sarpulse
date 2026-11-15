@@ -1,0 +1,53 @@
+{
+  "aoi_id": "demo-brahmaputra",
+  "crs": "EPSG:4326",
+  "bounds_wgs84": [
+    93.9,
+    26.8,
+    94.3,
+    27.1
+  ],
+  "image_coordinates": [
+    [
+      93.9,
+      27.1
+    ],
+    [
+      94.3,
+      27.1
+    ],
+    [
+      94.3,
+      26.8
+    ],
+    [
+      93.9,
+      26.8
+    ]
+  ],
+  "dates": [
+    "2026-07-01",
+    "2026-07-13",
+    "2026-07-25"
+  ],
+  "layers": [
+    {
+      "id": "change_class",
+      "kind": "categorical",
+      "title": "Water change (SYNTHETIC)",
+      "png": "web/change_class.png",
+      "geotiff": null,
+      "legend": [
+        {
+          "class": "water_gained",
+          "code": 1,
+          "color": "#2166ac"
+        }
+      ],
+      "before_scene_id": "SYNTHETIC-SCENE-A",
+      "after_scene_id": "SYNTHETIC-SCENE-C"
+    }
+  ],
+  "attribution": "Synthetic fixture, not NASA data.",
+  "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS"
+}
