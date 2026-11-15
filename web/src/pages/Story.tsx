@@ -163,8 +163,8 @@ export default function Story({ study }: { study: StudyPackage }) {
           </div>
           <GeoWorkspace
             study={study}
-            observationKey={study.observations[1].key}
-            beforeKey={study.observations[0].key}
+            observationKey={study.science?.analysis.after_scene_id ?? study.observations[1].key}
+            beforeKey={study.science?.analysis.before_scene_id ?? study.observations[0].key}
             mode={mode}
             compare={chapter === 3}
             opacity={0.8}

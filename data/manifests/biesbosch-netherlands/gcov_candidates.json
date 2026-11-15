@@ -1,0 +1,86 @@
+{
+  "aoi": {
+    "id": "biesbosch-netherlands",
+    "bbox": {
+      "west": 4.65,
+      "south": 51.7,
+      "east": 4.9,
+      "north": 51.88
+    }
+  },
+  "query": {
+    "endpoint": "https://api.daac.asf.alaska.edu/services/search/param",
+    "params": {
+      "granule_list": "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001,NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001",
+      "output": "geojson"
+    },
+    "retrieved_utc": "2026-11-15T18:51:27.472785+00:00",
+    "result_count": 2
+  },
+  "candidates": [
+    {
+      "scene_id": "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+      "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001/NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001.h5",
+      "collection": "NISAR_L2_GCOV_PROVISIONAL_V1",
+      "maturity": "PROVISIONAL",
+      "processing_type": "PR",
+      "crid": "P05023",
+      "track": 167,
+      "frame": 62,
+      "direction": "DESCENDING",
+      "mode": "2005",
+      "polarization": "DHDH",
+      "orbit_accuracy": "N",
+      "coverage": "F",
+      "counter": 1,
+      "start_utc": "2026-07-19T18:57:41Z",
+      "stop_utc": "2026-07-19T18:58:16Z",
+      "main_band_polarizations": [
+        "HH",
+        "HV"
+      ],
+      "footprint_wkt": "POLYGON((4.48037 53.73145,3.15709 51.68574,6.51678 50.81491,7.97198 52.82178,4.48037 53.73145))",
+      "footprint_bbox": {
+        "west": 3.15709,
+        "south": 50.81491,
+        "east": 7.97198,
+        "north": 53.73145
+      },
+      "processing_date_utc": "2026-07-22T05:11:12Z",
+      "pge_version": "R05.02.3",
+      "browse_url": "https://nisar.asf.earthdatacloud.nasa.gov/BROWSE/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001/NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001_LATLON.png"
+    },
+    {
+      "scene_id": "NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001",
+      "url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001/NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001.h5",
+      "collection": "NISAR_L2_GCOV_PROVISIONAL_V1",
+      "maturity": "PROVISIONAL",
+      "processing_type": "PR",
+      "crid": "P05023",
+      "track": 167,
+      "frame": 62,
+      "direction": "DESCENDING",
+      "mode": "2005",
+      "polarization": "DHDH",
+      "orbit_accuracy": "N",
+      "coverage": "F",
+      "counter": 1,
+      "start_utc": "2026-10-11T18:57:39Z",
+      "stop_utc": "2026-10-11T18:58:14Z",
+      "main_band_polarizations": [
+        "HH",
+        "HV"
+      ],
+      "footprint_wkt": "POLYGON((4.5013 53.76374,3.17624 51.71823,6.53789 50.84689,7.995 52.85351,4.5013 53.76374))",
+      "footprint_bbox": {
+        "west": 3.17624,
+        "south": 50.84689,
+        "east": 7.995,
+        "north": 53.76374
+      },
+      "processing_date_utc": "2026-10-13T17:30:31Z",
+      "pge_version": "R05.02.3",
+      "browse_url": "https://nisar.asf.earthdatacloud.nasa.gov/BROWSE/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001/NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001_LATLON.png"
+    }
+  ]
+}

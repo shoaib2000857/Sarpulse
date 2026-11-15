@@ -22,5 +22,5 @@ This is a collaboration map, **not a hierarchy**. Everyone is expected to help e
 - Challenge: Dancing with the SARs.
 - Project: SARPulse; team: StarFire.
 - Focus: scientifically honest NISAR-based water/wetland changes.
-- Brahmaputra is a **candidate** region, conditional on compatible downloadable NISAR observations.
+- Brahmaputra–Majuli and Biesbosch now have processed compatible NISAR pairs. Biesbosch includes an automatic optical-reference comparison; Assam's classifier remains independently unvalidated.
 - Initial goal: one authentic, reproducible end-to-end investigation. All advanced ideas are conditional on working science.

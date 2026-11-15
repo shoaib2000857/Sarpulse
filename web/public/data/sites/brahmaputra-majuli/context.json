@@ -1,0 +1,24 @@
+[
+  {
+    "kind": "dem_slope",
+    "source": "Copernicus DEM GLO-30 (ESA / AWS Open Data)",
+    "value": 1.2,
+    "units": "% of AOI with slope > 10 deg",
+    "resolution": "30 m",
+    "period_start": null,
+    "period_end": null,
+    "caveat": "Terrain context. Steep slopes cause radar layover/shadow; changes there are unreliable.",
+    "data_status": "observed"
+  },
+  {
+    "kind": "jrc_gsw_occurrence",
+    "source": "EC JRC Global Surface Water v1.4 (Landsat, 1984-2021)",
+    "value": 9.4,
+    "units": "% of AOI water in >= 50% of historical observations",
+    "resolution": "30 m",
+    "period_start": "1984-03-16",
+    "period_end": "2021-12-31",
+    "caveat": "Historical optical context, not 2026 ground truth. Braided channels migrate.",
+    "data_status": "observed"
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "aoi_id": "biesbosch-netherlands",
+  "retrieved_utc": "2026-11-15T18:51:27.472785+00:00",
+  "stacks": [
+    {
+      "stack_id": "T167D_F062_2005_DHDH_PR_P05023",
+      "key": {
+        "track": 167,
+        "direction": "DESCENDING",
+        "frame": 62,
+        "mode": "2005",
+        "polarization": "DHDH",
+        "processing_type": "PR",
+        "crid": "P05023"
+      },
+      "n_dates": 2,
+      "dates": [
+        "2026-07-19",
+        "2026-10-11"
+      ],
+      "warnings": [],
+      "scenes": [
+        "NISAR_L2_PR_GCOV_025_167_D_062_2005_DHDH_A_20260719T185741_20260719T185816_P05023_N_F_J_001",
+        "NISAR_L2_PR_GCOV_032_167_D_062_2005_DHDH_A_20261011T185739_20261011T185814_P05023_N_F_J_001"
+      ]
+    }
+  ]
+}

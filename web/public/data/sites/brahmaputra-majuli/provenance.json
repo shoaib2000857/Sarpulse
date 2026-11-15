@@ -1,0 +1,158 @@
+{
+  "data_status": "observed",
+  "scenes": [
+    {
+      "scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+      "source": "NASA/JPL NISAR L2 GCOV via ASF DAAC (NISAR_L2_GCOV_PROVISIONAL_V1)",
+      "acquired_at_utc": "2026-07-22T23:05:28Z",
+      "maturity": "PROVISIONAL",
+      "crid": "P05023",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit": 40,
+      "polarizations": [
+        "HHHH",
+        "HVHV"
+      ],
+      "grid_epsg": 32646,
+      "pixel_spacing_m": 20.0,
+      "footprint": {
+        "west": 92.40239,
+        "south": 25.39617,
+        "east": 95.56736,
+        "north": 28.08414
+      },
+      "license": "NASA Earth Science open data policy; cite NASA/JPL-Caltech NISAR and ASF DAAC",
+      "data_url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001/NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001.h5",
+      "data_status": "observed"
+    },
+    {
+      "scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001",
+      "source": "NASA/JPL NISAR L2 GCOV via ASF DAAC (NISAR_L2_GCOV_PROVISIONAL_V1)",
+      "acquired_at_utc": "2026-10-14T23:05:26Z",
+      "maturity": "PROVISIONAL",
+      "crid": "P05023",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit": 40,
+      "polarizations": [
+        "HHHH",
+        "HVHV"
+      ],
+      "grid_epsg": 32646,
+      "pixel_spacing_m": 20.0,
+      "footprint": {
+        "west": 92.39972,
+        "south": 25.34359,
+        "east": 95.59097,
+        "north": 28.09047
+      },
+      "license": "NASA Earth Science open data policy; cite NASA/JPL-Caltech NISAR and ASF DAAC",
+      "data_url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001/NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001.h5",
+      "data_status": "observed"
+    }
+  ],
+  "processing": {
+    "si_assistance": "Code and integration assisted by Codex; see AI_DISCLOSURE.md. Observational inputs are not SI-generated.",
+    "stack_id": "T040A_F015_4005_DHDH_PR_P05023",
+    "stack_schema": "sarpulse.ard_stack.v0",
+    "comparability_key": {
+      "track": 40,
+      "direction": "ASCENDING",
+      "frame": 15,
+      "mode": "4005",
+      "polarization": "DHDH",
+      "processing_type": "PR",
+      "crid": "P05023"
+    },
+    "ingest_processing": {
+      "software": "sarpulse_ingest 0.1.0",
+      "multilook": 2,
+      "valid_rule": "GCOV mask in 1..5, inputDataExceptionMask == 0, finite and > 0 in HHHH and HVHV",
+      "created_utc": "2026-11-15T18:56:50Z"
+    },
+    "grid": {
+      "crs": "EPSG:32646",
+      "epsg": 32646,
+      "transform": [
+        20.0,
+        0.0,
+        589200.0,
+        0.0,
+        -20.0,
+        2998180.0
+      ],
+      "width": 2001,
+      "height": 1679,
+      "pixel_spacing_m": 20.0
+    },
+    "scenes": [
+      {
+        "scene_id": "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001",
+        "source": "NASA/JPL NISAR L2 GCOV via ASF DAAC (NISAR_L2_GCOV_PROVISIONAL_V1)",
+        "acquired_at_utc": "2026-07-22T23:05:28Z",
+        "maturity": "PROVISIONAL",
+        "crid": "P05023",
+        "orbit_direction": "ASCENDING",
+        "relative_orbit": 40,
+        "polarizations": [
+          "HHHH",
+          "HVHV"
+        ],
+        "grid_epsg": 32646,
+        "pixel_spacing_m": 20.0,
+        "footprint": {
+          "west": 92.40239,
+          "south": 25.39617,
+          "east": 95.56736,
+          "north": 28.08414
+        },
+        "license": "NASA Earth Science open data policy; cite NASA/JPL-Caltech NISAR and ASF DAAC",
+        "data_url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001/NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001.h5",
+        "data_status": "observed"
+      },
+      {
+        "scene_id": "NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001",
+        "source": "NASA/JPL NISAR L2 GCOV via ASF DAAC (NISAR_L2_GCOV_PROVISIONAL_V1)",
+        "acquired_at_utc": "2026-10-14T23:05:26Z",
+        "maturity": "PROVISIONAL",
+        "crid": "P05023",
+        "orbit_direction": "ASCENDING",
+        "relative_orbit": 40,
+        "polarizations": [
+          "HHHH",
+          "HVHV"
+        ],
+        "grid_epsg": 32646,
+        "pixel_spacing_m": 20.0,
+        "footprint": {
+          "west": 92.39972,
+          "south": 25.34359,
+          "east": 95.59097,
+          "north": 28.09047
+        },
+        "license": "NASA Earth Science open data policy; cite NASA/JPL-Caltech NISAR and ASF DAAC",
+        "data_url": "https://nisar.asf.earthdatacloud.nasa.gov/NISAR/NISAR_L2_GCOV_PROVISIONAL_V1/NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001/NISAR_L2_PR_GCOV_033_040_A_015_4005_DHDH_A_20261014T230526_20261014T230601_P05023_N_F_J_001.h5",
+        "data_status": "observed"
+      }
+    ],
+    "parameters": {
+      "speckle_filter": "lee",
+      "filter_size": 5,
+      "tile_px": 64,
+      "margin_db": 0.5,
+      "min_change_db": 3.0,
+      "n_boot": 200,
+      "seed": 0,
+      "gmm_check": true
+    },
+    "created_utc": "2026-11-15T18:58:16Z"
+  },
+  "limitations": [
+    "NISAR GCOV inputs have data maturity PROVISIONAL: calibrated but not fully validated by the mission.",
+    "Open water is inferred from low L-band HH backscatter. Smooth non-water surfaces (dry sand bars, bare flat soil, radar shadow) can look like water; wind- or rain-roughened water can look like land.",
+    "Flooded vegetation can brighten HH through double-bounce scattering and is NOT mapped as water; strong HH increases on land are reported separately as hh_brightening_non_water_km2.",
+    "A change in backscatter is evidence of surface change, not proof of flooding or of its cause. Rainfall or river-gauge data are context, not confirmation.",
+    "Layover/shadow from the NISAR static-layers product is not applied; results in steep terrain are unreliable.",
+    "Areas use projected (UTM) pixel area; map scale distortion is below ~0.2 % within a UTM zone.",
+    "Backscatter values in samples.json are gamma-0 dB on the analysis grid; filter settings are recorded in processing parameters. They are not unprocessed source pixels."
+  ]
+}

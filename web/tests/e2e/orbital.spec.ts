@@ -1,6 +1,10 @@
 import { test, expect } from "@playwright/test";
 import type { Page } from "@playwright/test";
 
+test.beforeEach(async ({page}) => {
+  await page.route("**/data/sites.json", route => route.fulfill({status:404,body:"No installed package in this fixture test"}));
+});
+
 async function settledChapter(page: Page, index: number) {
   await expect(page.locator(".orbital-journey")).toHaveAttribute(
     "data-orbit-chapter",

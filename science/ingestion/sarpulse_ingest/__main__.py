@@ -61,6 +61,10 @@ def cmd_ard(args) -> int:
         missing = wanted - {c.start_utc[:10] for c in stack.scenes}
         if missing:
             sys.exit(f"no scene in {stack.stack_id} on {sorted(missing)}")
+        stacks = build_stacks(stack.scenes)
+        if not stacks:
+            sys.exit("Select at least two compatible acquisition dates")
+        stack = stacks[0]
     try:
         opener = local_opener(Path(args.local_dir)) if args.offline else earthdata_opener(Path(args.local_dir) if args.local_dir else None)
     except PermissionError as err:

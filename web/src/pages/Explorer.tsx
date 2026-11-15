@@ -14,6 +14,7 @@ import {
   SplitSquareHorizontal,
 } from "lucide-react";
 import GeoWorkspace from "../components/map/GeoWorkspace";
+import ChangePassport from "../components/ChangePassport";
 import { Button } from "../components/ui/button";
 import {
   availableChannels,
@@ -56,8 +57,8 @@ const kindLabel: Record<ChangeKind, string> = {
   "no-data": "No data",
 };
 export default function Explorer({ study }: { study: StudyPackage }) {
-  const [index, setIndex] = useState(1);
-  const [beforeIndex, setBeforeIndex] = useState(0);
+  const [index, setIndex] = useState(() => Math.max(0, study.science ? study.observations.findIndex(o => o.key === study.science!.analysis.after_scene_id) : 1));
+  const [beforeIndex, setBeforeIndex] = useState(() => Math.max(0, study.science ? study.observations.findIndex(o => o.key === study.science!.analysis.before_scene_id) : 0));
   const [mode, setMode] = useState<LayerMode>("after");
   const [compare, setCompare] = useState(false);
   const [opacity, setOpacity] = useState(0.8);
@@ -71,6 +72,8 @@ export default function Explorer({ study }: { study: StudyPackage }) {
   const [exported, setExported] = useState(false);
   const obs = study.observations[index],
     baseline = study.observations[beforeIndex];
+  const comparisonAvailable = !study.science || (obs.key === study.science.analysis.after_scene_id && baseline.key === study.science.analysis.before_scene_id);
+  useEffect(() => { if (!comparisonAvailable && !["before","after"].includes(mode)) setMode("after"); },[comparisonAvailable,mode]);
   const channels = availableChannels(obs),
     selectedRaster = observationRaster(obs, channel || undefined);
   useEffect(() => {
@@ -184,6 +187,7 @@ export default function Explorer({ study }: { study: StudyPackage }) {
                         name="map-layer"
                         value={m.key}
                         checked={mode === m.key}
+                        disabled={!comparisonAvailable && !["before","after"].includes(m.key)}
                         onChange={() => setMode(m.key)}
                       />
                       <span>
@@ -198,6 +202,7 @@ export default function Explorer({ study }: { study: StudyPackage }) {
                     ? "All classes are schematic test cells."
                     : "Class geometry is precomputed for this package."}{" "}
                   Changing dates does not rerun classification.
+                  {!comparisonAvailable && " Select the original analysed before/after pair to view its computed change layers."}
                 </p>
               </section>
               <section className="control-section">
@@ -308,7 +313,7 @@ export default function Explorer({ study }: { study: StudyPackage }) {
                   <Info size={16} />
                   <p>
                     {selectedRaster
-                      ? `Supplied radar tiles · ${channel || obs.polarization || "channel unspecified"} · ${selectedRaster.minDb} to ${selectedRaster.maxDb} dB`
+                      ? `Supplied radar ${selectedRaster.image ? "image" : "tiles"} · ${channel || obs.polarization || "channel unspecified"} · ${selectedRaster.minDb} to ${selectedRaster.maxDb} dB`
                       : "Radar raster unavailable. No COG or TiTiler tile URL has been supplied for this observation and channel."}
                   </p>
                 </div>
@@ -360,6 +365,7 @@ export default function Explorer({ study }: { study: StudyPackage }) {
                   <span>No location selected</span>
                 </div>
               )}
+              {selection && study.science && <ChangePassport study={study} lon={selection.longitude} lat={selection.latitude} />}
               <div className="cell-list">
                 {visibleOverlays(
                   study,
@@ -424,6 +430,11 @@ export default function Explorer({ study }: { study: StudyPackage }) {
             }}
           />
           <div className="class-strip" aria-label="Classes in the current view">
+            {study.science ? <><span className="class-strip-title">Computed water candidates</span>
+              <span>Gained <b>{study.science.analysis.gained_water_km2.toFixed(2)} km²</b></span>
+              <span>Lost <b>{study.science.analysis.lost_water_km2.toFixed(2)} km²</b></span>
+              <span>Ambiguous <b>{study.science.analysis.ambiguous_km2.toFixed(2)} km²</b></span>
+              <small>Derived classifications, not confirmed flood extent.</small></> : <>
             <span className="class-strip-title">
               {study.status === "synthetic"
                 ? "Test cells in view"
@@ -441,6 +452,7 @@ export default function Explorer({ study }: { study: StudyPackage }) {
             <small>
               Counts of supplied geometry, not area or measured change.
             </small>
+            </>}
           </div>
           <div className="timeline">
             <div className="timeline-heading">

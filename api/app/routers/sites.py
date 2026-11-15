@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import FileResponse
 
 from ..passport import build_passport
-from ..schemas import Analysis, ChangePassport, ContextRecord, LayersManifest, Scene, Site, TimeSeries
+from ..schemas import Analysis, ChangePassport, ContextRecord, LayersManifest, SamplePoint, Scene, Site, TimeSeries
 from ..store import NotFound, Store, get_store
 
 router = APIRouter(prefix="/api/sites", tags=["sites"])
@@ -43,6 +43,11 @@ def get_time_series(site_id: str, store: Store = Depends(get_store)):
 @router.get("/{site_id}/evidence", response_model=list[ContextRecord])
 def get_evidence(site_id: str, store: Store = Depends(get_store)):
     return _get(store.context, site_id)
+
+
+@router.get("/{site_id}/samples", response_model=list[SamplePoint])
+def get_samples(site_id: str, store: Store = Depends(get_store)):
+    return _get(store.samples, site_id)
 
 
 @router.get("/{site_id}/layers", response_model=LayersManifest)

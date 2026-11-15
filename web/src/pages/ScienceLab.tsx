@@ -10,10 +10,10 @@ import {
 import { Button } from "../components/ui/button";
 import { downloadFile, observationLabel, summaryCsv } from "../lib/study";
 import { safeSourceUrl } from "../lib/validate-package";
+import ScientificEvidence from "../components/ScientificEvidence";
 import type { StudyPackage } from "../types/frontend";
-import { classCount, classKinds } from "../components/charts/ClassChart";
+import ClassChart, { classCount, classKinds } from "../components/charts/ClassChart";
 const SignalChart = lazy(() => import("../components/charts/SignalChart"));
-const ClassChart = lazy(() => import("../components/charts/ClassChart"));
 const LocatorGlobe = lazy(() => import("../components/map/LocatorGlobe"));
 
 export default function ScienceLab({ study }: { study: StudyPackage }) {
@@ -120,6 +120,7 @@ export default function ScienceLab({ study }: { study: StudyPackage }) {
           </div>
         ))}
       </section>
+      {study.science && <ScientificEvidence science={study.science} />}
       <div className="science-grid">
         <section className="science-panel">
           <div className="panel-heading">

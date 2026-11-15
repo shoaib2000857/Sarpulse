@@ -18,7 +18,8 @@ const textOrNull = (v: unknown, name: string) =>
 export function safeSourceUrl(v: unknown): v is string {
   if (typeof v !== "string") return false;
   try {
-    return new URL(v).protocol === "https:";
+    const url = new URL(v);
+    return url.protocol === "https:" && !url.username && !url.password;
   } catch {
     return false;
   }
@@ -44,7 +45,15 @@ function validTile(v: unknown): boolean {
 function raster(v: unknown) {
   const r = record(v);
   str(r.attribution, "Raster attribution");
-  if (
+  if (r.image !== undefined) {
+    const image = record(r.image);
+    const url = str(image.url, "Raster image URL");
+    if (!((url.startsWith("/") && !url.startsWith("//")) || safeSourceUrl(url) || /^http:\/\/(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?\//.test(url)))
+      fail("Raster images require HTTPS or a local URL.");
+    if (!Array.isArray(image.coordinates) || image.coordinates.length !== 4 || !image.coordinates.every(p =>
+      Array.isArray(p) && p.length === 2 && p.every(finite) && Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 85))
+      fail("Raster images require four valid geographic corners.");
+  } else if (
     !Array.isArray(r.tiles) ||
     !r.tiles.length ||
     r.tiles.length > 8 ||

@@ -1,5 +1,7 @@
 # SARPulse — NASA Space Apps 2026 submission
 
+**Superseded:** use [SUBMISSION_FINAL.md](SUBMISSION_FINAL.md), which describes the delivered real-data application and working public demo. The completion-assumption text below is historical and must not be pasted as the current project status.
+
 Team StarFire · Dancing with the SARs · Prepared November 15, 2026
 
 **Team editing note — do not paste this note into the form:** This is a completion-assumption draft, as requested by Shoaib. The product descriptions below assume the planned experience has shipped. Check them against the final build before publishing. Catalog metadata is present, but this session has not yet processed real NISAR pixels or validated environmental results. No accuracy, flood-area or population-impact figures are invented here. The project URL is supplied by Shoaib; it did not resolve in the local check and needs DNS/hosting verification. Replace the demo-link placeholder and remove any capability or resource that is absent from the final delivery.
