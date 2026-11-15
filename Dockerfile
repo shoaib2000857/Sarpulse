@@ -7,6 +7,7 @@ ENV VITE_SARPULSE_API_URL=/api
 RUN npm run build
 
 FROM python:3.12-slim
+RUN apt-get update && apt-get install -y --no-install-recommends libexpat1 libgomp1 && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY requirements.lock.txt ./
 RUN pip install --no-cache-dir -r requirements.lock.txt

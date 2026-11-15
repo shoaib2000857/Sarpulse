@@ -24,7 +24,9 @@ The last command serves the genuine precomputed investigations at http://127.0.0
 
 Start the frontend separately with `cd web`, `npm ci`, then `npm run dev`. It includes geographic exploration, comparisons, a Science Lab, guided stories and a 3D presentation. See [frontend setup and data boundaries](web/README.md).
 
-Submission material: [form-ready draft](docs/SUBMISSION_DRAFT.md). Chosen project URL: https://sarpulse.shoaibssm.me (public availability must be verified; see [deployment](docs/DEPLOYMENT.md)). The current supplied guide requires a **<=30-second video or <=7-slide deck**, superseding the master plan's longer demonstration proposal.
+**Public project:** https://sarpulse.adoredrose256.chatgpt.site · [Seven-slide demo](https://sarpulse.adoredrose256.chatgpt.site/demo/) · [Demo PDF](https://sarpulse.adoredrose256.chatgpt.site/demo/sarpulse-demo.pdf).
+
+Submission material: [final form-ready fields](docs/SUBMISSION_FINAL.md). The requested domain `sarpulse.shoaibssm.me` awaits the records in [public deployment](docs/PUBLIC_DEPLOYMENT.md). The supplied guide requires a **<=30-second video or <=7-slide deck**, superseding the master plan's longer demonstration proposal. This November 16 release does not establish a submission before the supplied November 15 deadline.
 
 ## 📅 Important dates
 
@@ -32,7 +34,7 @@ Submission material: [form-ready draft](docs/SUBMISSION_DRAFT.md). Chosen projec
 - **14–15 Nov 2026:** hackathon build window. Begin actual challenge solution work when the event officially starts.
 - **15 Nov 2026, 23:59 local time:** project submission deadline. Verify your Local Event's instructions.
 
-Follow the [official 2026 Space Apps event](https://www.spaceappschallenge.org/2026/) and the latest participant/local-event guidance about when solution work may begin. We are deliberately keeping this scaffold documentation-only before the hackathon and will follow the current official rules.
+Follow the [official 2026 Space Apps event](https://www.spaceappschallenge.org/2026/) and participant/local-event guidance. The pre-event preparation instructions below are retained as historical team policy; current implementation and release evidence are in [final status](docs/FINAL_STATUS.md).
 
 ## 👥 Team and areas
 

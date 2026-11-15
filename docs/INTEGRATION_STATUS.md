@@ -1,5 +1,7 @@
 # Integration status — November 15, 2026
 
+**Historical snapshot:** the frontend adapter, real-data analysis, deployment and demo blockers described below were resolved in the November 16 release. See [current final status](FINAL_STATUS.md), [public deployment](PUBLIC_DEPLOYMENT.md) and [final submission fields](SUBMISSION_FINAL.md). Current verification: 40 Python tests, 22 frontend unit tests, TypeScript and production build pass; the connected-science browser test and the complete Docker/browser smoke pass, including actual-pixel API passports. GitHub CI passes on Windows and Ubuntu. No statement below establishes a NASA form submission.
+
 ## Frontend follow-up review
 
 Integrated the three new `frontend` commits (`2e4511a`, `1d4e75e`, `4701f88`) on `feat/shoaib-frontend-integration`. The source includes the 3D landing, shared map workspace, comparisons, local package imports, Science Lab, chart alternatives, story navigation and labelled synthetic fixture. Frontend type checking, 17 unit tests and the production build pass; the existing 40 backend/integration tests and generated-contract checks also pass. Browser review found and corrected a false failure callback in the canvas fallback and deferred continuous rendering until the model is ready. Final browser-check and remote CI results are recorded in PR #11. CI now checks the frontend as well as Python modules.
