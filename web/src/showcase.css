@@ -1,0 +1,326 @@
+.sc-root {
+  background: #000;
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+.sc-marquee {
+  padding: 8vh 0 4vh;
+  display: grid;
+  gap: 1vw;
+  white-space: nowrap;
+  border-top: 1px solid #14171b;
+}
+.sc-marquee-track {
+  display: flex;
+  width: max-content;
+  font-size: clamp(64px, 12vw, 190px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  color: transparent;
+  -webkit-text-stroke: 1px #2b3138;
+  will-change: transform;
+}
+.sc-marquee-track[data-row="1"] {
+  -webkit-text-stroke: 1px #00a1ff;
+  margin-left: -30vw;
+}
+.sc-section {
+  padding: 14vh 4.1667vw 4vh;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.sc-section h2 {
+  font-size: clamp(38px, 6vw, 92px);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 1;
+  margin: 18px 0 0;
+}
+.sc-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin: 9vh 0 0;
+  background: #1a1d22;
+  border: 1px solid #1a1d22;
+}
+.sc-glow {
+  position: relative;
+  background: #050607;
+  --mx: 50%;
+  --my: 50%;
+  isolation: isolate;
+}
+.sc-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.35s;
+  background: radial-gradient(
+    380px circle at var(--mx) var(--my),
+    #00a1ff2e,
+    transparent 70%
+  );
+}
+.sc-glow:hover::before {
+  opacity: 1;
+}
+.sc-stat {
+  padding: 34px 28px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 250px;
+}
+.sc-stat dt {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #7d8792;
+}
+.sc-stat dd {
+  margin: auto 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: clamp(54px, 6.4vw, 104px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+.sc-stat dd span {
+  font-size: 0.32em;
+  color: #00a1ff;
+  letter-spacing: -0.02em;
+}
+.sc-stat small {
+  color: #66717e;
+  font-size: 12px;
+}
+.sc-footnote {
+  margin: 22px 0 0;
+  color: #66717e;
+  font-size: 11px;
+  max-width: 60ch;
+}
+.sc-lifeline {
+  margin-top: 9vh;
+}
+.sc-lifeline-bar {
+  height: 2px;
+  background: #1a1d22;
+  margin-bottom: 26px;
+}
+.sc-lifeline-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #00a1ff, #7fd3ff);
+  box-shadow: 0 0 18px #00a1ff;
+}
+.sc-lifeline ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.sc-step {
+  border: 1px solid #1a1d22;
+  padding: 24px 22px 28px;
+  min-height: 230px;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.3s;
+}
+.sc-step:hover {
+  transform: translateY(-8px);
+  border-color: #00a1ff;
+}
+.sc-step small {
+  color: #00a1ff;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.sc-step h3 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  margin: 46px 0 10px;
+}
+.sc-step p {
+  margin: 0;
+  color: #8a949e;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.sc-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 8vh;
+}
+.sc-col {
+  border: 1px solid #1a1d22;
+  padding: 38px 34px 34px;
+}
+.sc-col h3 {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  margin: 0 0 26px;
+}
+.sc-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.sc-col li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 0;
+  border-top: 1px solid #14171b;
+  color: #c3cad1;
+  font-size: 15px;
+}
+.sc-col li svg {
+  color: #00a1ff;
+  flex: none;
+}
+.sc-col-warn li svg {
+  color: #ff9b3d;
+}
+.sc-col a {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 22px;
+  color: #00a1ff;
+  font-size: 13px;
+  text-decoration: none;
+  border-bottom: 1px solid #00a1ff55;
+  padding-bottom: 3px;
+}
+@media (max-width: 900px) {
+  .sc-stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sc-lifeline ol {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sc-cols {
+    grid-template-columns: 1fr;
+  }
+  .sc-stat {
+    min-height: 190px;
+  }
+}
+@media (max-width: 520px) {
+  .sc-lifeline ol {
+    grid-template-columns: 1fr;
+  }
+  .sc-step {
+    min-height: 0;
+  }
+  .sc-step h3 {
+    margin-top: 22px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sc-step,
+  .sc-glow::before {
+    transition: none;
+  }
+}
+/* Blur sits on a click-through layer so the header's dropdown stays interactive. */
+.orbital-shell .app-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  -webkit-mask-image: linear-gradient(#000 55%, transparent);
+  mask-image: linear-gradient(#000 55%, transparent);
+}
+.orbital-beam-caption {
+  max-width: 46ch;
+  margin: 22px auto 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #7d8792;
+  text-align: center;
+}
+
+/* Two steps: matches the reference — a centred globe flanked by two huge words. */
+.orbital-landing .orbital-steps-row {
+  left: 1.4vw;
+  right: 1.4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 0;
+}
+.orbital-landing .orbital-steps-row h3 {
+  font-size: 7vw;
+  letter-spacing: -0.05em;
+}
+.orbital-landing .orbital-steps-row > a > span {
+  font-size: 12px;
+  margin-bottom: 8px;
+  letter-spacing: 0.08em;
+}
+.orbital-landing .orbital-steps-row p {
+  font-size: 1.05vw;
+  color: #8b95a1;
+  margin-top: 12px;
+}
+.orbital-landing .orbital-steps-row > a > svg {
+  right: 0;
+  top: -34px;
+  bottom: auto;
+}
+.orbital-landing .orbital-steps-row > a:last-child {
+  text-align: right;
+}
+.orbital-landing .orbital-step-gap {
+  flex: 1;
+}
+/* Persistent-style square-arrow CTA, as on the reference. */
+.orbital-shell .orbital-landing a.orbital-hero-cta {
+  background: none;
+  color: #8b95a1;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0;
+  gap: 18px;
+  align-items: center;
+}
+.orbital-shell .orbital-landing a.orbital-hero-cta svg {
+  box-sizing: content-box;
+  padding: 15px;
+  width: 22px;
+  height: 22px;
+  background: #5b6470aa;
+  color: #fff;
+}
+.orbital-shell .orbital-landing a.orbital-hero-cta:hover {
+  color: #fff;
+}
+
+.orbital-landing .orbital-finale .orbital-eyebrow,
+.orbital-landing .orbital-beam-caption {
+  text-shadow: 0 0 14px #000, 0 0 4px #000;
+}
+.orbital-landing .orbital-beam-caption {
+  color: #c3cad1;
+}
