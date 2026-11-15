@@ -32,12 +32,16 @@ python -m pytest
 | GET | `/api/sites/{id}/scenes` | Scene metadata |
 | GET | `/api/sites/{id}/summary` | Change analysis (areas, method, limitations) |
 | GET | `/api/sites/{id}/timeseries` | Per-date metrics (no interpolation) |
-| GET | `/api/sites/{id}/evidence` | Context records (rainfall, JRC, optical, DEM) |
+| GET | `/api/sites/{id}/evidence` | Context records (rainfall, JRC, optical, DEM); `[]` if none yet |
+| GET | `/api/sites/{id}/layers` | Map overlay manifest (`layers.json`), PNG/GeoTIFF paths rewritten to URLs |
+| GET | `/api/sites/{id}/files/{path}` | Serves `.png` / `.tif` assets inside the site folder only |
 | GET | `/api/sites/{id}/passport?lon=&lat=` | Change Passport for a point |
 
 ## Data
 
-`SARPULSE_DATA_DIR` (default `fixtures/`) holds `<site_id>/{site,scenes,analysis,time_series,context,samples}.json`.
+`SARPULSE_DATA_DIR` (default `fixtures/`) holds `<site_id>/{site,scenes,analysis,time_series,samples,layers}.json` plus the `web/*.png` and `*.tif` assets, exactly as written by `python -m sarpulse_analysis` (science/analysis). `context.json` is optional and comes from the context adapters. Point the API at real output with `SARPULSE_DATA_DIR=../data/processed/<run>`.
+
+Extra fields from the pipeline (`area_ranges_km2`, `thresholds`, `method_agreement`, ...) are passed through unchanged.
 
 **The bundled `fixtures/demo-brahmaputra` is SYNTHETIC/DEMO — NOT NASA OBSERVATIONS.** Every record carries `data_status` so the UI can show this.
 

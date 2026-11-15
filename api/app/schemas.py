@@ -9,7 +9,7 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class DataStatus(str, Enum):
@@ -62,6 +62,9 @@ class Scene(BaseModel):
 
 
 class Analysis(BaseModel):
+    # extra=allow passes through pipeline fields (area_ranges_km2, thresholds, method_agreement, ...)
+    model_config = ConfigDict(extra="allow")
+
     aoi_id: str
     source_scene_ids: list[str]
     before_scene_id: str
@@ -87,6 +90,8 @@ class TimeSeriesPoint(BaseModel):
 
 
 class TimeSeries(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
     aoi_id: str
     interpolated: bool = False
     points: list[TimeSeriesPoint]
@@ -139,4 +144,29 @@ class ChangePassport(BaseModel):
     evidence: list[EvidenceItem]
     limitations: list[str]
     provenance: dict[str, Any]
+    data_status: DataStatus
+
+
+class Layer(BaseModel):
+    """One web map overlay from science/analysis layers.json. Paths are rewritten to API URLs."""
+
+    model_config = ConfigDict(extra="allow")
+
+    id: str
+    kind: str
+    title: str
+    png: str | None = None
+    geotiff: str | None = None
+
+
+class LayersManifest(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    aoi_id: str
+    crs: str
+    bounds_wgs84: list[float]
+    image_coordinates: list[list[float]]
+    dates: list[str]
+    layers: list[Layer]
+    attribution: str
     data_status: DataStatus
