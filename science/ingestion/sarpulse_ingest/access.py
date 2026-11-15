@@ -27,21 +27,23 @@ def local_opener(local_dir: Path):
 
 def earthdata_opener(local_dir: Path | None = None):
     """Prefer an already-downloaded file in local_dir; otherwise stream from Earthdata Cloud."""
-    import earthaccess
-
-    try:
-        auth = earthaccess.login(strategy="environment") if _env_creds() else earthaccess.login(strategy="netrc")
-    except Exception as err:  # earthaccess raises LoginStrategyUnavailable without a .netrc
-        raise PermissionError(f"Earthdata Login unavailable ({err}): configure ~/.netrc or EARTHDATA_USERNAME/EARTHDATA_PASSWORD") from err
-    if not auth or not auth.authenticated:
-        raise PermissionError("Earthdata Login failed: configure ~/.netrc or EARTHDATA_USERNAME/EARTHDATA_PASSWORD")
-    fs = earthaccess.get_fsspec_https_session()
+    fs = None
 
     @contextmanager
     def open_remote(c: CandidateScene):
+        nonlocal fs
         if local_dir and (Path(local_dir) / f"{c.scene_id}.h5").is_file():
             yield str(Path(local_dir) / f"{c.scene_id}.h5")
             return
+        if fs is None:
+            import earthaccess
+            try:
+                auth = earthaccess.login(strategy="environment" if _env_creds() else "netrc")
+            except Exception as err:
+                raise PermissionError("Earthdata Login unavailable: configure ~/.netrc or local Earthdata environment variables") from err
+            if not auth or not auth.authenticated:
+                raise PermissionError("Earthdata Login failed: configure local Earthdata credentials")
+            fs = earthaccess.get_fsspec_https_session()
         with fs.open(c.url, mode="rb", cache_type="blockcache", block_size=BLOCK_SIZE) as f:
             yield f
 

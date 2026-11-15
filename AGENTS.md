@@ -18,6 +18,7 @@ You are working on **SARPulse**, Team StarFire's entry for the 2026 NASA Space A
 - Prefer robust, precomputed demo outputs to fragile heavy on-demand processing.
 - Do not introduce huge ML models, complex infrastructure or an LLM without a clear validated benefit.
 - Don't commit credentials, downloads, secrets or data with unclear redistribution rights.
+- Keep SI disclosures centralized in `AI_DISCLOSURE.md`, submission text and processing metadata; do not repeat disclosure boilerplate in every source file.
 
 ## Team ownership
 - Shoaib: `platform/`, shared architecture/CI, integration, review and merges.

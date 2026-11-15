@@ -14,7 +14,9 @@
 5. Open concise PRs; Shoaib reviews and merges after checking interface compatibility.
 6. Run an end-to-end scientific demo early. Polish and optional features come after it works.
 
-## Planned contracts (not finalized)
+## Shared contracts
+
+The v0 interfaces are now documented in `contracts/README.md`; JSON Schemas and OpenAPI are generated from the actual API models. The original contract scope is retained below:
 - Acquisition metadata: product ID, URL/source, acquisition time, instrument/band, polarization, product type, processing version, bounds, CRS and data maturity.
 - Analysis-ready rasters: aligned geographic grid, valid-data masks, calibrated values, units and shape.
 - Detection result: change mask, per-class area, optional uncertainty and validation details with method/version.

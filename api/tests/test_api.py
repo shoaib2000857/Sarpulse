@@ -40,7 +40,7 @@ def test_passport_labels_and_values():
     p = r.json()
     assert p["change_class"] == "water_gained"
     labels = [e["label"] for e in p["evidence"]]
-    assert labels[0] == "Observed" and labels[1] == "Derived"
+    assert labels[0] == "Unverified" and labels[1] == "Derived"
     assert "Context" in labels and labels[-1] == "Hypothesis"
     assert p["evidence"][0]["values"]["delta_hh_db"] == -12.0
 

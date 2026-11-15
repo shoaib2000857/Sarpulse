@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use SARPulse, cite this software and the original input datasets separately."
+title: "SARPulse: Earth's changes. Revealed by radar."
+version: 0.1.0
+date-released: 2026-11-15
+type: software
+authors:
+  - name: "Team StarFire"
+repository-code: "https://github.com/shoaib2000857/Sarpulse"
+url: "https://sarpulse.shoaibssm.me"
+license: MIT
+abstract: "Reproducible NISAR open-water change analysis and traceable scientific evidence. Software tests are not independent validation of environmental results."

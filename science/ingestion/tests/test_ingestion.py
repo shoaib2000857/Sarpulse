@@ -12,7 +12,7 @@ from sarpulse_ingest.catalog import CandidateScene, candidate_from_feature, matu
 from sarpulse_ingest.comparability import build_stacks
 from sarpulse_ingest.granule import parse_granule_name
 
-from tests.synthetic_gcov import write_synthetic_gcov
+from science.ingestion.tests.synthetic_gcov import write_synthetic_gcov
 
 # Real product name format as listed by ASF (used only to test parsing).
 NAME = "NISAR_L2_PR_GCOV_026_040_A_015_4005_DHDH_A_20260722T230528_20260722T230602_P05023_N_F_J_001"

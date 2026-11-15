@@ -1,0 +1,154 @@
+{
+  "$defs": {
+    "BBox": {
+      "properties": {
+        "west": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "West",
+          "type": "number"
+        },
+        "south": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "South",
+          "type": "number"
+        },
+        "east": {
+          "maximum": 180,
+          "minimum": -180,
+          "title": "East",
+          "type": "number"
+        },
+        "north": {
+          "maximum": 90,
+          "minimum": -90,
+          "title": "North",
+          "type": "number"
+        }
+      },
+      "required": [
+        "west",
+        "south",
+        "east",
+        "north"
+      ],
+      "title": "BBox",
+      "type": "object"
+    },
+    "DataStatus": {
+      "enum": [
+        "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+        "observed"
+      ],
+      "title": "DataStatus",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "scene_id": {
+      "title": "Scene Id",
+      "type": "string"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "acquired_at_utc": {
+      "format": "date-time",
+      "title": "Acquired At Utc",
+      "type": "string"
+    },
+    "maturity": {
+      "title": "Maturity",
+      "type": "string"
+    },
+    "crid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Crid"
+    },
+    "orbit_direction": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Orbit Direction"
+    },
+    "relative_orbit": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Relative Orbit"
+    },
+    "polarizations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Polarizations",
+      "type": "array"
+    },
+    "grid_epsg": {
+      "title": "Grid Epsg",
+      "type": "integer"
+    },
+    "pixel_spacing_m": {
+      "title": "Pixel Spacing M",
+      "type": "number"
+    },
+    "footprint": {
+      "$ref": "#/$defs/BBox"
+    },
+    "license": {
+      "title": "License",
+      "type": "string"
+    },
+    "data_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Data Url"
+    },
+    "data_status": {
+      "$ref": "#/$defs/DataStatus"
+    }
+  },
+  "required": [
+    "scene_id",
+    "source",
+    "acquired_at_utc",
+    "maturity",
+    "polarizations",
+    "grid_epsg",
+    "pixel_spacing_m",
+    "footprint",
+    "license",
+    "data_status"
+  ],
+  "title": "Scene",
+  "type": "object"
+}

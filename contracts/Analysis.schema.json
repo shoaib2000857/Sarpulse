@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "DataStatus": {
+      "enum": [
+        "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+        "observed"
+      ],
+      "title": "DataStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "aoi_id": {
+      "title": "Aoi Id",
+      "type": "string"
+    },
+    "source_scene_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Scene Ids",
+      "type": "array"
+    },
+    "before_scene_id": {
+      "title": "Before Scene Id",
+      "type": "string"
+    },
+    "after_scene_id": {
+      "title": "After Scene Id",
+      "type": "string"
+    },
+    "processing_version": {
+      "title": "Processing Version",
+      "type": "string"
+    },
+    "valid_area_km2": {
+      "minimum": 0,
+      "title": "Valid Area Km2",
+      "type": "number"
+    },
+    "gained_water_km2": {
+      "minimum": 0,
+      "title": "Gained Water Km2",
+      "type": "number"
+    },
+    "lost_water_km2": {
+      "minimum": 0,
+      "title": "Lost Water Km2",
+      "type": "number"
+    },
+    "ambiguous_km2": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Ambiguous Km2",
+      "type": "number"
+    },
+    "class_definitions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Class Definitions",
+      "type": "object"
+    },
+    "threshold_method": {
+      "title": "Threshold Method",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "title": "Provenance",
+      "type": "object"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "validation_status": {
+      "title": "Validation Status",
+      "type": "string"
+    },
+    "data_status": {
+      "$ref": "#/$defs/DataStatus"
+    }
+  },
+  "required": [
+    "aoi_id",
+    "source_scene_ids",
+    "before_scene_id",
+    "after_scene_id",
+    "processing_version",
+    "valid_area_km2",
+    "gained_water_km2",
+    "lost_water_km2",
+    "class_definitions",
+    "threshold_method",
+    "provenance",
+    "limitations",
+    "validation_status",
+    "data_status"
+  ],
+  "title": "Analysis",
+  "type": "object"
+}

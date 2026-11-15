@@ -22,6 +22,7 @@ from . import __version__
 from .aoi import AOI, Grid, aoi_grid, grid_bbox_wgs84
 from .catalog import CandidateScene
 from .comparability import Stack
+from .comparability import stack_key
 from .gcov import GcovSubset, noise_equivalent_backscatter_db, read_grid, read_identification, read_subset, window_for_bounds
 
 SCHEMA_VERSION = "sarpulse.ard_stack.v0"
@@ -189,6 +190,12 @@ def _parse_utc(stamp: str) -> datetime:
 
 
 def build_ard_stack(stack: Stack, aoi: AOI, out_dir: Path, opener: Opener, multilook: int = 2) -> dict:
+    if multilook < 1:
+        raise ValueError("multilook must be positive")
+    if len(stack.scenes) < 2 or len({c.start_utc for c in stack.scenes}) != len(stack.scenes):
+        raise ValueError("At least two unique acquisitions are required")
+    if len({stack_key(c) for c in stack.scenes}) != 1 or len({c.maturity for c in stack.scenes}) != 1:
+        raise ValueError("Selected acquisitions have incompatible geometry, radar mode, processing release or maturity")
     out_dir = Path(out_dir)
     grid: Grid | None = None
     records, excluded = [], []
@@ -226,9 +233,9 @@ def build_ard_stack(stack: Stack, aoi: AOI, out_dir: Path, opener: Opener, multi
 
         warnings = []
         if ident.get("granuleId") and ident["granuleId"].removesuffix(".h5") != c.scene_id:
-            warnings.append(f"identification/granuleId {ident['granuleId']} differs from catalogue name")
+            raise ValueError(f"identification/granuleId {ident['granuleId']} differs from catalogue name")
         if ident.get("compositeReleaseId") and ident["compositeReleaseId"] != c.crid:
-            warnings.append(f"identification/compositeReleaseId {ident['compositeReleaseId']} differs from catalogue CRID")
+            raise ValueError(f"identification/compositeReleaseId {ident['compositeReleaseId']} differs from catalogue CRID")
 
         acquired = _utc_from_ident(ident, c.start_utc)
         if abs((_parse_utc(acquired) - _parse_utc(c.start_utc)).total_seconds()) > 60:

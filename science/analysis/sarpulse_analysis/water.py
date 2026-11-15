@@ -116,6 +116,8 @@ def split_based_threshold(
     seed: int = 0,
 ) -> ThresholdResult:
     """Select a water/land threshold on a dB image (NaN = invalid)."""
+    if np.count_nonzero(np.isfinite(db)) < 2:
+        raise ValueError("Not enough valid radar pixels to classify water")
     rng = np.random.default_rng(seed)
     candidates, total = [], 0
     for tile in _tiles(db, tile_px):

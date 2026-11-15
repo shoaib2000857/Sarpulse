@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "DataStatus": {
+      "enum": [
+        "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+        "observed"
+      ],
+      "title": "DataStatus",
+      "type": "string"
+    },
+    "TimeSeriesPoint": {
+      "additionalProperties": true,
+      "properties": {
+        "date": {
+          "format": "date",
+          "title": "Date",
+          "type": "string"
+        },
+        "scene_id": {
+          "title": "Scene Id",
+          "type": "string"
+        },
+        "water_area_km2": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Water Area Km2"
+        },
+        "quality_flags": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Quality Flags",
+          "type": "array"
+        }
+      },
+      "required": [
+        "date",
+        "scene_id"
+      ],
+      "title": "TimeSeriesPoint",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "aoi_id": {
+      "title": "Aoi Id",
+      "type": "string"
+    },
+    "interpolated": {
+      "default": false,
+      "title": "Interpolated",
+      "type": "boolean"
+    },
+    "points": {
+      "items": {
+        "$ref": "#/$defs/TimeSeriesPoint"
+      },
+      "title": "Points",
+      "type": "array"
+    },
+    "data_status": {
+      "$ref": "#/$defs/DataStatus"
+    }
+  },
+  "required": [
+    "aoi_id",
+    "points",
+    "data_status"
+  ],
+  "title": "TimeSeries",
+  "type": "object"
+}

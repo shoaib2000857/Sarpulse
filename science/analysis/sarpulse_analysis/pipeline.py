@@ -27,7 +27,7 @@ BASE_LIMITATIONS = [
     "A change in backscatter is evidence of surface change, not proof of flooding or of its cause. Rainfall or river-gauge data are context, not confirmation.",
     "Layover/shadow from the NISAR static-layers product is not applied; results in steep terrain are unreliable.",
     "Areas use projected (UTM) pixel area; map scale distortion is below ~0.2 % within a UTM zone.",
-    "Backscatter values in samples.json are Lee-filtered gamma-0 dB on the analysis grid, not single raw pixels.",
+    "Backscatter values in samples.json are gamma-0 dB on the analysis grid; filter settings are recorded in processing parameters. They are not unprocessed source pixels.",
 ]
 
 
@@ -97,6 +97,10 @@ def run_analysis(stack_path: str | Path, before_ref: str, after_ref: str, out_di
 
     # Time series over the area valid on every date, so areas are comparable.
     common = np.logical_and.reduce([r.valid for r in results.values()])
+    if not np.any(before.valid & after.valid):
+        raise ValueError("Selected scenes have no common valid pixels")
+    if not common.any():
+        raise ValueError("Time-series scenes have no common valid footprint; use a smaller compatible stack")
     ts_points = []
     for s in stack.scenes:
         r = results[s.scene_id]
@@ -121,6 +125,14 @@ def run_analysis(stack_path: str | Path, before_ref: str, after_ref: str, out_di
     write_geotiff(out / "change_class.tif", cls, g, NODATA, {**tags, "classes": CLASS_CODES})
     delta_out = np.where(cls != NODATA, delta, np.nan).astype(np.float32)
     write_geotiff(out / "delta_hh_db.tif", delta_out, g, np.nan, {**tags, "units": "dB (after - before, Lee-filtered gamma-0 HH)"})
+    passport_rasters = {"change_class": "change_class.tif"}
+    for label, result in (("before", before), ("after", after)):
+        for channel in ("hh", "hv"):
+            key = f"{label}_{channel}_db"
+            rel = f"evidence/{key}.tif"
+            write_geotiff(out / rel, getattr(result, f"{channel}_db"), g, np.nan,
+                          {**tags, "units": "gamma-0 dB, Lee-filtered" if p.speckle_filter == "lee" else "gamma-0 dB"})
+            passport_rasters[key] = rel
     proj = WebProjector(g)
     write_png(out / "web" / "change_class.png", classes_rgba(proj.warp(cls, NODATA)))
     layers = [
@@ -135,14 +147,19 @@ def run_analysis(stack_path: str | Path, before_ref: str, after_ref: str, out_di
             "after_scene_id": after.scene_id,
         }
     ]
+    write_png(out / "web" / "delta_hh_db.png", backscatter_rgba(proj.warp(delta_out, np.float32(np.nan)), (-10, 10)))
+    layers.append({"id": "delta_hh_db", "kind": "difference", "title": "HH change (after minus before)",
+                   "png": "web/delta_hh_db.png", "geotiff": "delta_hh_db.tif", "display_range_db": [-10, 10]})
     for s in stack.scenes:
         r = results[s.scene_id]
         wmask = np.where(r.valid, r.water.astype(np.uint8), NODATA).astype(np.uint8)
         write_geotiff(out / "water" / f"{r.date}.tif", wmask, g, NODATA, {"data_status": data_status, "scene_id": r.scene_id, "values": "1 water, 0 land, 255 nodata"})
         write_png(out / "web" / f"water_{r.date}.png", water_rgba(proj.warp(wmask, NODATA)))
         write_png(out / "web" / f"hh_db_{r.date}.png", backscatter_rgba(proj.warp(r.hh_db, np.float32(np.nan))))
+        write_png(out / "web" / f"hv_db_{r.date}.png", backscatter_rgba(proj.warp(r.hv_db, np.float32(np.nan)), (-35, -5)))
         layers.append({"id": f"water_{r.date}", "kind": "mask", "title": f"Open water {r.date}", "png": f"web/water_{r.date}.png", "geotiff": f"water/{r.date}.tif", "scene_id": r.scene_id, "date": r.date})
         layers.append({"id": f"hh_db_{r.date}", "kind": "backscatter", "title": f"HH backscatter {r.date}", "png": f"web/hh_db_{r.date}.png", "display_range_db": [-25.0, 0.0], "scene_id": r.scene_id, "date": r.date})
+        layers.append({"id": f"hv_db_{r.date}", "kind": "backscatter", "title": f"HV backscatter {r.date}", "png": f"web/hv_db_{r.date}.png", "display_range_db": [-35.0, -5.0], "scene_id": r.scene_id, "date": r.date})
 
     limitations = list(BASE_LIMITATIONS)
     maturities = sorted({(s.maturity or "UNKNOWN") for s in stack.scenes})
@@ -176,17 +193,27 @@ def run_analysis(stack_path: str | Path, before_ref: str, after_ref: str, out_di
         "class_definitions": CLASS_DEFINITIONS,
         "threshold_method": f"{before.threshold.method} per date on Lee-filtered HH dB; change requires |delta HH| >= {p.min_change_db} dB",
         "thresholds": {r.date: {**r.threshold.to_dict(), "enl": round(r.enl, 2) if r.enl else None} for r in (before, after)},
+        "passport_rasters": passport_rasters,
+        "baseline_comparison": {
+            "description": "Diagnostic areas on the common pair footprint; not accuracy metrics or flood truth.",
+            "absolute_difference_threshold_db": p.min_change_db,
+            "absolute_difference_km2": _km2(((cls != NODATA) & (np.abs(delta) >= p.min_change_db)).sum(), stack),
+            "difference_without_water_transition_km2": _km2(((cls != NODATA) & (np.abs(delta) >= p.min_change_db) & (before.water == after.water)).sum(), stack),
+            "simple_threshold_gain_km2": _km2(((cls != NODATA) & ~before.water & after.water).sum(), stack),
+            "simple_threshold_loss_km2": _km2(((cls != NODATA) & before.water & ~after.water).sum(), stack),
+        },
         "method_agreement": {
             "description": "Otsu water vs unsupervised 2-component Gaussian mixture on (HH, HV) dB. Internal consistency only, NOT accuracy.",
             **{r.date: r.method_agreement for r in (before, after)},
         },
         "provenance": {
+            "si_assistance": "Code and integration assisted by Codex; see AI_DISCLOSURE.md. Observational inputs are not SI-generated.",
             "stack_id": stack.doc.get("stack_id"),
             "stack_schema": stack.doc.get("schema_version"),
             "comparability_key": stack.doc.get("comparability_key"),
             "ingest_processing": stack.doc.get("processing"),
             "grid": stack.doc.get("grid"),
-            "scenes": [{"scene_id": s.scene_id, "acquired_at_utc": s.acquired_at_utc, "maturity": s.maturity} for s in stack.scenes],
+            "scenes": [s.record.get("scene", {"scene_id": s.scene_id, "acquired_at_utc": s.acquired_at_utc, "maturity": s.maturity}) for s in stack.scenes],
             "parameters": p.to_dict(),
             "created_utc": _utc_now(),
         },

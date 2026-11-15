@@ -43,7 +43,7 @@ def binary_metrics(pred: np.ndarray, ref: np.ndarray) -> dict:
     pe = ((tp + fp) * (tp + fn) + (fn + tn) * (fp + tn)) / (n * n) if n else 0
     kappa = round(((tp + tn) / n - pe) / (1 - pe), 4) if n and pe < 1 else None
     precision, recall = ratio(tp, tp + fp), ratio(tp, tp + fn)
-    f1 = round(2 * precision * recall / (precision + recall), 4) if precision and recall else None
+    f1 = ratio(2 * tp, 2 * tp + fp + fn)
     return {
         "n": n,
         "confusion_matrix": {"tp": tp, "fp": fp, "fn": fn, "tn": tn},
@@ -72,7 +72,10 @@ def reference_from_points(path: Path, grid: Grid, label_field: str = "water") ->
         if 0 <= r < grid.height and 0 <= c < grid.width:
             rows.append(r)
             cols.append(c)
-            labels.append(bool(f["properties"][label_field]))
+            label = f["properties"][label_field]
+            if not isinstance(label, bool) and (not isinstance(label, (int, float)) or label not in (0, 1)):
+                raise ValueError(f"Reference labels must be boolean or 0/1; got {label!r}")
+            labels.append(bool(label))
     return np.array([rows, cols], dtype=int), np.array(labels, dtype=bool)
 
 
@@ -80,10 +83,9 @@ def reference_from_raster(path: Path, grid: Grid, water_values: set[int]) -> np.
     """Reference raster resampled (nearest) onto the analysis grid; -1 = no reference."""
     dst = np.full((grid.height, grid.width), -1, dtype=np.int32)
     with rasterio.open(path) as src:
-        data = src.read(1)
+        data = src.read(1, masked=True)
         ref = np.where(np.isin(data, list(water_values)), 1, 0).astype(np.int32)
-        if src.nodata is not None:
-            ref[data == src.nodata] = -1
+        ref[np.ma.getmaskarray(data) | ~np.isfinite(np.asarray(data))] = -1
         reproject(
             ref,
             dst,

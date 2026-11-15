@@ -12,7 +12,7 @@ from sarpulse_analysis.validate import binary_metrics, validate_water_map, wilso
 from sarpulse_analysis.water import agreement, otsu_threshold, split_based_threshold
 from sarpulse_analysis.water import ThresholdResult
 
-from tests.synthetic_stack import EPSG, SPACING, X0, Y0, river_masks, speckled, write_stack
+from science.analysis.tests.synthetic_stack import EPSG, SPACING, X0, Y0, river_masks, speckled, write_stack
 
 API_ANALYSIS_FIELDS = {
     "aoi_id", "source_scene_ids", "before_scene_id", "after_scene_id", "processing_version", "valid_area_km2",

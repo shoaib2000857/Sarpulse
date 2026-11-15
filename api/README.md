@@ -2,7 +2,7 @@
 
 Owner: Shridhar. FastAPI service for scientific evidence, contextual datasets and the **Change Passport**.
 
-The API is a thin read-only layer over precomputed JSON (static-first), so the demo never depends on live processing. Schemas in `app/schemas.py` are a **draft proposal** pending Shoaib's sign-off in `contracts/`.
+The API is a thin read-only layer over precomputed JSON (static-first), so the demo never depends on live processing. The integrated v0 interfaces are confirmed in `contracts/README.md`, with generated JSON Schema and OpenAPI definitions.
 
 ## Run
 
@@ -47,7 +47,7 @@ Extra fields from the pipeline (`area_ranges_km2`, `thresholds`, `method_agreeme
 
 ## Change Passport
 
-Evidence for a point is split into labelled items: **Observed** (radar dB values, acquisition times), **Derived** (change class, method, validation status), **Context** (ancillary data with caveats), **Hypothesis** (physical interpretation). Automatic warnings are added for mixed maturity, invalid masks, steep slope and distant samples.
+Evidence for a point is split into labelled items: **Observed** (real radar dB values, acquisition times), **Derived** (change class, method, validation status), **Context** (ancillary data with caveats), **Hypothesis** (physical interpretation). Synthetic radar values use **Unverified**. New analysis exports include evidence rasters for actual-pixel lookup; older fixtures use sparse samples with disclosed coordinates and distance. Invalid pixels abstain from environmental interpretation. Warnings cover mixed maturity/release, invalid masks, steep slope and distant samples.
 
 ## Context adapters (offline)
 

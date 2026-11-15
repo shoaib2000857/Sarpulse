@@ -51,6 +51,8 @@ def cmd_ard(args) -> int:
     from .ard import build_ard_stack
 
     aoi = load_aoi(args.aoi)
+    if args.offline and not args.local_dir:
+        sys.exit("--offline requires --local-dir with downloaded GCOV products")
     manifest_dir = Path(args.manifest_dir or REPO / "data" / "manifests" / aoi.id)
     stack = _load_stack(manifest_dir, args.stack_id)
     if args.dates:

@@ -118,9 +118,9 @@ def water_rgba(water: np.ndarray, color: str = "#2166ac", alpha: int = 200) -> n
     return rgba
 
 
-def backscatter_rgba(db: np.ndarray) -> np.ndarray:
+def backscatter_rgba(db: np.ndarray, display_range=HH_DISPLAY_RANGE_DB) -> np.ndarray:
     """Greyscale HH dB with a fixed stretch so dates are visually comparable (not a photo)."""
-    lo, hi = HH_DISPLAY_RANGE_DB
+    lo, hi = display_range
     ok = np.isfinite(db)
     grey = np.zeros(db.shape, dtype=np.uint8)
     grey[ok] = np.clip((db[ok] - lo) / (hi - lo) * 255, 0, 255).astype(np.uint8)

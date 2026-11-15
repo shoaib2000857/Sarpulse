@@ -73,6 +73,46 @@ class Store:
     def samples(self, site_id: str) -> list[SamplePoint]:
         return TypeAdapter(list[SamplePoint]).validate_python(self._read(site_id, "samples"))
 
+    def point(self, site_id: str, lon: float, lat: float) -> tuple[SamplePoint, float]:
+        """Sample the actual classified pixel where exported rasters are available.
+
+        Older/small fixtures use the sparse sample grid with a disclosed distance.
+        """
+        from .passport import distance_km, nearest_sample
+
+        analysis = self.analysis(site_id)
+        rasters = getattr(analysis, "passport_rasters", None)
+        if not rasters:
+            samples = self.samples(site_id)
+            if not samples:
+                raise NotFound("No analysed samples for this site")
+            return nearest_sample(samples, lon, lat)
+
+        import math
+        import rasterio
+        from rasterio.warp import transform
+
+        values = {}
+        pixel_lon, pixel_lat = lon, lat
+        for key in ("change_class", "before_hh_db", "after_hh_db", "before_hv_db", "after_hv_db"):
+            with rasterio.open(self.asset(site_id, rasters[key])) as src:
+                xs, ys = transform("EPSG:4326", src.crs, [lon], [lat])
+                row, col = src.index(xs[0], ys[0])
+                if not (0 <= row < src.height and 0 <= col < src.width):
+                    values[key] = None
+                    continue
+                raw = next(src.sample([(xs[0], ys[0])], masked=True))[0]
+                values[key] = float(raw) if not getattr(raw, "mask", False) and math.isfinite(float(raw)) else None
+                if key == "change_class":
+                    x, y = src.xy(row, col)
+                    px, py = transform(src.crs, "EPSG:4326", [x], [y])
+                    pixel_lon, pixel_lat = px[0], py[0]
+        classes = {0: "stable_land", 1: "water_gained", 2: "water_lost", 3: "stable_water", 4: "ambiguous"}
+        change_class = classes.get(values.pop("change_class"), "nodata")
+        sample = SamplePoint(lon=pixel_lon, lat=pixel_lat, change_class=change_class,
+                             valid=change_class != "nodata", **values)
+        return sample, distance_km(lon, lat, pixel_lon, pixel_lat)
+
 
 @lru_cache
 def get_store() -> Store:

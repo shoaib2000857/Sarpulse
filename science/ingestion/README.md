@@ -47,7 +47,9 @@ The ASF search on 2026-11-14 (`data/manifests/brahmaputra-majuli/`) returned 32 
 
 So the **catalogue metadata** confirms comparable multi-date coverage across the 2026 monsoon and post-monsoon period. Pixel data has not been inspected yet: run `ard` with Earthdata credentials to confirm AOI validity per scene. The 2026-06-16 product uses forecast-orbit accuracy (`F`) while the others use `N`, so the stack warns about it.
 
-## Output contract: analysis-ready stack v0 (proposal for `contracts/`)
+## Output contract: analysis-ready stack v0
+
+The integrated interface is documented in `contracts/README.md`.
 
 `data/processed/<aoi>/stack.json` (`schema_version: sarpulse.ard_stack.v0`):
 
@@ -55,7 +57,7 @@ So the **catalogue metadata** confirms comparable multi-date coverage across the
 | --- | --- |
 | `aoi` | id, name and WGS84 bbox |
 | `stack_id`, `comparability_key`, `comparability_warnings` | why the scenes are comparable |
-| `grid` | `crs`, `epsg`, `transform` (GDAL order a,b,c,d,e,f), `width`, `height`, `pixel_spacing_m`; shared by every raster |
+| `grid` | `crs`, `epsg`, `transform` (Affine constructor order a,b,c,d,e,f, not GDAL GetGeoTransform order), `width`, `height`, `pixel_spacing_m`; shared by every raster |
 | `grid_bbox_wgs84` | grid bounds in lon/lat |
 | `units` | physical meaning of each raster |
 | `data_status` | `observed` only when every scene came from a real product; otherwise `SYNTHETIC/DEMO — NOT NASA OBSERVATIONS` |

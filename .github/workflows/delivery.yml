@@ -1,0 +1,41 @@
+name: Package precomputed science delivery
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_dir:
+        description: 'Repository-relative folder containing real precomputed site.json and assets'
+        required: true
+      require_validation:
+        description: 'Require an independent reference comparison'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - name: Export inspected real observations
+        env:
+          SITE_DIR: ${{ inputs.site_dir }}
+          REQUIRE_VALIDATION: ${{ inputs.require_validation }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          extra=()
+          if [ "$REQUIRE_VALIDATION" = "true" ]; then extra+=(--require-validation); fi
+          python scripts/sarpulse.py export --site "$SITE_DIR" --out dist/science-delivery "${extra[@]}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sarpulse-science-${{ github.run_number }}
+          path: dist/science-delivery
+          if-no-files-found: error

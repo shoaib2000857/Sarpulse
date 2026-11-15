@@ -1,4 +1,4 @@
-"""DRAFT API schemas — proposal for Shoaib to confirm in contracts/.
+"""SARPulse v0 API schemas — see contracts/README.md.
 
 Field names follow the master plan (scenes.json / analysis.json / time_series.json)
 plus the evidence "Change Passport". Every record carries a data_status so the UI
@@ -83,6 +83,8 @@ class Analysis(BaseModel):
 
 
 class TimeSeriesPoint(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
     date: date
     scene_id: str
     water_area_km2: float | None = None

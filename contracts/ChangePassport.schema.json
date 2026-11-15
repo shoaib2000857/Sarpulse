@@ -1,0 +1,120 @@
+{
+  "$defs": {
+    "DataStatus": {
+      "enum": [
+        "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+        "observed"
+      ],
+      "title": "DataStatus",
+      "type": "string"
+    },
+    "EvidenceItem": {
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/EvidenceLabel"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "values": {
+          "additionalProperties": true,
+          "default": {},
+          "title": "Values",
+          "type": "object"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        }
+      },
+      "required": [
+        "label",
+        "statement"
+      ],
+      "title": "EvidenceItem",
+      "type": "object"
+    },
+    "EvidenceLabel": {
+      "enum": [
+        "Observed",
+        "Derived",
+        "Context",
+        "Hypothesis",
+        "Unverified"
+      ],
+      "title": "EvidenceLabel",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "site_id": {
+      "title": "Site Id",
+      "type": "string"
+    },
+    "lon": {
+      "title": "Lon",
+      "type": "number"
+    },
+    "lat": {
+      "title": "Lat",
+      "type": "number"
+    },
+    "before_scene_id": {
+      "title": "Before Scene Id",
+      "type": "string"
+    },
+    "after_scene_id": {
+      "title": "After Scene Id",
+      "type": "string"
+    },
+    "change_class": {
+      "title": "Change Class",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/EvidenceItem"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "title": "Provenance",
+      "type": "object"
+    },
+    "data_status": {
+      "$ref": "#/$defs/DataStatus"
+    }
+  },
+  "required": [
+    "site_id",
+    "lon",
+    "lat",
+    "before_scene_id",
+    "after_scene_id",
+    "change_class",
+    "evidence",
+    "limitations",
+    "provenance",
+    "data_status"
+  ],
+  "title": "ChangePassport",
+  "type": "object"
+}

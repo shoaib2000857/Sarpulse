@@ -13,6 +13,7 @@ from .schemas import (
     ContextRecord,
     EvidenceItem,
     EvidenceLabel,
+    DataStatus,
     SamplePoint,
     Scene,
 )
@@ -26,7 +27,7 @@ HYPOTHESES = {
     "water_lost": "Increase in backscatter is consistent with water receding. Vegetation growth or "
     "wind-roughened water can also raise backscatter.",
     "stable_water": "Persistently low backscatter is consistent with permanent open water.",
-    "stable_land": "No significant change in backscatter between the two acquisitions.",
+    "stable_land": "Not classified as open water on either date. Backscatter may still have changed; this class does not prove unchanged land.",
     "ambiguous": "Signal change is inconclusive; needs review against independent evidence.",
 }
 
@@ -62,8 +63,8 @@ def build_passport(
 
     evidence = [
         EvidenceItem(
-            label=EvidenceLabel.observed,
-            statement="Radar backscatter (gamma-0, dB) at the nearest analysed sample.",
+            label=EvidenceLabel.observed if analysis.data_status == DataStatus.observed else EvidenceLabel.unverified,
+            statement="Radar backscatter (gamma-0, dB) at the analysed sample. See sample coordinates and distance.",
             values={
                 "before_hh_db": sample.before_hh_db,
                 "after_hh_db": sample.after_hh_db,
@@ -74,6 +75,9 @@ def build_passport(
                 "before_acquired_utc": before.acquired_at_utc.isoformat() if before else None,
                 "after_acquired_utc": after.acquired_at_utc.isoformat() if after else None,
                 "sample_distance_km": round(sample_distance_km, 3),
+                "sample_lon": sample.lon,
+                "sample_lat": sample.lat,
+                "data_status": analysis.data_status.value,
                 "valid": sample.valid,
             },
             source=f"{analysis.before_scene_id} -> {analysis.after_scene_id}",
@@ -105,20 +109,25 @@ def build_passport(
             EvidenceItem(
                 label=EvidenceLabel.context,
                 statement=f"{head}. {c.caveat}",
-                values=c.model_dump(mode="json", exclude={"data_status"}),
+                values=c.model_dump(mode="json"),
                 source=c.source,
             )
         )
     evidence.append(
         EvidenceItem(
             label=EvidenceLabel.hypothesis,
-            statement=HYPOTHESES.get(sample.change_class, HYPOTHESES["ambiguous"]),
+            statement=(HYPOTHESES.get(sample.change_class, HYPOTHESES["ambiguous"])
+                       if sample.valid else "No environmental interpretation: this location has invalid radar data."),
         )
     )
 
     warnings: list[str] = []
+    if analysis.data_status != DataStatus.observed:
+        warnings.append("SYNTHETIC/DEMO — NOT NASA OBSERVATIONS: these values are for integration testing only.")
     if before and after and before.maturity != after.maturity:
         warnings.append("Scenes have different processing maturity; change may be a processing artifact.")
+    if before and after and before.crid != after.crid:
+        warnings.append("Scenes have different processing releases; change may be a processing artifact.")
     if not sample.valid:
         warnings.append("Sample falls in a masked / invalid-data area.")
     if sample.slope_deg is not None and sample.slope_deg > STEEP_SLOPE_DEG:

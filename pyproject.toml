@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sarpulse"
+version = "0.1.0"
+description = "Team StarFire's reproducible NISAR water-change pipeline and evidence API"
+requires-python = ">=3.12"
+dependencies = [
+  "numpy>=2,<3", "scipy>=1.12,<2", "h5py>=3.10,<4", "rasterio>=1.4,<2",
+  "pyproj>=3.6,<4", "requests>=2.31,<3", "earthaccess>=0.12,<1",
+  "scikit-learn>=1.4,<2", "fastapi>=0.115,<1", "uvicorn[standard]>=0.30,<1",
+  "pydantic>=2.9,<3", "pydantic-settings>=2.5,<3",
+]
+
+[project.scripts]
+sarpulse = "sarpulse_platform.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["platform", "science/ingestion", "science/analysis", "api"]
+include = ["sarpulse_platform*", "sarpulse_ingest*", "sarpulse_analysis*", "app*", "context_adapters*"]
+namespaces = false
+
+[tool.pytest.ini_options]
+testpaths = ["science/ingestion/tests", "science/analysis/tests", "api/tests", "tests"]
+pythonpath = [".", "science/ingestion", "science/analysis", "api", "platform"]
+addopts = "--import-mode=importlib"
+

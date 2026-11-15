@@ -44,7 +44,7 @@ python -m sarpulse_analysis run --stack ../../data/processed/brahmaputra-majuli/
 | `web/*.png`, `layers.json` | EPSG:4326 overlays (change classes, per-date water, per-date HH backscatter with a fixed −25…0 dB stretch) with `bounds_wgs84` / `image_coordinates` for a MapLibre image source |
 | `validation/<date>.json` | written by `validate` (below) |
 
-`analysis.json` keeps every API field and adds `stable_water_km2`, `stable_land_km2`, `area_ranges_km2`, `hh_brightening_non_water_km2`, `thresholds` and `method_agreement`. Pydantic ignores these extra fields.
+`analysis.json` keeps every API field and adds `stable_water_km2`, `stable_land_km2`, `area_ranges_km2`, `hh_brightening_non_water_km2`, `thresholds`, `method_agreement`, baseline diagnostics and evidence raster paths. The API preserves these fields and time-series uncertainty fields. HH/HV overlays and a difference overlay are exported; evidence rasters support actual-pixel Change Passports. See `contracts/README.md`.
 
 ### Validation against an independent reference
 

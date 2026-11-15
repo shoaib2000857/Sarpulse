@@ -1,0 +1,1141 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SARPulse API",
+    "description": "Scientific evidence and Change Passport API for SARPulse (Team StarFire).",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/sites": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "List Sites",
+        "operationId": "list_sites_api_sites_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Site"
+                  },
+                  "type": "array",
+                  "title": "Response List Sites Api Sites Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Site",
+        "operationId": "get_site_api_sites__site_id__get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Site"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/scenes": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Scenes",
+        "operationId": "get_scenes_api_sites__site_id__scenes_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Scene"
+                  },
+                  "title": "Response Get Scenes Api Sites  Site Id  Scenes Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/summary": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Summary",
+        "operationId": "get_summary_api_sites__site_id__summary_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Analysis"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/timeseries": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Time Series",
+        "operationId": "get_time_series_api_sites__site_id__timeseries_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimeSeries"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/evidence": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Evidence",
+        "operationId": "get_evidence_api_sites__site_id__evidence_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContextRecord"
+                  },
+                  "title": "Response Get Evidence Api Sites  Site Id  Evidence Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/layers": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Layers",
+        "description": "Map overlay manifest; relative png/geotiff paths are rewritten to absolute API URLs.",
+        "operationId": "get_layers_api_sites__site_id__layers_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LayersManifest"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/files/{asset_path}": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Asset",
+        "operationId": "get_asset_api_sites__site_id__files__asset_path__get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          },
+          {
+            "name": "asset_path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Asset Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/passport": {
+      "get": {
+        "tags": [
+          "sites"
+        ],
+        "summary": "Get Passport",
+        "operationId": "get_passport_api_sites__site_id__passport_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Site Id"
+            }
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "maximum": 180,
+              "minimum": -180,
+              "title": "Lon"
+            }
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "maximum": 90,
+              "minimum": -90,
+              "title": "Lat"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangePassport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "meta"
+        ],
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Analysis": {
+        "properties": {
+          "aoi_id": {
+            "type": "string",
+            "title": "Aoi Id"
+          },
+          "source_scene_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Source Scene Ids"
+          },
+          "before_scene_id": {
+            "type": "string",
+            "title": "Before Scene Id"
+          },
+          "after_scene_id": {
+            "type": "string",
+            "title": "After Scene Id"
+          },
+          "processing_version": {
+            "type": "string",
+            "title": "Processing Version"
+          },
+          "valid_area_km2": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Valid Area Km2"
+          },
+          "gained_water_km2": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Gained Water Km2"
+          },
+          "lost_water_km2": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Lost Water Km2"
+          },
+          "ambiguous_km2": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Ambiguous Km2",
+            "default": 0
+          },
+          "class_definitions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Class Definitions"
+          },
+          "threshold_method": {
+            "type": "string",
+            "title": "Threshold Method"
+          },
+          "provenance": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Provenance"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "validation_status": {
+            "type": "string",
+            "title": "Validation Status"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "aoi_id",
+          "source_scene_ids",
+          "before_scene_id",
+          "after_scene_id",
+          "processing_version",
+          "valid_area_km2",
+          "gained_water_km2",
+          "lost_water_km2",
+          "class_definitions",
+          "threshold_method",
+          "provenance",
+          "limitations",
+          "validation_status",
+          "data_status"
+        ],
+        "title": "Analysis"
+      },
+      "BBox": {
+        "properties": {
+          "west": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "West"
+          },
+          "south": {
+            "type": "number",
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "South"
+          },
+          "east": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "East"
+          },
+          "north": {
+            "type": "number",
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "North"
+          }
+        },
+        "type": "object",
+        "required": [
+          "west",
+          "south",
+          "east",
+          "north"
+        ],
+        "title": "BBox"
+      },
+      "ChangePassport": {
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "lon": {
+            "type": "number",
+            "title": "Lon"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "before_scene_id": {
+            "type": "string",
+            "title": "Before Scene Id"
+          },
+          "after_scene_id": {
+            "type": "string",
+            "title": "After Scene Id"
+          },
+          "change_class": {
+            "type": "string",
+            "title": "Change Class"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceItem"
+            },
+            "type": "array",
+            "title": "Evidence"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "provenance": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Provenance"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          }
+        },
+        "type": "object",
+        "required": [
+          "site_id",
+          "lon",
+          "lat",
+          "before_scene_id",
+          "after_scene_id",
+          "change_class",
+          "evidence",
+          "limitations",
+          "provenance",
+          "data_status"
+        ],
+        "title": "ChangePassport"
+      },
+      "ContextRecord": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "period_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period Start"
+          },
+          "period_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period End"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "units": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Units"
+          },
+          "resolution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution"
+          },
+          "caveat": {
+            "type": "string",
+            "title": "Caveat"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind",
+          "source",
+          "caveat",
+          "data_status"
+        ],
+        "title": "ContextRecord",
+        "description": "Ancillary evidence (rainfall, optical, historical water, terrain). Never ground truth."
+      },
+      "DataStatus": {
+        "type": "string",
+        "enum": [
+          "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+          "observed"
+        ],
+        "title": "DataStatus"
+      },
+      "EvidenceItem": {
+        "properties": {
+          "label": {
+            "$ref": "#/components/schemas/EvidenceLabel"
+          },
+          "statement": {
+            "type": "string",
+            "title": "Statement"
+          },
+          "values": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Values",
+            "default": {}
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          }
+        },
+        "type": "object",
+        "required": [
+          "label",
+          "statement"
+        ],
+        "title": "EvidenceItem"
+      },
+      "EvidenceLabel": {
+        "type": "string",
+        "enum": [
+          "Observed",
+          "Derived",
+          "Context",
+          "Hypothesis",
+          "Unverified"
+        ],
+        "title": "EvidenceLabel"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Layer": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "png": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Png"
+          },
+          "geotiff": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geotiff"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "title"
+        ],
+        "title": "Layer",
+        "description": "One web map overlay from science/analysis layers.json. Paths are rewritten to API URLs."
+      },
+      "LayersManifest": {
+        "properties": {
+          "aoi_id": {
+            "type": "string",
+            "title": "Aoi Id"
+          },
+          "crs": {
+            "type": "string",
+            "title": "Crs"
+          },
+          "bounds_wgs84": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Bounds Wgs84"
+          },
+          "image_coordinates": {
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Image Coordinates"
+          },
+          "dates": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Dates"
+          },
+          "layers": {
+            "items": {
+              "$ref": "#/components/schemas/Layer"
+            },
+            "type": "array",
+            "title": "Layers"
+          },
+          "attribution": {
+            "type": "string",
+            "title": "Attribution"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "aoi_id",
+          "crs",
+          "bounds_wgs84",
+          "image_coordinates",
+          "dates",
+          "layers",
+          "attribution",
+          "data_status"
+        ],
+        "title": "LayersManifest"
+      },
+      "Scene": {
+        "properties": {
+          "scene_id": {
+            "type": "string",
+            "title": "Scene Id"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "acquired_at_utc": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Acquired At Utc"
+          },
+          "maturity": {
+            "type": "string",
+            "title": "Maturity"
+          },
+          "crid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crid"
+          },
+          "orbit_direction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Orbit Direction"
+          },
+          "relative_orbit": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relative Orbit"
+          },
+          "polarizations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Polarizations"
+          },
+          "grid_epsg": {
+            "type": "integer",
+            "title": "Grid Epsg"
+          },
+          "pixel_spacing_m": {
+            "type": "number",
+            "title": "Pixel Spacing M"
+          },
+          "footprint": {
+            "$ref": "#/components/schemas/BBox"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "data_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data Url"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          }
+        },
+        "type": "object",
+        "required": [
+          "scene_id",
+          "source",
+          "acquired_at_utc",
+          "maturity",
+          "polarizations",
+          "grid_epsg",
+          "pixel_spacing_m",
+          "footprint",
+          "license",
+          "data_status"
+        ],
+        "title": "Scene"
+      },
+      "Site": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "bbox": {
+            "$ref": "#/components/schemas/BBox"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          },
+          "verified": {
+            "type": "boolean",
+            "title": "Verified",
+            "description": "True only when comparable real NISAR scenes are confirmed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "bbox",
+          "data_status",
+          "verified"
+        ],
+        "title": "Site"
+      },
+      "TimeSeries": {
+        "properties": {
+          "aoi_id": {
+            "type": "string",
+            "title": "Aoi Id"
+          },
+          "interpolated": {
+            "type": "boolean",
+            "title": "Interpolated",
+            "default": false
+          },
+          "points": {
+            "items": {
+              "$ref": "#/components/schemas/TimeSeriesPoint"
+            },
+            "type": "array",
+            "title": "Points"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "aoi_id",
+          "points",
+          "data_status"
+        ],
+        "title": "TimeSeries"
+      },
+      "TimeSeriesPoint": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "scene_id": {
+            "type": "string",
+            "title": "Scene Id"
+          },
+          "water_area_km2": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Water Area Km2"
+          },
+          "quality_flags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Quality Flags",
+            "default": []
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "date",
+          "scene_id"
+        ],
+        "title": "TimeSeriesPoint"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

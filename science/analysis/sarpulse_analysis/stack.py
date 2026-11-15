@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 import rasterio
 from rasterio.transform import Affine
+from pyproj import CRS
 
 SUPPORTED_SCHEMAS = {"sarpulse.ard_stack.v0"}
 SYNTHETIC = "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS"
@@ -71,7 +72,7 @@ class Stack:
         with rasterio.open(path) as r:
             if r.crs.to_epsg() != self.grid.epsg or (r.width, r.height) != (self.grid.width, self.grid.height):
                 raise ValueError(f"{path} is not on the stack grid")
-            if not np.allclose(tuple(r.transform)[:6], self.grid.transform):
+            if not np.allclose(tuple(r.transform)[:6], self.grid.transform, rtol=0, atol=1e-7):
                 raise ValueError(f"{path} transform differs from the stack grid")
             arr = r.read(1)
         return arr
@@ -93,6 +94,12 @@ def load_stack(path: str | Path) -> Stack:
         raise ValueError(f"Unsupported stack schema {doc.get('schema_version')!r}")
     g = doc["grid"]
     grid = Grid(epsg=int(g["epsg"]), transform=tuple(g["transform"]), width=int(g["width"]), height=int(g["height"]), pixel_spacing_m=float(g["pixel_spacing_m"]))
+    crs = CRS.from_epsg(grid.epsg)
+    if not crs.is_projected or any(a.unit_conversion_factor != 1 for a in crs.axis_info):
+        raise ValueError("Analysis requires a projected grid in metres for physical area calculations")
+    if (grid.width < 1 or grid.height < 1 or grid.transform[0] <= 0 or grid.transform[4] >= 0
+            or grid.transform[1] != 0 or grid.transform[3] != 0):
+        raise ValueError("Analysis requires a nonempty north-up raster grid")
     scenes = [
         SceneInfo(
             scene_id=s["scene_id"],
@@ -105,4 +112,12 @@ def load_stack(path: str | Path) -> Stack:
         for s in doc["scenes"]
     ]
     scenes.sort(key=lambda s: s.acquired_at_utc)
+    if len(scenes) < 2 or len({s.acquired_at_utc for s in scenes}) != len(scenes):
+        raise ValueError("At least two unique acquisition times are required")
+    # Synthetic test stacks can omit observational metadata; real stacks cannot.
+    if doc.get("data_status") == OBSERVED:
+        for name in ("maturity", "crid", "orbit_direction", "relative_orbit", "polarizations"):
+            values = [s.record.get("scene", {}).get(name) for s in scenes]
+            if any(v is None or v == [] or v == "UNKNOWN" for v in values) or any(v != values[0] for v in values):
+                raise ValueError(f"Missing or incompatible scene {name}: {values}")
     return Stack(root=path.parent, doc=doc, grid=grid, scenes=scenes)

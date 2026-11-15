@@ -36,6 +36,14 @@ class Params:
     seed: int = 0
     gmm_check: bool = True
 
+    def __post_init__(self):
+        if self.speckle_filter not in ("lee", "none"):
+            raise ValueError("speckle_filter must be lee or none")
+        if self.filter_size < 1 or self.filter_size % 2 != 1 or self.tile_px < 2 or self.n_boot < 2:
+            raise ValueError("filter_size must be positive and odd; tile_px and n_boot must be >= 2")
+        if self.margin_db < 0 or self.min_change_db < 0:
+            raise ValueError("margin_db and min_change_db must be nonnegative")
+
     def to_dict(self) -> dict:
         return dict(self.__dict__)
 

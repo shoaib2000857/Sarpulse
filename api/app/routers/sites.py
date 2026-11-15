@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import FileResponse
 
-from ..passport import build_passport, nearest_sample
+from ..passport import build_passport
 from ..schemas import Analysis, ChangePassport, ContextRecord, LayersManifest, Scene, Site, TimeSeries
 from ..store import NotFound, Store, get_store
 
@@ -73,10 +73,7 @@ def get_passport(
     site = _get(store.site, site_id)
     if not site.bbox.contains(lon, lat):
         raise HTTPException(status_code=422, detail="Point is outside the analysed site area.")
-    samples = _get(store.samples, site_id)
-    if not samples:
-        raise HTTPException(status_code=404, detail="No analysed samples for this site.")
-    sample, dist = nearest_sample(samples, lon, lat)
+    sample, dist = _get(store.point, site_id, lon, lat)
     return build_passport(
         site_id,
         lon,
