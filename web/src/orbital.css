@@ -1,0 +1,931 @@
+.orbital-shell {
+  background: #000;
+  color: #fff;
+  --cyan: #00a1ff;
+  --muted: #66717e;
+  font-family: "Manrope", sans-serif;
+}
+.orbital-shell .app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 94px;
+  border: 0;
+  background: linear-gradient(#000c, #0000);
+  padding-inline: 4.1667vw;
+  z-index: 40;
+}
+.orbital-shell .brand {
+  font-family: "Manrope", sans-serif;
+  font-size: 23px;
+  letter-spacing: -0.06em;
+  font-weight: 600;
+}
+.orbital-shell .brand-symbol {
+  border: 0;
+  border-radius: 0;
+  color: #fff;
+  width: 29px;
+}
+.orbital-shell .brand small {
+  color: #66717e;
+  letter-spacing: 0.02em;
+  font-size: 8px;
+}
+.orbital-shell .main-nav {
+  gap: 26px;
+}
+.orbital-shell .main-nav a {
+  padding: 8px 0;
+  border-radius: 0;
+  background: none;
+  font-size: 11px;
+  color: #aeb4bc;
+}
+.orbital-shell .main-nav a svg {
+  display: none;
+}
+.orbital-shell .main-nav a[aria-current="page"] {
+  color: #fff;
+  background: none;
+  border-bottom: 1px solid #00a1ff;
+}
+.orbital-shell .main-nav a:hover {
+  color: #00a1ff;
+  background: none;
+}
+.orbital-shell .header-actions > .button-outline {
+  border: 0;
+  background: none;
+  border-radius: 0;
+  color: #fff;
+  padding: 8px 0;
+  font-size: 11px;
+}
+.orbital-shell .header-actions > .button-outline:hover {
+  color: #00a1ff;
+}
+.orbital-shell .data-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 45;
+  background: #08090be8;
+  border-top: 1px solid #1a1c20;
+  border-bottom: 0;
+  padding: 7px 4.1667vw;
+  justify-content: flex-start;
+  gap: 14px;
+  font-family: "Manrope", sans-serif;
+  font-size: 8px;
+  line-height: 1.5;
+  color: #89919a;
+}
+.orbital-shell .data-banner .data-badge {
+  font-size: 8px;
+  background: none;
+  border-color: #3c424a;
+  color: #a9b3bc;
+  padding: 2px 6px;
+}
+.orbital-shell .data-banner button {
+  margin-left: auto;
+  font-size: 9px;
+}
+.orbital-shell .app-notice {
+  position: fixed;
+  top: 90px;
+  left: 4.1667vw;
+  right: 4.1667vw;
+  z-index: 50;
+}
+.orbital-shell .app-footer {
+  background: #000;
+  border-color: #1d2025;
+  padding-bottom: 65px;
+  color: #66717e;
+  font-size: 10px;
+}
+.orbital-shell .app-footer svg {
+  color: #00a1ff;
+}
+.orbital-shell .button-primary {
+  background: #00a1ff;
+  color: #000;
+  border: 0;
+  border-radius: 2px;
+  padding: 15px 26px;
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: none;
+}
+.orbital-shell .button-primary:hover {
+  background: #56c0ff;
+}
+.orbital-shell .page-loading {
+  min-height: 100svh;
+  padding-top: 45svh;
+  background: #000;
+}
+.orbital-landing {
+  background: #000;
+}
+.orbital-journey {
+  height: 550svh;
+  position: relative;
+  isolation: isolate;
+}
+.orbital-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: #000;
+}
+.orbital-scene {
+  position: absolute;
+  inset: 0;
+  touch-action: pan-y;
+  user-select: none;
+}
+.orbital-scene > div {
+  touch-action: pan-y;
+}
+.orbital-scene canvas {
+  display: block !important;
+  touch-action: pan-y;
+}
+.orbital-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #0002,
+    transparent 20%,
+    transparent 77%,
+    #0005
+  );
+  pointer-events: none;
+}
+.orbital-scroll-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.orbital-chapter {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 11.9444vw;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.orbital-chapter[aria-hidden="false"] a,
+.orbital-chapter[aria-hidden="false"] button {
+  pointer-events: auto;
+}
+.orbital-hero-title {
+  width: 100%;
+  position: relative;
+}
+.orbital-hero-title > p {
+  font-size: clamp(11px, 1.318vw, 20px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #00a1ff;
+  margin: 0 0 21px 4px;
+}
+.orbital-hero h1 {
+  font-family: "Manrope", sans-serif;
+  text-transform: uppercase;
+  font-size: 6.5918vw;
+  font-weight: 600;
+  line-height: 0.795;
+  letter-spacing: -0.045em;
+  color: #fff;
+  max-width: 1000px;
+}
+.orbital-hero-cta {
+  position: absolute;
+  right: 4.1667vw;
+  bottom: 126px;
+  gap: 27px !important;
+}
+.orbital-copy {
+  width: 100%;
+  max-width: 1000px;
+}
+.orbital-eyebrow {
+  display: block;
+  text-transform: uppercase;
+  color: #00a1ff;
+  font-size: clamp(11px, 1.318vw, 20px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  margin-bottom: 25px;
+}
+.orbital-orange {
+  color: #f26c3c;
+}
+.orbital-reveal {
+  padding-left: 10.0098vw;
+}
+.orbital-reveal h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: 2.8809vw;
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  max-width: 880px;
+}
+.orbital-inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 35px;
+  margin-top: 27px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #343c45;
+  font-size: 11px;
+  color: #aab6c1;
+}
+.orbital-inline-link svg {
+  color: #00a1ff;
+}
+.orbital-inline-link:hover {
+  color: #fff;
+  border-color: #00a1ff;
+}
+.orbital-steps {
+  display: block;
+  padding: 18.125svh 4.1667vw;
+}
+.orbital-steps-title {
+  text-align: center;
+}
+.orbital-steps-title .orbital-eyebrow {
+  margin-bottom: 17px;
+}
+.orbital-steps-title h2 {
+  font-family: "Manrope", sans-serif;
+  text-transform: uppercase;
+  font-size: 6.5918vw;
+  line-height: 0.8;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+.orbital-steps-row {
+  position: absolute;
+  left: 8vw;
+  right: 8vw;
+  top: 56%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 45px;
+}
+.orbital-steps-row > a {
+  position: relative;
+  color: #fff;
+}
+.orbital-steps-row > a > span {
+  color: #66717e;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 12px;
+}
+.orbital-steps-row h3 {
+  font-family: "Manrope", sans-serif;
+  font-size: 5.3vw;
+  text-transform: uppercase;
+  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+.orbital-steps-row p {
+  font-size: 1.318vw;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #66717e;
+  margin-top: 17px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+.orbital-steps-row > a > svg {
+  position: absolute;
+  right: -35px;
+  bottom: 0;
+  color: #00a1ff;
+}
+.orbital-step-line {
+  height: 1px;
+  background: #282c33;
+  flex: 1;
+  max-width: 35%;
+  opacity: 0.5;
+}
+.orbital-finale {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 4.1667vw 18svh;
+}
+.orbital-finale .orbital-eyebrow {
+  font-size: 12px;
+  color: #00a1ff;
+  margin-bottom: 25px;
+}
+.orbital-finale h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: 6.5278vw;
+  line-height: 0.81;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.orbital-finale .button {
+  margin-top: 35px;
+  gap: 35px;
+}
+.orbital-chapter-nav {
+  position: absolute;
+  left: 50%;
+  bottom: 65px;
+  transform: translateX(-50%);
+  z-index: 14;
+  display: flex;
+  gap: 3px;
+}
+.orbital-chapter-nav button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0 9px !important;
+  background: #202027 !important;
+  border-radius: 2px !important;
+  color: #76828e;
+  overflow: hidden;
+}
+.orbital-chapter-nav small {
+  font-size: 9px;
+  line-height: 1;
+}
+.orbital-chapter-nav button > span {
+  display: none;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.orbital-chapter-nav button[aria-current="step"] {
+  color: #fff;
+  min-width: 120px;
+}
+.orbital-chapter-nav button[aria-current="step"] > span {
+  display: inline;
+}
+.orbital-chapter-nav button > i {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: transparent;
+}
+.orbital-chapter-nav button[aria-current="step"] > i {
+  background: #00a1ff;
+}
+.orbital-scene-controls {
+  position: absolute;
+  left: 4.1667vw;
+  bottom: 69px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  z-index: 14;
+}
+.orbital-scene-controls > button {
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  color: #66717e;
+  padding: 0;
+}
+.orbital-scene-controls > button:hover {
+  color: #fff;
+}
+.drag-instruction {
+  font-size: 9px;
+  color: #66717e;
+  margin-right: 8px;
+}
+.orbital-motion-button {
+  margin-left: 4px;
+}
+.orbital-scroll-cue {
+  position: absolute;
+  right: 4.1667vw;
+  bottom: 75px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #66717e;
+  font-size: 9px;
+  pointer-events: none;
+}
+.orbital-scroll-cue svg {
+  color: #aaa;
+}
+.orbital-model-note {
+  position: absolute;
+  bottom: 40px;
+  left: 4.1667vw;
+  font-family: "Manrope", sans-serif;
+  font-size: 8px;
+  color: #596570;
+  z-index: 5;
+  pointer-events: none;
+}
+.orbital-loading {
+  position: absolute;
+  bottom: 115px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #66717e;
+  font-size: 10px;
+}
+.orbital-loading > div {
+  position: relative;
+  width: 180px;
+  padding-bottom: 12px;
+}
+.orbital-loading b {
+  float: right;
+  font-size: 9px;
+  font-weight: 400;
+}
+.orbital-loading i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #00a1ff;
+  transform-origin: left;
+}
+.orbital-loading > span {
+  height: 4px;
+  width: 4px;
+  background: #00a1ff;
+}
+.orbital-static {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 120px 25px;
+  color: #788795;
+  font-size: 11px;
+  pointer-events: none;
+}
+.orbital-static > span {
+  max-width: 320px;
+  text-align: center;
+}
+.orbital-destinations {
+  position: relative;
+  z-index: 3;
+  background: #000;
+  border-top: 1px solid #22242a;
+  padding: 95px 8vw 45px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+}
+.orbital-destinations h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(32px, 3.8vw, 65px);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+.orbital-destinations > div > p {
+  font-size: 12px;
+  color: #66717e;
+  margin-top: 17px;
+}
+.orbital-destination-main {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 13px;
+  color: #00a1ff;
+}
+.orbital-destination-links {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  border-top: 1px solid #22242a;
+  padding-top: 35px;
+}
+.orbital-destination-links > a {
+  position: relative;
+  display: block;
+}
+.orbital-destination-links > a > span {
+  font-size: 17px;
+  color: #fff;
+}
+.orbital-destination-links p {
+  font-size: 11px;
+  color: #66717e;
+  margin-top: 13px;
+}
+.orbital-destination-links svg {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #66717e;
+}
+.orbital-destination-links > a:hover svg {
+  color: #00a1ff;
+}
+.orbital-integrity {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  grid-column: 1/-1;
+  border-top: 1px solid #22242a;
+  padding-top: 25px;
+}
+.orbital-integrity > p {
+  font-size: 9px !important;
+  color: #66717e;
+  max-width: 630px;
+  margin-top: 0 !important;
+}
+.orbital-integrity > a {
+  font-size: 9px;
+  color: #92a5b3;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+@media (min-width: 1800px) {
+  .orbital-hero h1,
+  .orbital-steps-title h2 {
+    font-size: 119px;
+  }
+  .orbital-reveal h2 {
+    font-size: 52px;
+  }
+  .orbital-finale h2 {
+    font-size: 118px;
+  }
+}
+@media (max-width: 1023px) {
+  .orbital-hero h1 {
+    font-size: 9.3vw;
+  }
+  .orbital-hero {
+    padding-inline: 5vw;
+  }
+  .orbital-hero-title > p {
+    font-size: 14px;
+  }
+  .orbital-shell .main-nav {
+    gap: 16px;
+  }
+  .orbital-shell .main-nav a {
+    font-size: 10px;
+  }
+  .orbital-shell .header-actions > .button-outline > span {
+    display: none;
+  }
+  .orbital-reveal h2 {
+    font-size: 4.2vw;
+  }
+  .orbital-reveal {
+    padding-left: 8vw;
+  }
+  .orbital-steps-title h2 {
+    font-size: 9vw;
+  }
+  .orbital-steps-row h3 {
+    font-size: 6.6vw;
+  }
+  .orbital-steps-row p {
+    font-size: 1.6vw;
+  }
+  .orbital-finale h2 {
+    font-size: 9vw;
+  }
+  .orbital-scene-controls {
+    bottom: 103px;
+  }
+  .orbital-scroll-cue {
+    display: none;
+  }
+  .orbital-chapter-nav {
+    bottom: 62px;
+  }
+  .orbital-model-note {
+    bottom: 39px;
+  }
+}
+@media (max-width: 600px) {
+  .orbital-shell .app-header {
+    height: 77px;
+    padding-inline: 22px;
+  }
+  .orbital-shell .brand {
+    font-size: 22px;
+  }
+  .orbital-shell .brand-symbol {
+    width: 24px;
+  }
+  .orbital-shell .main-nav {
+    top: 77px;
+    background: #090b10f5;
+    padding: 15px 22px;
+    gap: 14px 25px;
+  }
+  .orbital-shell .main-nav a {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+  .orbital-shell .header-actions {
+    gap: 14px;
+  }
+  .orbital-shell .header-actions > .button-outline {
+    width: 25px;
+    padding: 0;
+  }
+  .orbital-shell .data-banner {
+    padding: 7px 12px;
+    gap: 9px;
+    font-size: 7px;
+  }
+  .orbital-shell .data-banner .data-badge {
+    font-size: 7px;
+  }
+  .orbital-shell .data-banner > span:last-of-type {
+    max-width: calc(100% - 75px);
+  }
+  .orbital-shell .app-footer {
+    padding-bottom: 80px;
+    font-size: 8px;
+  }
+  .orbital-shell .button-primary {
+    padding: 13px 18px;
+    font-size: 9px;
+  }
+  .orbital-journey {
+    height: 550svh;
+  }
+  .orbital-stage {
+    min-height: 600px;
+  }
+  .orbital-chapter {
+    padding: 0 24px;
+    align-items: flex-start;
+    padding-top: 155px;
+  }
+  .orbital-hero-title > p {
+    font-size: 10px;
+    line-height: 1.2;
+    margin: 0 0 20px 2px;
+    max-width: 240px;
+  }
+  .orbital-hero h1 {
+    font-size: 12.1vw;
+    line-height: 0.86;
+    letter-spacing: -0.055em;
+    max-width: 100%;
+  }
+  .orbital-hero-cta {
+    right: 24px;
+    bottom: 160px;
+  }
+  .orbital-reveal {
+    padding-top: 147px;
+  }
+  .orbital-eyebrow {
+    font-size: 11px;
+    margin-bottom: 24px;
+  }
+  .orbital-reveal h2 {
+    font-size: 6.8vw;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    text-shadow:
+      0 1px 12px #000,
+      0 0 25px #000;
+  }
+  .orbital-copy {
+    max-width: 100%;
+  }
+  .orbital-inline-link {
+    font-size: 10px;
+    margin-top: 24px;
+  }
+  .orbital-steps {
+    padding-top: 142px;
+  }
+  .orbital-steps-title {
+    text-align: left;
+  }
+  .orbital-steps-title h2 {
+    font-size: 13vw;
+  }
+  .orbital-steps-title .orbital-eyebrow {
+    font-size: 10px;
+  }
+  .orbital-steps-row {
+    top: 37%;
+    left: 24px;
+    right: 24px;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .orbital-steps-row h3 {
+    font-size: 8.6vw;
+  }
+  .orbital-steps-row > a > span {
+    font-size: 10px;
+  }
+  .orbital-steps-row p {
+    font-size: 9px;
+    margin-top: 13px;
+  }
+  .orbital-steps-row > a > svg {
+    bottom: -30px;
+    right: auto;
+    left: 0;
+    width: 14px;
+  }
+  .orbital-step-line {
+    max-width: 5%;
+    margin-top: 40px;
+  }
+  .orbital-finale {
+    align-items: center;
+    text-align: center;
+    padding: 160px 24px 0;
+  }
+  .orbital-finale h2 {
+    font-size: 14vw;
+    line-height: 0.88;
+  }
+  .orbital-finale .orbital-eyebrow {
+    font-size: 9px;
+    max-width: 250px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .orbital-finale .button {
+    margin-top: 27px;
+    font-size: 9px;
+    gap: 20px;
+  }
+  .orbital-scene-controls {
+    left: 24px;
+    bottom: 100px;
+  }
+  .orbital-chapter-nav {
+    bottom: 61px;
+    max-width: calc(100% - 48px);
+  }
+  .orbital-chapter-nav button {
+    height: 25px;
+    min-width: 25px;
+    padding-inline: 7px !important;
+  }
+  .orbital-chapter-nav small,
+  .orbital-chapter-nav button > span {
+    font-size: 8px;
+  }
+  .orbital-chapter-nav button[aria-current="step"] {
+    min-width: 107px;
+  }
+  .orbital-model-note {
+    left: 24px;
+    right: 20px;
+    bottom: 137px;
+    font-size: 7px;
+    max-width: 225px;
+  }
+  .orbital-loading {
+    bottom: 193px;
+    font-size: 9px;
+  }
+  .orbital-static {
+    font-size: 9px;
+    padding-bottom: 200px;
+  }
+  .orbital-destinations {
+    display: block;
+    padding: 55px 24px 30px;
+  }
+  .orbital-destinations h2 {
+    font-size: 34px;
+  }
+  .orbital-destinations > div > p {
+    font-size: 10px;
+  }
+  .orbital-destination-main {
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 30px 0;
+    border-bottom: 1px solid #22242a;
+  }
+  .orbital-destination-links {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 30px;
+    border-top: 0;
+  }
+  .orbital-destination-links > a > span {
+    font-size: 15px;
+  }
+  .orbital-destination-links p {
+    font-size: 10px;
+    max-width: 260px;
+  }
+  .orbital-integrity {
+    margin-top: 30px;
+    display: block;
+  }
+  .orbital-integrity > p {
+    font-size: 8px !important;
+  }
+  .orbital-integrity > a {
+    margin-top: 15px;
+    font-size: 9px;
+  }
+}
+@media (max-height: 600px) and (min-width: 601px) {
+  .orbital-stage {
+    min-height: 0;
+  }
+  .orbital-hero h1 {
+    font-size: 6.6vw;
+  }
+  .orbital-hero-title > p {
+    font-size: 11px;
+    margin-bottom: 15px;
+  }
+  .orbital-hero-cta {
+    bottom: 116px;
+  }
+  .orbital-reveal h2 {
+    font-size: 3.3vw;
+  }
+  .orbital-steps {
+    padding-top: 7svh;
+  }
+  .orbital-steps-title h2 {
+    font-size: 7vw;
+  }
+  .orbital-steps-row {
+    top: 47%;
+  }
+  .orbital-steps-row h3 {
+    font-size: 4.5vw;
+  }
+  .orbital-steps-row p {
+    font-size: 11px;
+    margin-top: 10px;
+  }
+  .orbital-scene-controls {
+    bottom: 69px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbital-shell * {
+    scroll-behavior: auto !important;
+  }
+}
