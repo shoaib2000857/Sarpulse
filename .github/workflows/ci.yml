@@ -3,7 +3,7 @@ name: Science and integration
 on:
   pull_request:
   push:
-    branches: [main, feat/shoaib-platform]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

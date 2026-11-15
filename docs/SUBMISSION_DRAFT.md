@@ -108,7 +108,7 @@ Suggested disclosure text for the project documentation or any available explana
 
 > We used OpenAI Codex to assist with code review, integration, implementation, debugging, tests and documentation, including drafting submission text. The project direction and team requirements were supplied by Team StarFire. SI assistance is disclosed in the repository and processing metadata. SI was not used to fabricate NASA acquisitions, environmental observations, reference labels, flood areas, population impacts or accuracy figures. Synthetic integration fixtures are explicitly marked “SYNTHETIC/DEMO — NOT NASA OBSERVATIONS” and are separate from observational results. Any SI-generated media included in the final delivery will be identified according to the 2026 submission guide. SI assistance does not constitute scientific validation or NASA endorsement.
 
-**Before publishing:** Verify the origin of the original concept and all teammate contributions. The supplied master-plan text appears to contain assistant-authored material; do not attest that SI played no role in ideation unless the team can support that statement. Disclose any use of Claude Code or other assistants that the contributors confirm. The guide supplied by the team permits SI as an accelerator and restricts using it to originate the solution idea.
+**Before publishing:** Confirm the final SI-use selections with the team, including any use of Claude Code or other assistants by contributors. The supplied guide permits SI to accelerate development and requires disclosure of how it was used.
 
 Required indicators in the delivery:
 

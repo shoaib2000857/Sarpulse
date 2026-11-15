@@ -155,10 +155,6 @@ def export_bundle(site_dir: Path, out: Path, allow_synthetic=False, require_vali
     metadata = {"schema_version": "sarpulse.delivery.v0", "created_utc": utc_now(), "site": report,
                 "source": _revision(), "si_assistance": "Code and documentation assisted by Codex; see AI_DISCLOSURE.md.",
                 "files": {}}
-    for path in sorted(out.rglob("*")):
-        if path.is_file():
-            metadata["files"][path.relative_to(out).as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
-    write_json(out / "artifact.json", metadata)
     (out / "README.txt").write_text(
         f"SARPulse precomputed delivery\nData status: {report['data_status']}\n"
         f"Validation: {report['validation_status']}\n"
@@ -166,4 +162,8 @@ def export_bundle(site_dir: Path, out: Path, allow_synthetic=False, require_vali
         "API consumer: sarpulse serve --data-dir <this-folder>/sites\n"
         "Threshold ranges are sensitivity estimates, not calibrated probabilities.\n"
         "Observational inputs and synthetic test fixtures are identified separately.\n", encoding="utf-8")
+    for path in sorted(out.rglob("*")):
+        if path.is_file():
+            metadata["files"][path.relative_to(out).as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
+    write_json(out / "artifact.json", metadata)
     return metadata

@@ -88,7 +88,7 @@ def test_versioned_delivery_and_synthetic_gate(investigation, tmp_path):
     assert metadata["site"]["data_status"] == SYNTHETIC
     assert (delivery / "sites" / site.name / "time_series.csv").is_file()
     assert (delivery / "sites" / site.name / "changes.geojson").is_file()
-    assert metadata["files"]
+    assert "README.txt" in metadata["files"]
     import hashlib
     for rel, digest in metadata["files"].items():
         assert hashlib.sha256((delivery / rel).read_bytes()).hexdigest() == digest
