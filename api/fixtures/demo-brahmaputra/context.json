@@ -1,0 +1,22 @@
+[
+  {
+    "kind": "rainfall_imerg",
+    "source": "synthetic fixture (GPM IMERG placeholder)",
+    "period_start": "2026-07-01",
+    "period_end": "2026-07-25",
+    "value": 100.0,
+    "units": "mm",
+    "resolution": "0.1 deg",
+    "caveat": "Context only, not proof of cause; coarse resolution.",
+    "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS"
+  },
+  {
+    "kind": "jrc_gsw_occurrence",
+    "source": "synthetic fixture (JRC GSW placeholder)",
+    "value": 30.0,
+    "units": "%",
+    "resolution": "30 m",
+    "caveat": "Historical context, not 2026 ground truth.",
+    "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS"
+  }
+]

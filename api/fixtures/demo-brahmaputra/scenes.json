@@ -1,0 +1,74 @@
+[
+  {
+    "scene_id": "SYNTHETIC-SCENE-A",
+    "source": "synthetic fixture (not NISAR)",
+    "acquired_at_utc": "2026-07-01T00:00:00Z",
+    "maturity": "SYNTHETIC",
+    "crid": null,
+    "orbit_direction": "ASCENDING",
+    "relative_orbit": null,
+    "polarizations": [
+      "HHHH",
+      "HVHV"
+    ],
+    "grid_epsg": 32646,
+    "pixel_spacing_m": 20.0,
+    "footprint": {
+      "west": 93.9,
+      "south": 26.8,
+      "east": 94.3,
+      "north": 27.1
+    },
+    "license": "fixture only",
+    "data_url": null,
+    "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS"
+  },
+  {
+    "scene_id": "SYNTHETIC-SCENE-B",
+    "source": "synthetic fixture (not NISAR)",
+    "acquired_at_utc": "2026-07-13T00:00:00Z",
+    "maturity": "SYNTHETIC",
+    "crid": null,
+    "orbit_direction": "ASCENDING",
+    "relative_orbit": null,
+    "polarizations": [
+      "HHHH",
+      "HVHV"
+    ],
+    "grid_epsg": 32646,
+    "pixel_spacing_m": 20.0,
+    "footprint": {
+      "west": 93.9,
+      "south": 26.8,
+      "east": 94.3,
+      "north": 27.1
+    },
+    "license": "fixture only",
+    "data_url": null,
+    "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS"
+  },
+  {
+    "scene_id": "SYNTHETIC-SCENE-C",
+    "source": "synthetic fixture (not NISAR)",
+    "acquired_at_utc": "2026-07-25T00:00:00Z",
+    "maturity": "SYNTHETIC",
+    "crid": null,
+    "orbit_direction": "ASCENDING",
+    "relative_orbit": null,
+    "polarizations": [
+      "HHHH",
+      "HVHV"
+    ],
+    "grid_epsg": 32646,
+    "pixel_spacing_m": 20.0,
+    "footprint": {
+      "west": 93.9,
+      "south": 26.8,
+      "east": 94.3,
+      "north": 27.1
+    },
+    "license": "fixture only",
+    "data_url": null,
+    "data_status": "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS"
+  }
+]

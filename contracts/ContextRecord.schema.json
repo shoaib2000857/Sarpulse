@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "DataStatus": {
+      "enum": [
+        "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+        "observed"
+      ],
+      "title": "DataStatus",
+      "type": "string"
+    }
+  },
+  "description": "Ancillary evidence (rainfall, optical, historical water, terrain). Never ground truth.",
+  "properties": {
+    "kind": {
+      "title": "Kind",
+      "type": "string"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    },
+    "period_start": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Period Start"
+    },
+    "period_end": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Period End"
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value"
+    },
+    "units": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Units"
+    },
+    "resolution": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution"
+    },
+    "caveat": {
+      "title": "Caveat",
+      "type": "string"
+    },
+    "data_status": {
+      "$ref": "#/$defs/DataStatus"
+    }
+  },
+  "required": [
+    "kind",
+    "source",
+    "caveat",
+    "data_status"
+  ],
+  "title": "ContextRecord",
+  "type": "object"
+}

@@ -1,0 +1,8 @@
+numpy>=2.0,<3.0
+h5py>=3.10,<4.0
+rasterio>=1.4,<2.0
+pyproj>=3.6,<4.0
+requests>=2.31,<3.0
+earthaccess>=0.12,<1.0
+# dev / test
+pytest>=8.0,<9.0

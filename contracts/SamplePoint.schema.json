@@ -1,0 +1,101 @@
+{
+  "description": "Per-location values from the analysis pipeline (Naveen/Veer outputs).",
+  "properties": {
+    "lon": {
+      "title": "Lon",
+      "type": "number"
+    },
+    "lat": {
+      "title": "Lat",
+      "type": "number"
+    },
+    "before_hh_db": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Before Hh Db"
+    },
+    "after_hh_db": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "After Hh Db"
+    },
+    "before_hv_db": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Before Hv Db"
+    },
+    "after_hv_db": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "After Hv Db"
+    },
+    "change_class": {
+      "title": "Change Class",
+      "type": "string"
+    },
+    "valid": {
+      "default": true,
+      "title": "Valid",
+      "type": "boolean"
+    },
+    "slope_deg": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Slope Deg"
+    },
+    "jrc_occurrence_pct": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jrc Occurrence Pct"
+    }
+  },
+  "required": [
+    "lon",
+    "lat",
+    "change_class"
+  ],
+  "title": "SamplePoint",
+  "type": "object"
+}

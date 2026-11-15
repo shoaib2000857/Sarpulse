@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "DataStatus": {
+      "enum": [
+        "SYNTHETIC/DEMO — NOT NASA OBSERVATIONS",
+        "observed"
+      ],
+      "title": "DataStatus",
+      "type": "string"
+    },
+    "Layer": {
+      "additionalProperties": true,
+      "description": "One web map overlay from science/analysis layers.json. Paths are rewritten to API URLs.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "png": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Png"
+        },
+        "geotiff": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Geotiff"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "title"
+      ],
+      "title": "Layer",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "aoi_id": {
+      "title": "Aoi Id",
+      "type": "string"
+    },
+    "crs": {
+      "title": "Crs",
+      "type": "string"
+    },
+    "bounds_wgs84": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Bounds Wgs84",
+      "type": "array"
+    },
+    "image_coordinates": {
+      "items": {
+        "items": {
+          "type": "number"
+        },
+        "type": "array"
+      },
+      "title": "Image Coordinates",
+      "type": "array"
+    },
+    "dates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Dates",
+      "type": "array"
+    },
+    "layers": {
+      "items": {
+        "$ref": "#/$defs/Layer"
+      },
+      "title": "Layers",
+      "type": "array"
+    },
+    "attribution": {
+      "title": "Attribution",
+      "type": "string"
+    },
+    "data_status": {
+      "$ref": "#/$defs/DataStatus"
+    }
+  },
+  "required": [
+    "aoi_id",
+    "crs",
+    "bounds_wgs84",
+    "image_coordinates",
+    "dates",
+    "layers",
+    "attribution",
+    "data_status"
+  ],
+  "title": "LayersManifest",
+  "type": "object"
+}

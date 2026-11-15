@@ -1,0 +1,38 @@
+[
+  {
+    "lon": 94.0,
+    "lat": 26.9,
+    "before_hh_db": -8.0,
+    "after_hh_db": -20.0,
+    "before_hv_db": -15.0,
+    "after_hv_db": -26.0,
+    "change_class": "water_gained",
+    "valid": true,
+    "slope_deg": 1.0,
+    "jrc_occurrence_pct": 10.0
+  },
+  {
+    "lon": 94.2,
+    "lat": 27.0,
+    "before_hh_db": -21.0,
+    "after_hh_db": -21.5,
+    "before_hv_db": -27.0,
+    "after_hv_db": -27.0,
+    "change_class": "stable_water",
+    "valid": true,
+    "slope_deg": 0.5,
+    "jrc_occurrence_pct": 95.0
+  },
+  {
+    "lon": 94.1,
+    "lat": 27.08,
+    "before_hh_db": -7.0,
+    "after_hh_db": -7.2,
+    "before_hv_db": -13.0,
+    "after_hv_db": -13.1,
+    "change_class": "stable_land",
+    "valid": true,
+    "slope_deg": 14.0,
+    "jrc_occurrence_pct": 0.0
+  }
+]

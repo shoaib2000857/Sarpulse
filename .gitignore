@@ -33,5 +33,8 @@ data/processed/
 .vscode/
 .idea/
 *.log
+*.egg-info/
+.netrc
+_netrc
 
 # Keep small manifests, documentation and intentionally reviewed fixtures in version control.
