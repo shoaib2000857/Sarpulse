@@ -65,13 +65,15 @@ Select the actual form options for code assistance and writing/documentation ass
 | NASA Earthdata — data access | https://search.earthdata.nasa.gov/search |
 | NASA earthaccess — authenticated retrieval library | https://github.com/nsidc/earthaccess |
 | Exact NISAR scenes, output provenance and reference evidence | https://github.com/shoaib2000857/Sarpulse/tree/main/web/public/data/sites |
-| NASA SMAP — credited introductory 3D model source, not NISAR imagery | https://science.nasa.gov/resource/smap-3d-model/ |
+| NASA SMAP — credited introductory 3D model source, not NISAR imagery | https://smap.jpl.nasa.gov/resources/99/smap-3d-model/ |
+| NASA Earth — illustrative 3D model, not current observations | https://science.nasa.gov/learn/heat/resource/earth-3d-model/ |
 
 ## Space Agency Partner & Other Data — Link Text / Link URL
 
 | Link Text | Link URL |
 | --- | --- |
 | SARPulse source, full dependency and asset attribution | https://github.com/shoaib2000857/Sarpulse/blob/main/ATTRIBUTION.md |
+| Detailed 3D/environment/font sources and reuse credits | https://github.com/shoaib2000857/Sarpulse/blob/main/web/public/models/ATTRIBUTION.md |
 | Copernicus DEM GLO-30 — terrain context | https://registry.opendata.aws/copernicus-dem/ |
 | EC JRC Global Surface Water v1.4 — historical context | https://global-surface-water.appspot.com/ |
 | ESA Copernicus Sentinel-2 — optical reference and processing | https://sentiwiki.copernicus.eu/web/s2-processing |
