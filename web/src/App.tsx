@@ -22,6 +22,7 @@ import {
 import { Button } from "./components/ui/button";
 import { demoStudy } from "./data/demo";
 import { parseStudyPackage } from "./lib/validate-package";
+import { installTilt } from "./lib/tilt";
 import type { StudyPackage } from "./types/frontend";
 
 const Landing = lazy(() => import("./pages/Landing"));
@@ -49,6 +50,7 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
   const main = useRef<HTMLElement>(null);
+  useEffect(() => installTilt(document.body), []);
   useEffect(() => {
     const onHash = () => {
       setRoute(getRoute());
