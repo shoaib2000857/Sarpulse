@@ -1,5 +1,11 @@
 # Integration status — November 15, 2026
 
+## Frontend follow-up review
+
+Integrated the three new `frontend` commits (`2e4511a`, `1d4e75e`, `4701f88`) on `feat/shoaib-frontend-integration`. The source includes the 3D landing, shared map workspace, comparisons, local package imports, Science Lab, chart alternatives, story navigation and labelled synthetic fixture. Frontend type checking, 17 unit tests and the production build pass; the existing 40 backend/integration tests and generated-contract checks also pass. Browser-check and remote CI results are recorded in the review PR. CI now checks the frontend as well as Python modules.
+
+The production build reports large WebGL/3D chunks and a redundant dynamic import for the class chart. These are performance/code-splitting warnings, not build failures. Backend-to-frontend data adaptation remains an explicit open integration task, as detailed below.
+
 ## Completed in this integration
 
 - Integrated `origin/feat/veer-ingestion` (`424fcc4`), `origin/feat/naveen-analysis` (`adfa90c`) and `origin/feat/shridhar-api` (`8a3572e`) into `feat/shoaib-platform` without conflicts.
@@ -30,7 +36,7 @@ Docker verification: `docker build -t sarpulse-api:integration .` passed. Starte
 
 1. **Real radar pixels:** catalog manifests identify compatible provisional acquisitions, but no downloaded HDF5 files or configured Earthdata credentials were present. Run the real-data pipeline once access is provided. Retain observed/provisional labels and input lineage.
 2. **Independent reference:** no actual reference labels or timely optical/reference raster were supplied. Do not invent accuracy or describe internal agreement as validation.
-3. **Frontend:** `web/` and `design/` are placeholders in the integrated branches. Nidhi/Hansika's implementation must consume the documented contracts and render real outputs.
+3. **Frontend data connection:** the `frontend` branch's three commits through `4701f88` now supply `web/` and design documentation. The viewer uses a local `StudyPackage` format and optional XYZ tiles. The platform currently exports API records and georeferenced PNG overlays. A data adapter and image-layer support or a tile-preparation step are still required; merging the source alone does not connect real scientific outputs.
 4. **Public hosting:** the selected hostname `sarpulse.shoaibssm.me` did not resolve in the local check. DNS/HTTPS and the public application need verification. The local API container build and smoke test passed.
 5. **Demo:** the submission draft includes seven-slide/30-second content outlines, not an exported final deck/video or public demo URL. Hansika owns the final presentation; the official limit is <=7 slides or <=30 seconds.
 6. **Final form:** Shoaib must reconcile completion-assumption wording with the shipped product, confirm resource use and team eligibility, then submit and verify the success banner. No form submission is claimed here.

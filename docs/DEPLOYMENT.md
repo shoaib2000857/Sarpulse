@@ -4,10 +4,10 @@ The chosen project URL is **https://sarpulse.shoaibssm.me**. At the November 15 
 
 ## Static-first application
 
-Nidhi/Hansika own `web/`; no frontend implementation was present in the branches integrated for this change. The platform does not invent or claim a deployed map interface. Once their app is available:
+Nidhi/Hansika's frontend is now present in `web/`. It builds as a static Vite application and currently opens a labelled synthetic fixture or a locally imported `StudyPackage`. It does not automatically load `/data/sites.json` or the API. Before deploying real results:
 
 1. Export a real, inspected science bundle using `sarpulse export` (see `platform/README.md`).
-2. Copy that bundle into the app's static data directory, for example `web/public/data/`. Point its loader at `/data/sites.json`.
+2. Implement the adapter from platform exports to the documented frontend `StudyPackage`, and image-overlay support or an XYZ tiling step. Simply copying the current platform bundle into `web/public/data/` does not connect it to the viewer.
 3. Build the frontend with its own documented package manager; deploy the production output to the chosen host.
 4. Configure the custom-domain record to the hosting provider's verified target and enable HTTPS. Do not guess a DNS target.
 5. Verify the actual public app, layer URLs, data labels, keyboard controls and downloads in a private browser. Static maps must not depend on Earthdata credentials.
@@ -29,4 +29,4 @@ The Docker recipe is provided; container execution is only verified if recorded 
 
 `.github/workflows/ci.yml` runs scientific, API and integration tests and contract checks. `.github/workflows/delivery.yml` packages a validated precomputed delivery from the checked-out repository when explicitly dispatched. Raw GCOV products and Earthdata credentials are never committed or required by CI tests.
 
-Automatic frontend publication awaits the actual frontend and selected host. This avoids publishing a synthetic fixture or overwriting the custom domain with an unrelated scaffold. The deployment artifact is ready for the frontend team's hosting workflow; public scientific readiness remains conditional on authentic processed data.
+Frontend type checks, unit tests and production build now run in CI. Automatic publication still awaits the selected host. A deployment can present the clearly labelled synthetic experience, while public scientific readiness remains conditional on authentic processed data and its frontend adapter.

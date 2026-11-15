@@ -6,7 +6,7 @@
 
 SARPulse is Team StarFire's selected concept for the 2026 challenge **[Dancing with the SARs](https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/)**. Our goal during the hackathon is to explore how NASA–ISRO **NISAR synthetic-aperture radar observations** can help people investigate changes across Earth's surface.
 
-**Status: scientific modules and platform integrated; real-data execution and frontend delivery pending.** Ingestion, open-water analysis, the FastAPI evidence service, orchestration, exports and integration checks are implemented. Engineering tests use explicitly synthetic inputs. No real environmental measurements or independent accuracy results are claimed by this status.
+**Status: scientific modules, platform and frontend source integrated; real-data execution and frontend data connection pending.** Ingestion, open-water analysis, the FastAPI evidence service, orchestration, exports and the frontend are implemented. The frontend currently opens a clearly labelled synthetic workspace and imports its own local data-package format; it does not yet automatically consume the platform's export/API. No real environmental measurements or independent accuracy results are claimed by this status.
 
 ## Run the integrated project
 
@@ -19,6 +19,8 @@ uv pip install --python .venv/Scripts/python.exe --no-deps -e .
 ```
 
 The last command serves **synthetic development fixtures** at http://127.0.0.1:8000/docs. See [the platform runbook](platform/README.md) for real GCOV ingestion, analysis, validation and versioned exports; [shared contracts](contracts/README.md) for frontend integration; and [integration status](docs/INTEGRATION_STATUS.md) for verified work and outstanding dependencies.
+
+Start the frontend separately with `cd web`, `npm ci`, then `npm run dev`. It includes geographic exploration, comparisons, a Science Lab, guided stories and a 3D presentation. See [frontend setup and data boundaries](web/README.md).
 
 Submission material: [form-ready draft](docs/SUBMISSION_DRAFT.md). Chosen project URL: https://sarpulse.shoaibssm.me (public availability must be verified; see [deployment](docs/DEPLOYMENT.md)). The current supplied guide requires a **<=30-second video or <=7-slide deck**, superseding the master plan's longer demonstration proposal.
 
@@ -65,7 +67,7 @@ docs/                # collaboration, science notes and demos
 tests/               # integration and validation
 ```
 
-`science/`, `api/`, `platform/`, `contracts/` and integration tests contain implementations. `web/` and `design/` still await the frontend/UX team's delivery in this integrated branch.
+`science/`, `api/`, `platform/`, `contracts/`, `web/` and integration tests contain implementations. `design/` documents the frontend/UX team's delivered experience and its remaining data requirements.
 
 ## 🛰️ Data and integrity
 
