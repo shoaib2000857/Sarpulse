@@ -3,6 +3,14 @@ import type { Feature, FeatureCollection, Polygon } from "geojson";
 // Frontend view model only. This does not establish a backend or shared scientific API.
 export type LayerMode = "after" | "before" | "difference" | "gain" | "loss";
 export type Palette = "standard" | "accessible";
+// Geographic context only. None of these basemaps is NISAR or SAR data.
+export type Basemap = "satellite" | "dark" | "streets" | "none";
+// Camera relative to the fitted study extent, so it works for any supplied package.
+export type MapCamera = {
+  zoomOffset?: number;
+  pitch?: number;
+  bearing?: number;
+};
 export type ChangeKind = "stable" | "gain" | "loss" | "no-data";
 export type RasterLayer = {
   tiles: string[];
@@ -66,7 +74,8 @@ export type GeoWorkspaceProps = {
   compare: boolean;
   opacity: number;
   palette: Palette;
-  contextMap: boolean;
+  basemap: Basemap;
+  camera?: MapCamera;
   showFootprint: boolean;
   channel?: string;
   onInspect?: (selection: MapSelection) => void;

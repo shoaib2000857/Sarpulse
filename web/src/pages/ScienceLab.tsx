@@ -11,7 +11,10 @@ import { Button } from "../components/ui/button";
 import { downloadFile, observationLabel, summaryCsv } from "../lib/study";
 import { safeSourceUrl } from "../lib/validate-package";
 import type { StudyPackage } from "../types/frontend";
+import { classCount, classKinds } from "../components/charts/ClassChart";
 const SignalChart = lazy(() => import("../components/charts/SignalChart"));
+const ClassChart = lazy(() => import("../components/charts/ClassChart"));
+const LocatorGlobe = lazy(() => import("../components/map/LocatorGlobe"));
 
 export default function ScienceLab({ study }: { study: StudyPackage }) {
   const [index, setIndex] = useState(0);
@@ -220,6 +223,76 @@ export default function ScienceLab({ study }: { study: StudyPackage }) {
               No source product link is available for this fixture.
             </p>
           )}
+        </section>
+      </div>
+      <div className="science-grid">
+        <section className="science-panel">
+          <div className="panel-heading">
+            <div>
+              <h2>Change classes by stage</h2>
+              <p>
+                {study.status === "synthetic"
+                  ? "Counts of schematic test cells · not measured change"
+                  : "Counts of supplied class cells · not area"}
+              </p>
+            </div>
+            <span className="data-badge">
+              {study.status === "synthetic" ? "Synthetic" : "Supplied"} · count
+            </span>
+          </div>
+          <Suspense
+            fallback={
+              <div className="signal-chart" role="status">
+                Loading class chart…
+              </div>
+            }
+          >
+            <ClassChart study={study} />
+          </Suspense>
+          <details className="data-table-details">
+            <summary>Read class counts as a table</summary>
+            <div className="table-scroll">
+              <table>
+                <caption>Cells per class ({study.status})</caption>
+                <thead>
+                  <tr>
+                    <th>Observation</th>
+                    {classKinds.map((k) => (
+                      <th key={k.kind}>{k.label}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {study.observations.map((o) => (
+                    <tr key={o.key}>
+                      <td>{observationLabel(o)}</td>
+                      {classKinds.map((k) => (
+                        <td key={k.kind}>{classCount(study, o.key, k.kind)}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+          <p className="panel-note">
+            A count of geometry in the package. Area statistics appear above
+            only when a package supplies them.
+          </p>
+        </section>
+        <section className="science-panel metadata-panel">
+          <div className="panel-heading">
+            <div>
+              <h2>Where on Earth</h2>
+              <p>{study.region}</p>
+            </div>
+            <a className="text-link" href="#explore">
+              Open map <ArrowRight size={14} />
+            </a>
+          </div>
+          <Suspense fallback={<div className="locator-globe" role="status" />}>
+            <LocatorGlobe study={study} />
+          </Suspense>
         </section>
       </div>
       <div className="science-grid lower-science">

@@ -13,7 +13,12 @@ import {
 } from "lucide-react";
 import GeoWorkspace from "../components/map/GeoWorkspace";
 import { Button } from "../components/ui/button";
-import type { LayerMode, StudyPackage } from "../types/frontend";
+import type {
+  Basemap,
+  LayerMode,
+  MapCamera,
+  StudyPackage,
+} from "../types/frontend";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Story({ study }: { study: StudyPackage }) {
@@ -103,6 +108,31 @@ export default function Story({ study }: { study: StudyPackage }) {
   }
   const mode: LayerMode =
     chapter === 0 ? "before" : chapter === 4 ? "difference" : "after";
+  // One scene per chapter: where the camera sits and which context map is shown.
+  const scenes: { basemap: Basemap; camera: MapCamera; label: string }[] = [
+    {
+      basemap: "dark",
+      camera: { zoomOffset: -3.6 },
+      label: "Regional context",
+    },
+    {
+      basemap: "satellite",
+      camera: { zoomOffset: -0.2 },
+      label: "Cloud-free optical composite, for context",
+    },
+    {
+      basemap: "none",
+      camera: { zoomOffset: 0.3, pitch: 48, bearing: -12 },
+      label: "No photograph here: geometry only",
+    },
+    { basemap: "dark", camera: { zoomOffset: 0 }, label: "Before and after" },
+    {
+      basemap: "satellite",
+      camera: { zoomOffset: -0.4, pitch: 35, bearing: 14 },
+      label: "Change classes over context imagery",
+    },
+  ];
+  const scene = scenes[chapter];
   const Icon = chapters[chapter].icon;
   return (
     <div className="story-page" ref={root}>
@@ -139,9 +169,11 @@ export default function Story({ study }: { study: StudyPackage }) {
             compare={chapter === 3}
             opacity={0.8}
             palette="standard"
-            contextMap={false}
+            basemap={scene.basemap}
+            camera={scene.camera}
             showFootprint={true}
           />
+          <p className="story-scene-label">{scene.label}</p>
           <div className="story-map-controls">
             <Button
               variant="ghost"

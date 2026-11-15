@@ -271,7 +271,6 @@ function LoadedScene({
         progress={progress}
         motion={motion}
       />
-
     </>
   );
 }

@@ -47,7 +47,7 @@ export default function SignalChart({ study }: { study: StudyPackage }) {
       tooltip: {
         trigger: "axis",
         renderMode: "richText",
-        backgroundColor: "#20344a",
+        backgroundColor: "#14171c",
         borderWidth: 0,
         textStyle: { color: "#edf3f7" },
       },
@@ -56,19 +56,19 @@ export default function SignalChart({ study }: { study: StudyPackage }) {
         ...(hasTimestamps
           ? {}
           : { data: study.observations.map(observationLabel) }),
-        axisLine: { lineStyle: { color: "#3c5065" } },
+        axisLine: { lineStyle: { color: "#2a2f37" } },
         axisLabel: {
           color: "#b2c0ce",
-          fontFamily: "IBM Plex Sans",
+          fontFamily: "Manrope",
           hideOverlap: true,
         },
       },
       yAxis: {
         type: "value",
         name: "dB",
-        nameTextStyle: { color: "#b2c0ce" },
-        axisLabel: { color: "#b2c0ce" },
-        splitLine: { lineStyle: { color: "#25394e" } },
+        nameTextStyle: { color: "#b2c0ce", fontFamily: "Manrope" },
+        axisLabel: { color: "#b2c0ce", fontFamily: "Manrope" },
+        splitLine: { lineStyle: { color: "#1a1d22" } },
       },
       series: [
         {
@@ -85,7 +85,7 @@ export default function SignalChart({ study }: { study: StudyPackage }) {
           itemStyle: {
             color: "#69dce8",
             borderWidth: 3,
-            borderColor: "#122238",
+            borderColor: "#0a0c10",
           },
           areaStyle: { color: "rgba(105,220,232,0.06)" },
         },

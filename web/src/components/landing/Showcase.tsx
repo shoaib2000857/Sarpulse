@@ -90,7 +90,11 @@ export default function Showcase() {
         stagger: 0.12,
         duration: 0.9,
         ease: "power3.out",
-        scrollTrigger: { trigger: ".sc-lifeline", start: "top 82%", once: true },
+        scrollTrigger: {
+          trigger: ".sc-lifeline",
+          start: "top 82%",
+          once: true,
+        },
       });
       gsap.fromTo(
         ".sc-lifeline-fill",

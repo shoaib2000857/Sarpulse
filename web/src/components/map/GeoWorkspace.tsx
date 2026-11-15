@@ -12,7 +12,7 @@ import {
   observationRaster,
   visibleOverlays,
 } from "../../lib/study";
-import type { GeoWorkspaceProps } from "../../types/frontend";
+import type { Basemap, GeoWorkspaceProps } from "../../types/frontend";
 
 // MapLibre 6 ships a separate worker; keep it on the same origin in dev and builds.
 maplibregl.setWorkerUrl(workerUrl);
@@ -26,7 +26,8 @@ export default function GeoWorkspace(props: GeoWorkspaceProps) {
     compare,
     opacity,
     palette,
-    contextMap,
+    basemap,
+    camera,
     showFootprint,
     channel,
     onInspect,
@@ -60,7 +61,7 @@ export default function GeoWorkspace(props: GeoWorkspaceProps) {
         {
           id: "background",
           type: "background",
-          paint: { "background-color": "#142b3b" },
+          paint: { "background-color": "#06090d" },
         },
       ],
     };
@@ -79,7 +80,7 @@ export default function GeoWorkspace(props: GeoWorkspaceProps) {
           attributionControl: false,
           dragRotate: false,
           pitchWithRotate: false,
-          maxPitch: 0,
+          maxPitch: latest.current.camera ? 60 : 0,
         });
         map.addControl(
           new maplibregl.AttributionControl({ compact: true }),
@@ -96,6 +97,8 @@ export default function GeoWorkspace(props: GeoWorkspaceProps) {
         });
         map.on("load", () => {
           updateMap(map, latest.current, compare && map === created[0]);
+          applyCamera(map, latest.current, false);
+          collapseAttribution(node);
           map.once("idle", () => {
             if (++readyMaps === nodes.length) setStatus("ready");
           });
@@ -172,12 +175,18 @@ export default function GeoWorkspace(props: GeoWorkspaceProps) {
     mode,
     opacity,
     palette,
-    contextMap,
+    basemap,
     showFootprint,
     channel,
     study,
     compare,
   ]); // Map state changes without recreating its camera.
+
+  useEffect(() => {
+    const map = maps.current[0];
+    // loaded() is false while tiles stream in, so test for the style's own layer.
+    if (map?.getLayer("background")) applyCamera(map, props, true);
+  }, [camera?.zoomOffset, camera?.pitch, camera?.bearing]);
 
   const obs = study.observations.find((o) => o.key === observationKey)!;
   const baseline = study.observations.find((o) => o.key === beforeKey)!;
@@ -285,8 +294,9 @@ export default function GeoWorkspace(props: GeoWorkspaceProps) {
       <div className="map-caption">
         <span className="status-dot" />
         {study.status === "synthetic"
-          ? "Schematic test cells · not satellite imagery"
+          ? "Schematic test cells · not observed change"
           : "Supplied layers · see provenance in Science Lab"}
+        {basemapNote[basemap] && <em> · {basemapNote[basemap]}</em>}
       </div>
       <div className="map-legend" aria-label="Map legend">
         {Object.entries(c).map(([key, color]) => (
@@ -329,31 +339,102 @@ export default function GeoWorkspace(props: GeoWorkspaceProps) {
   );
 }
 
+/** Start the credit control collapsed (its "i" button still opens it). */
+export function collapseAttribution(container: HTMLElement) {
+  const el = container.querySelector(".maplibregl-ctrl-attrib");
+  el?.classList.remove("maplibregl-compact-show");
+  el?.removeAttribute("open");
+}
+const basemapNote: Record<Basemap, string> = {
+  satellite: "basemap: optical context imagery, not SAR",
+  dark: "basemap: reference map, not SAR",
+  streets: "basemap: reference map, not SAR",
+  none: "",
+};
+const basemaps: Record<
+  Exclude<Basemap, "none">,
+  { tiles: string[]; maxzoom: number; attribution: string; paint: object }
+> = {
+  satellite: {
+    tiles: [
+      "https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg",
+    ],
+    maxzoom: 13,
+    attribution:
+      '<a href="https://s2maps.eu">Sentinel-2 cloudless</a> by EOX IT Services GmbH (contains modified Copernicus Sentinel data 2016) · optical context, not NISAR',
+    paint: { "raster-brightness-max": 0.72, "raster-saturation": -0.15 },
+  },
+  // OpenStreetMap tiles, desaturated and tone-inverted by the renderer. No API key.
+  dark: {
+    tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+    maxzoom: 19,
+    attribution:
+      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · geographic context, not NISAR',
+    paint: {
+      "raster-saturation": -1,
+      "raster-brightness-min": 0.6,
+      "raster-brightness-max": 0.03,
+      "raster-contrast": 0.15,
+    },
+  },
+  streets: {
+    tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+    maxzoom: 19,
+    attribution:
+      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · geographic context, not NISAR',
+    paint: { "raster-opacity": 0.55, "raster-saturation": -0.8 },
+  },
+};
+
+function applyCamera(map: GLMap, p: GeoWorkspaceProps, animate: boolean) {
+  if (!p.camera) return;
+  const [w, s, e, n] = p.study.bounds;
+  const fitted = map.cameraForBounds(
+    [
+      [w, s],
+      [e, n],
+    ],
+    { padding: 54 },
+  );
+  if (!fitted?.center || fitted.zoom === undefined) return;
+  const target = {
+    center: fitted.center,
+    zoom: Math.max(1, fitted.zoom + (p.camera.zoomOffset ?? 0)),
+    pitch: p.camera.pitch ?? 0,
+    bearing: p.camera.bearing ?? 0,
+  };
+  if (animate && !window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+    map.flyTo({ ...target, duration: 2200, essential: false });
+  else map.jumpTo(target);
+}
+
 function updateMap(map: GLMap, p: GeoWorkspaceProps, isBefore: boolean) {
-  const { study, mode, opacity, palette, showFootprint, contextMap } = p;
+  const { study, mode, opacity, palette, showFootprint } = p;
   const key = isBefore || mode === "before" ? p.beforeKey : p.observationKey;
   const observation = study.observations.find((o) => o.key === key)!;
-  if (!map.getSource("context")) {
-    map.addSource("context", {
-      type: "raster",
-      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-      tileSize: 256,
-      attribution:
-        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · geographic context, not NISAR',
-    });
-    map.addLayer({
-      id: "context",
-      type: "raster",
-      source: "context",
-      layout: { visibility: "none" },
-      paint: { "raster-opacity": 0.35, "raster-saturation": -0.8 },
-    });
+  for (const [name, b] of Object.entries(basemaps)) {
+    const id = `basemap-${name}`;
+    // Sources are added lazily so an unused tile service is never contacted.
+    if (name === p.basemap && !map.getSource(id)) {
+      map.addSource(id, {
+        type: "raster",
+        tiles: b.tiles,
+        tileSize: 256,
+        maxzoom: b.maxzoom,
+        attribution: b.attribution,
+      });
+      map.addLayer(
+        { id, type: "raster", source: id, paint: b.paint },
+        map.getLayer("grid") ? "grid" : undefined,
+      );
+    }
+    if (map.getLayer(id))
+      map.setLayoutProperty(
+        id,
+        "visibility",
+        name === p.basemap ? "visible" : "none",
+      );
   }
-  map.setLayoutProperty(
-    "context",
-    "visibility",
-    contextMap ? "visible" : "none",
-  );
   if (!map.getSource("grid")) {
     const [w, s, e, n] = study.bounds;
     const features = [];

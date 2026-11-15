@@ -6,6 +6,7 @@ import {
   Download,
   Info,
   Layers,
+  Map as MapIcon,
   MapPin,
   Pause,
   Play,
@@ -16,12 +17,15 @@ import GeoWorkspace from "../components/map/GeoWorkspace";
 import { Button } from "../components/ui/button";
 import {
   availableChannels,
+  colors,
   downloadFile,
   observationLabel,
   observationRaster,
   visibleOverlays,
 } from "../lib/study";
 import type {
+  Basemap,
+  ChangeKind,
   LayerMode,
   MapSelection,
   Palette,
@@ -39,6 +43,18 @@ const modes: { key: LayerMode; label: string; detail: string }[] = [
   { key: "gain", label: "Water gained", detail: "Supplied gain geometry" },
   { key: "loss", label: "Water lost", detail: "Supplied loss geometry" },
 ];
+const basemapOptions: { key: Basemap; label: string }[] = [
+  { key: "satellite", label: "Satellite" },
+  { key: "dark", label: "Dark" },
+  { key: "streets", label: "Streets" },
+  { key: "none", label: "Grid" },
+];
+const kindLabel: Record<ChangeKind, string> = {
+  stable: "Persistent",
+  gain: "Gain",
+  loss: "Loss",
+  "no-data": "No data",
+};
 export default function Explorer({ study }: { study: StudyPackage }) {
   const [index, setIndex] = useState(1);
   const [beforeIndex, setBeforeIndex] = useState(0);
@@ -47,7 +63,7 @@ export default function Explorer({ study }: { study: StudyPackage }) {
   const [opacity, setOpacity] = useState(0.8);
   const [palette, setPalette] = useState<Palette>("standard");
   const [channel, setChannel] = useState("");
-  const [contextMap, setContextMap] = useState(false);
+  const [basemap, setBasemap] = useState<Basemap>("satellite");
   const [footprint, setFootprint] = useState(true);
   const [playing, setPlaying] = useState(false);
   const [selection, setSelection] = useState<MapSelection | null>(null);
@@ -75,6 +91,11 @@ export default function Explorer({ study }: { study: StudyPackage }) {
   useEffect(() => {
     if (index === beforeIndex) setCompare(false);
   }, [index, beforeIndex]);
+  const inView = visibleOverlays(
+    study,
+    mode === "before" ? baseline.key : obs.key,
+    mode,
+  ).features;
   const selectIndex = (i: number) => {
     setIndex(i);
     setPlaying(false);
@@ -181,6 +202,48 @@ export default function Explorer({ study }: { study: StudyPackage }) {
               </section>
               <section className="control-section">
                 <h2>
+                  <MapIcon size={15} />
+                  Basemap
+                </h2>
+                <div
+                  className="basemap-grid"
+                  role="radiogroup"
+                  aria-label="Basemap"
+                >
+                  {basemapOptions.map((b) => (
+                    <label
+                      key={b.key}
+                      className={
+                        basemap === b.key
+                          ? "basemap-option selected"
+                          : "basemap-option"
+                      }
+                    >
+                      <input
+                        type="radio"
+                        name="basemap"
+                        value={b.key}
+                        checked={basemap === b.key}
+                        onChange={() => setBasemap(b.key)}
+                      />
+                      <i
+                        className={`basemap-swatch ${b.key}`}
+                        aria-hidden="true"
+                      />
+                      <span>{b.label}</span>
+                    </label>
+                  ))}
+                </div>
+                <p className="control-note">
+                  {basemap === "none"
+                    ? "Offline grid. No external map service is contacted."
+                    : basemap === "satellite"
+                      ? "Sentinel-2 cloudless by EOX (modified Copernicus Sentinel data 2016). Optical context only, not NISAR or SAR."
+                      : "© OpenStreetMap contributors. Geographic context only, not NISAR or SAR."}
+                </p>
+              </section>
+              <section className="control-section">
+                <h2>
                   <SlidersHorizontal size={15} />
                   Display
                 </h2>
@@ -204,15 +267,6 @@ export default function Explorer({ study }: { study: StudyPackage }) {
                   {study.status === "synthetic"
                     ? "illustrative extent"
                     : "supplied footprint"}
-                </label>
-                <label className="check-row">
-                  <input
-                    type="checkbox"
-                    checked={contextMap}
-                    onChange={(e) => setContextMap(e.target.checked)}
-                  />
-                  OpenStreetMap context{" "}
-                  <span className="tiny-label">online</span>
                 </label>
                 <label className="check-row">
                   <input
@@ -361,7 +415,7 @@ export default function Explorer({ study }: { study: StudyPackage }) {
             compare={compare}
             opacity={opacity}
             palette={palette}
-            contextMap={contextMap}
+            basemap={basemap}
             showFootprint={footprint}
             channel={channel || undefined}
             onInspect={(s) => {
@@ -369,6 +423,25 @@ export default function Explorer({ study }: { study: StudyPackage }) {
               setTab("inspect");
             }}
           />
+          <div className="class-strip" aria-label="Classes in the current view">
+            <span className="class-strip-title">
+              {study.status === "synthetic"
+                ? "Test cells in view"
+                : "Supplied cells in view"}
+            </span>
+            {(Object.keys(kindLabel) as ChangeKind[]).map((k) => (
+              <span key={k} className="class-chip">
+                <i
+                  style={{ background: colors(palette === "accessible")[k] }}
+                />
+                {kindLabel[k]}
+                <b>{inView.filter((f) => f.properties.kind === k).length}</b>
+              </span>
+            ))}
+            <small>
+              Counts of supplied geometry, not area or measured change.
+            </small>
+          </div>
           <div className="timeline">
             <div className="timeline-heading">
               <div>

@@ -78,7 +78,7 @@
   padding: 7px 4.1667vw;
   justify-content: flex-start;
   gap: 14px;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 8px;
   line-height: 1.5;
   color: #89919a;
@@ -455,7 +455,7 @@
   position: absolute;
   bottom: 40px;
   left: 4.1667vw;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 8px;
   color: #596570;
   z-index: 5;

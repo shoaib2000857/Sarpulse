@@ -239,7 +239,10 @@ export function SarBeam({
     return g;
   }, []);
   const dir = useMemo(() => new Vector3(0.5, -0.32, 0.8).normalize(), []);
-  const tmp = useMemo(() => ({ target: new Vector3(), z: new Vector3(0, 0, 1) }), []);
+  const tmp = useMemo(
+    () => ({ target: new Vector3(), z: new Vector3(0, 0, 1) }),
+    [],
+  );
   useFrame(({ clock }) => {
     const p = progress.current,
       pose = spacecraft.current,
@@ -249,16 +252,10 @@ export function SarBeam({
     beam.current.visible = footprint.current.visible = a > 0.01;
     if (a <= 0.01) return;
     const radius = 0.5 * planet.scale.x;
-    tmp.target
-      .copy(planet.position)
-      .addScaledVector(dir, radius * 1.004);
+    tmp.target.copy(planet.position).addScaledVector(dir, radius * 1.004);
     beam.current.position.copy(pose.position);
     beam.current.lookAt(tmp.target);
-    cone.current?.scale.set(
-      1,
-      1,
-      beam.current.position.distanceTo(tmp.target),
-    );
+    cone.current?.scale.set(1, 1, beam.current.position.distanceTo(tmp.target));
     bMat.uniforms.uOpacity.value = a;
     bMat.uniforms.uTime.value = motion ? clock.elapsedTime : 0;
     footprint.current.position.copy(tmp.target);

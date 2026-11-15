@@ -66,3 +66,13 @@ npm run dev
 ```
 
 Open the printed local Vite URL. Use **Open data package** for a local JSON file or export the example shape from **Science Lab → Data package**. Imported packages remain in memory only; nothing is uploaded.
+
+## Workspace revision: maps, basemaps and unified identity
+
+Explore, Science Lab and Guided story now share the landing's identity (black, electric blue, Manrope, square corners; `web/src/workspace.css` plus a palette/type swap in `web/src/styles.css`).
+
+- **Basemaps (MapLibre raster, no API keys):** Satellite = Sentinel-2 cloudless 2016 by EOX (optical context); Dark and Streets = OpenStreetMap tiles (Dark is tone-inverted by the renderer); Grid = offline, no external requests. All are labelled as geographic context, not NISAR/SAR. CARTO tiles were tried and rejected (they now require an API key). Tile-service terms and the EOX layer licence should be confirmed before any public deployment.
+- **Explore:** basemap picker, taller map, and a "cells in view" strip (counts of supplied geometry per class; not area).
+- **Science Lab:** "Change classes by stage" ECharts stacked bars with a table alternative (counts only), and a "Where on Earth" MapLibre globe (`LocatorGlobe.tsx`).
+- **Guided story:** each chapter sets a basemap and a camera (zoom, pitch, bearing) relative to the study extent via the new optional `camera` prop on `GeoWorkspace`.
+- `GeoWorkspaceProps.contextMap` was replaced by `basemap`; `camera` is optional. No area, pixel or change computation was added.
